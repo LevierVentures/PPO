@@ -120,22 +120,26 @@ export default function Dashboard() {
           <CardContent className="space-y-6">
             <div>
               <div className="flex items-center justify-between mb-3">
-                <h4 className="font-semibold text-primary">Approvals Due Today</h4>
-                <Badge variant="secondary" className="text-xs">{mockWorkloadData.approvalsDueToday.length}</Badge>
+                <h4 className="font-semibold text-primary">Urgent Requests</h4>
+                <Badge variant="secondary" className="text-xs">{mockWorkloadData.urgentRequests.length}</Badge>
               </div>
               <div className="space-y-2">
-                {mockWorkloadData.approvalsDueToday.map((item) => (
+                {mockWorkloadData.urgentRequests.map((item) => (
                   <div 
                     key={item.id} 
                     className="p-3 border rounded-lg hover:shadow-sm cursor-pointer transition-all bg-gradient-to-r from-background to-accent/20"
-                    onClick={() => setLocation("/approvals")}
+                    onClick={() => setLocation("/request-intake")}
                   >
-                    <div className="flex items-center justify-between">
+                    <div className="flex items-center justify-between mb-1">
                       <div>
                         <p className="font-medium text-sm">{item.id}</p>
                         <p className="text-xs text-muted-foreground">{item.description}</p>
                       </div>
                       <span className="font-semibold text-primary">${item.amount.toLocaleString()}</span>
+                    </div>
+                    <div className="flex items-center justify-between text-xs text-muted-foreground">
+                      <span>Requested by: {item.requestedBy}</span>
+                      <span>Delivery: {item.deliveryDate}</span>
                     </div>
                   </div>
                 ))}

@@ -10,8 +10,8 @@ import ErrorOverlay from "@/components/common/error-overlay";
 import Dashboard from "./pages/dashboard";
 import RequestIntake from "./pages/request-intake";
 import Approvals from "./pages/approvals";
-import POWorkbench from "./pages/po-workbench";
-import POHistory from "./pages/po-history";
+import AgreementSummary from "./pages/agreement-summary";
+import PurchaseOrders from "./pages/purchase-orders";
 import POSummary from "./pages/po-summary";
 import UserReview from "./pages/user-review";
 import Vendors from "./pages/vendors";
@@ -26,8 +26,8 @@ function Router() {
       <Route path="/" component={Dashboard} />
       <Route path="/request" component={RequestIntake} />
       <Route path="/approvals" component={Approvals} />
-      <Route path="/po-workbench" component={POWorkbench} />
-      <Route path="/po-history" component={POHistory} />
+      <Route path="/agreement-summary" component={AgreementSummary} />
+      <Route path="/purchase-orders" component={PurchaseOrders} />
       <Route path="/po-summary" component={POSummary} />
       <Route path="/user-review" component={UserReview} />
       <Route path="/vendors" component={Vendors} />
