@@ -1,0 +1,61 @@
+Professional Procurement Organization (PPO): I need you to build an HTML+JS MVP UI for a Unified P2P (Procure-to-Pay) procurement system with the following requirements. It must run locally in a browser without a backend and should be fully interactive (no blank loading screens). Safe boot logic must ensure rendering on all modern browsers.
+### Core features:
+1. Landing Dashboard (role-based)
+   - Role-based KPIs (My Approvals, POs in Flight, AP Invoice routing, 3 way match)
+   - Workload panel with actionable items (approvals due, contracts expiring, forecasted spikes) 
+   - Quick actions (New Request, My Approvals, Analytics)
+   - Chat AI Prompt to assist in search or initiating new requests
+2. Request Intake
+   - Goods vs Services forms vs Mixed goods capex service
+-Capabilities multiple vendors per Requsiitons, for each vendor seperate PO is genrate after full approval
+   - Vendor PunchOut dropdown (cXML/OCI/Hosted Catalog integrations) — when “Shop” is clicked, access to vendor catalogue, once checked out simulate cart return
+   - Per-PO request shipping address override; default shipping address editable
+   - Mixed category handling: 
+     - Goods: SKU/product code, qty, UOM, unit price, hazmat flag
+     - Services: may lack product number; can require contracts based on policy thresholds
+   - Service contract gating: requirement to reference contract number 
+3. Workflow Matrix
+   - Accessible from PO request history or directory  
+   - Approver chain based on policy thresholds:
+     - >$1k: Manager
+     - >$10k: Department Director + Finance
+     - >$25k: Department Head + Finance
+-Include Procurement Review
+
+Add Legal if service needs contract
+
+Approvals
+List pending requests with quick “Workflow” button
+Simulate approval/rejection actions
+PO Workbench
+List POs with statuses (Pending, Approved, Denied, etc.)
+Link to related invoices
+Vendors
+List integrated and non-integrated vendors with type (cXML, OCI, Hosted) and status
+Invoices
+List Invoice history and directory pending processing approved paid, 3-way OK, exception)
+
+Analytics
+Drill-down by seearch field, SKU, Department, Time Window (12/24 mo)
+Seasonal pattern recognition
+Anomaly detection with operational recommendations -PO running out of funds
+Per-user saved filters; admins see organization-wide analytics
+AI Chat Dock
+Docked bottom-right
+Prompt shelf with quick actions
+Accepts free-text instructions like:
+“Show the workflow for REQ-24118”
+“Forecast spend for R&D SKU 55-9876 next 6 months”
+“Prep a blanket PO playbook for September for top 2 SKUs in R&D”
+Can navigate, set analytics filters, and generate guidance ### Technical requirements:
+Pure HTML/CSS/JS, no frameworks (React/Vue) for max portability
+Safe boot: render something immediately, with multiple init paths (DOMContentLoaded, window.onload, fallback timer)
+Error overlay: show JS errors in a visible panel
+No optional chaining or modern syntax that breaks on older browsers
+Modular functions for each view (Dashboard, Intake, Approvals, PO, Vendors, Invoices, Analytics)
+Sample mock data for SKUs, vendors, history
+Minimal CSS framework with responsive layout
+Clear separation of data state and rendering functions ### Goals:
+Fully working UI locally (no dependencies)
+Feature-complete as above
+No blank loading — always render a visible state even if something fails
