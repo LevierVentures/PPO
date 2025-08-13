@@ -18,6 +18,8 @@ import Vendors from "./pages/vendors";
 import Invoices from "./pages/invoices";
 import InvoiceHistory from "./pages/invoice-history";
 import Analytics from "./pages/analytics";
+import UserProfile from "./pages/user-profile";
+import Administration from "./pages/admin";
 import { AppStateProvider } from "@/hooks/use-app-state";
 
 function Router() {
@@ -34,6 +36,8 @@ function Router() {
       <Route path="/invoices" component={Invoices} />
       <Route path="/invoice-history" component={InvoiceHistory} />
       <Route path="/analytics" component={Analytics} />
+      <Route path="/user-profile" component={UserProfile} />
+      <Route path="/admin" component={Administration} />
     </Switch>
   );
 }

@@ -6,7 +6,7 @@ A comprehensive full-stack web application that provides a unified Procure-to-Pa
 
 The application follows standard P2P workflow: Purchase Requisition → Approval Workflow → PO (fully approved) → Sent to vendor for processing. It supports role-based dashboards, multi-vendor requisitions, vendor integrations (cXML, OCI, hosted catalogs), Blanket POs for recurring purchases, contract management through PO fields, and provides analytics with realistic anomaly detection. Budget management is handled by external ERP systems, not within the P2P system.
 
-## Recent Changes (December 2024)
+## Recent Changes (August 2025)
 
 ✅ **Renamed "Procurement Request" to "Purchase Requisition"** throughout the application
 ✅ **Moved General Ledger Codes from requisition level to line items** with dropdown options for non-finance users  
@@ -15,6 +15,11 @@ The application follows standard P2P workflow: Purchase Requisition → Approval
 ✅ **Enhanced Purchase Orders page** with search functionality by vendor, PO#, product number and customizable columns
 ✅ **Created Invoice History page** with preview capabilities and detailed line item views with GL codes
 ✅ **Improved Approvals page** with priority-based tabs and comprehensive approval workflow data
+✅ **Added User Profile page** with image upload, contact information management, and account settings
+✅ **Created Administration module** for user management, role assignment, workflow customization, and system settings
+✅ **Enhanced Header navigation** with user profile dropdown and role-based administration access
+✅ **Fixed all UI issues** including Purchase Order date approved column, contract search functionality, approval table formatting consistency, and invoice search capabilities
+✅ **Streamlined navigation** by removing duplicate invoice tabs and improving interface consistency
 
 ## Key Features Implemented
 
@@ -23,6 +28,10 @@ The application follows standard P2P workflow: Purchase Requisition → Approval
 - **Advanced Search & Filtering**: Vendor, PO number, product number search across all tables
 - **Invoice Preview**: Detailed invoice preview with line items, GL codes, and attachment management
 - **Complete Approval Workflow**: Priority-based approval queues with pending POs, requisitions, and invoices
+- **User Profile Management**: Full profile editing with image upload, contact info, and role-based settings
+- **Administration Panel**: Comprehensive user management, role assignment, workflow customization, and system configuration
+- **Enhanced Navigation**: User-centric header with profile access and role-based administration features
+- **Modernized UI**: Improved table formatting, consistent search functionality, and streamlined interface design
 
 ## User Preferences
 
