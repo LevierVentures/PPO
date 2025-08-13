@@ -128,7 +128,7 @@ export default function Dashboard() {
                   <div 
                     key={item.id} 
                     className="p-3 border rounded-lg hover:shadow-sm cursor-pointer transition-all bg-gradient-to-r from-background to-accent/20"
-                    onClick={() => setLocation("/request-intake")}
+                    onClick={() => setLocation("/request")}
                   >
                     <div className="flex items-center justify-between mb-1">
                       <div>

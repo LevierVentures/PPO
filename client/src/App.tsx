@@ -10,7 +10,7 @@ import ErrorOverlay from "@/components/common/error-overlay";
 import Dashboard from "./pages/dashboard";
 import RequestIntake from "./pages/request-intake";
 import Approvals from "./pages/approvals";
-import AgreementSummary from "./pages/agreement-summary";
+import Contracts from "./pages/contracts";
 import PurchaseOrders from "./pages/purchase-orders";
 import POSummary from "./pages/po-summary";
 import UserReview from "./pages/user-review";
@@ -26,7 +26,7 @@ function Router() {
       <Route path="/" component={Dashboard} />
       <Route path="/request" component={RequestIntake} />
       <Route path="/approvals" component={Approvals} />
-      <Route path="/agreement-summary" component={AgreementSummary} />
+      <Route path="/contracts" component={Contracts} />
       <Route path="/purchase-orders" component={PurchaseOrders} />
       <Route path="/po-summary" component={POSummary} />
       <Route path="/user-review" component={UserReview} />

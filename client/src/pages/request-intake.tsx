@@ -21,6 +21,7 @@ const requestFormSchema = z.object({
   requestType: z.enum(["goods", "services", "mixed", "new-vendor"]),
   department: z.string().min(1, "Department is required"),
   budgetCode: z.string().optional(),
+  generalLedgerCode: z.string().min(1, "General Ledger Code is required"),
   vendorId: z.string().optional(),
   shippingAddress: z.string().optional(),
   businessJustification: z.string().min(1, "Business justification is required"),
@@ -272,7 +273,7 @@ export default function RequestIntake() {
         <CardHeader>
           <CardTitle className="flex items-center gap-2">
             <Plus className="h-5 w-5" />
-            New Procurement Request
+            New Purchase Requisition
           </CardTitle>
         </CardHeader>
         <CardContent>
@@ -337,6 +338,22 @@ export default function RequestIntake() {
                       <FormLabel>Budget Code</FormLabel>
                       <FormControl>
                         <Input placeholder="e.g., IT-2024-001" {...field} />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+              </div>
+
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <FormField
+                  control={form.control}
+                  name="generalLedgerCode"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>General Ledger Code *</FormLabel>
+                      <FormControl>
+                        <Input placeholder="e.g., 5000-001-0001" {...field} />
                       </FormControl>
                       <FormMessage />
                     </FormItem>

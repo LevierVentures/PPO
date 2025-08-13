@@ -32,6 +32,7 @@ export const requisitions = pgTable("requisitions", {
   requestorId: varchar("requestor_id").references(() => users.id),
   department: text("department").notNull(),
   budgetCode: text("budget_code"),
+  generalLedgerCode: text("general_ledger_code").notNull(),
   totalAmount: decimal("total_amount", { precision: 12, scale: 2 }),
   status: text("status").notNull().default("pending"), // pending, approved, rejected, in-progress
   businessJustification: text("business_justification"),

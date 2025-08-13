@@ -14,9 +14,9 @@ import { cn } from "@/lib/utils";
 
 const navItems = [
   { path: "/", label: "Dashboard", icon: Layout },
-  { path: "/request", label: "New Request", icon: PlusCircle },
+  { path: "/request", label: "Purchase Requisition", icon: PlusCircle },
   { path: "/approvals", label: "Approvals", icon: CheckCircle },
-  { path: "/agreement-summary", label: "Agreement Summary", icon: FileText },
+  { path: "/contracts", label: "Contracts", icon: FileText },
   { path: "/purchase-orders", label: "Purchase Orders", icon: History },
   { path: "/vendors", label: "Vendors", icon: Handshake },
   { path: "/invoices", label: "Invoices", icon: Receipt },
