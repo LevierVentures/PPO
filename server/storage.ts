@@ -179,9 +179,16 @@ export class MemStorage implements IStorage {
     const id = randomUUID();
     const requestId = `REQ-${Date.now()}`;
     const requisition: Requisition = { 
-      ...insertRequisition, 
+      ...insertRequisition,
       id, 
       requestId,
+      status: insertRequisition.status ?? "pending",
+      requestorId: insertRequisition.requestorId ?? null,
+      budgetCode: insertRequisition.budgetCode ?? null,
+      totalAmount: insertRequisition.totalAmount ?? null,
+      businessJustification: insertRequisition.businessJustification ?? null,
+      shippingAddress: insertRequisition.shippingAddress ?? null,
+      isMultiVendor: insertRequisition.isMultiVendor ?? false,
       submittedAt: new Date(),
       approvedAt: null
     };
@@ -205,7 +212,19 @@ export class MemStorage implements IStorage {
 
   async createRequisitionItem(insertItem: InsertRequisitionItem): Promise<RequisitionItem> {
     const id = randomUUID();
-    const item: RequisitionItem = { ...insertItem, id };
+    const item: RequisitionItem = { 
+      ...insertItem, 
+      id,
+      requisitionId: insertItem.requisitionId ?? null,
+      vendorId: insertItem.vendorId ?? null,
+      sku: insertItem.sku ?? null,
+      quantity: insertItem.quantity ?? null,
+      unitOfMeasure: insertItem.unitOfMeasure ?? null,
+      unitPrice: insertItem.unitPrice ?? null,
+      totalPrice: insertItem.totalPrice ?? null,
+      isHazmat: insertItem.isHazmat ?? false,
+      contractNumber: insertItem.contractNumber ?? null
+    };
     this.requisitionItems.set(id, item);
     return item;
   }
@@ -226,6 +245,9 @@ export class MemStorage implements IStorage {
       ...insertPO, 
       id, 
       poNumber,
+      status: insertPO.status ?? "pending",
+      requisitionId: insertPO.requisitionId ?? null,
+      vendorId: insertPO.vendorId ?? null,
       createdAt: new Date(),
       approvedAt: null,
       completedAt: null
@@ -261,6 +283,10 @@ export class MemStorage implements IStorage {
     const invoice: Invoice = { 
       ...insertInvoice, 
       id,
+      status: insertInvoice.status ?? "pending",
+      vendorId: insertInvoice.vendorId ?? null,
+      poId: insertInvoice.poId ?? null,
+      threeWayMatchStatus: insertInvoice.threeWayMatchStatus ?? "pending",
       receivedAt: new Date(),
       paidAt: null
     };
@@ -284,7 +310,15 @@ export class MemStorage implements IStorage {
 
   async createWorkflowStep(insertStep: InsertWorkflowStep): Promise<WorkflowStep> {
     const id = randomUUID();
-    const step: WorkflowStep = { ...insertStep, id, completedAt: null };
+    const step: WorkflowStep = { 
+      ...insertStep, 
+      id, 
+      status: insertStep.status ?? "pending",
+      requisitionId: insertStep.requisitionId ?? null,
+      assigneeId: insertStep.assigneeId ?? null,
+      notes: insertStep.notes ?? null,
+      completedAt: null 
+    };
     this.workflowSteps.set(id, step);
     return step;
   }
@@ -310,6 +344,9 @@ export class MemStorage implements IStorage {
       ...insertRequest, 
       id, 
       requestId,
+      status: insertRequest.status ?? "pending",
+      requestorId: insertRequest.requestorId ?? null,
+      taxId: insertRequest.taxId ?? null,
       submittedAt: new Date(),
       reviewedAt: null
     };
@@ -333,7 +370,13 @@ export class MemStorage implements IStorage {
 
   async createAnalyticsEntry(insertEntry: InsertAnalytics): Promise<Analytics> {
     const id = randomUUID();
-    const entry: Analytics = { ...insertEntry, id, createdAt: new Date() };
+    const entry: Analytics = { 
+      ...insertEntry, 
+      id,
+      value: insertEntry.value ?? null,
+      metadata: insertEntry.metadata ?? null,
+      createdAt: new Date() 
+    };
     this.analytics.set(id, entry);
     return entry;
   }

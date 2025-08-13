@@ -138,6 +138,7 @@ export default function RequestIntake() {
     const totalAmount = items.reduce((sum, item) => sum + (item.quantity * item.unitPrice), 0);
     
     createRequisitionMutation.mutate({
+      requestId: `REQ-${Date.now()}`,
       requestType: data.requestType,
       requestorId: state.currentUser.id,
       department: data.department,
@@ -226,7 +227,7 @@ export default function RequestIntake() {
                       <FormItem>
                         <FormLabel>Tax ID</FormLabel>
                         <FormControl>
-                          <Input placeholder="XX-XXXXXXX" {...field} />
+                          <Input placeholder="XX-XXXXXXX" {...field} value={field.value || ""} />
                         </FormControl>
                         <FormMessage />
                       </FormItem>
