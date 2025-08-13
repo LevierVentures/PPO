@@ -15,13 +15,14 @@ import { api } from "@/lib/api";
 import { useAppState } from "@/hooks/use-app-state";
 import { useToast } from "@/hooks/use-toast";
 import { insertRequisitionSchema, insertNewVendorRequestSchema } from "@shared/schema";
+import { glCodes } from "@/lib/gl-codes";
 import { useLocation } from "wouter";
 
 const requestFormSchema = z.object({
   requestType: z.enum(["goods", "services", "mixed", "new-vendor"]),
   department: z.string().min(1, "Department is required"),
   budgetCode: z.string().optional(),
-  generalLedgerCode: z.string().min(1, "General Ledger Code is required"),
+
   vendorId: z.string().optional(),
   shippingAddress: z.string().optional(),
   businessJustification: z.string().min(1, "Business justification is required"),
@@ -48,6 +49,7 @@ export default function RequestIntake() {
       quantity: 1,
       unitOfMeasure: "Each",
       unitPrice: 0,
+      generalLedgerCode: "",
       isHazmat: false,
       contractNumber: "",
     },
@@ -345,22 +347,6 @@ export default function RequestIntake() {
                 />
               </div>
 
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <FormField
-                  control={form.control}
-                  name="generalLedgerCode"
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormLabel>General Ledger Code *</FormLabel>
-                      <FormControl>
-                        <Input placeholder="e.g., 5000-001-0001" {...field} />
-                      </FormControl>
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
-              </div>
-
               {/* Vendor Selection */}
               <div className="space-y-4">
                 <FormField
@@ -528,6 +514,28 @@ export default function RequestIntake() {
                             />
                           </div>
                         )}
+                      </div>
+
+                      {/* GL Code - Required for all line items */}
+                      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div>
+                          <label className="text-sm font-medium">General Ledger Code *</label>
+                          <Select
+                            value={item.generalLedgerCode}
+                            onValueChange={(value) => updateItem(item.id, "generalLedgerCode", value)}
+                          >
+                            <SelectTrigger>
+                              <SelectValue placeholder="Select GL Code" />
+                            </SelectTrigger>
+                            <SelectContent>
+                              {glCodes.map((code) => (
+                                <SelectItem key={code.code} value={code.code}>
+                                  {code.code} - {code.description}
+                                </SelectItem>
+                              ))}
+                            </SelectContent>
+                          </Select>
+                        </div>
                       </div>
 
                       {(item.itemType === "good" || item.itemType === "capex") && (

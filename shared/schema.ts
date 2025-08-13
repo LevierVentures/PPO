@@ -54,6 +54,7 @@ export const requisitionItems = pgTable("requisition_items", {
   unitOfMeasure: text("unit_of_measure"),
   unitPrice: decimal("unit_price", { precision: 12, scale: 2 }),
   totalPrice: decimal("total_price", { precision: 12, scale: 2 }),
+  generalLedgerCode: text("general_ledger_code").notNull(),
   isHazmat: boolean("is_hazmat").default(false),
   contractNumber: text("contract_number"),
 });

@@ -1,244 +1,334 @@
 import { useState } from "react";
-import { useQuery } from "@tanstack/react-query";
-import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { Archive, Eye, Download } from "lucide-react";
-import { api } from "@/lib/api";
-import { useToast } from "@/hooks/use-toast";
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
+import { Separator } from "@/components/ui/separator";
+import { Receipt, Eye, Search, Filter, Building2, FileText, Calendar, DollarSign } from "lucide-react";
+import { mockInvoicesData, getInvoicesByStatus } from "@/lib/invoice-data";
 
 export default function InvoiceHistory() {
-  const [dateRange, setDateRange] = useState("last-30-days");
+  const [searchTerm, setSearchTerm] = useState("");
   const [statusFilter, setStatusFilter] = useState("all");
   const [vendorFilter, setVendorFilter] = useState("all");
-  const { toast } = useToast();
+  const [selectedInvoice, setSelectedInvoice] = useState<any>(null);
 
-  const { data: invoices = [], isLoading } = useQuery({
-    queryKey: ["/api/invoices"],
-    queryFn: api.invoices.getAll,
+  const invoicesByStatus = getInvoicesByStatus();
+  const uniqueVendors = [...new Set(mockInvoicesData.map(inv => inv.vendorName))];
+
+  // Filter data based on search and filters
+  const filteredInvoices = mockInvoicesData.filter(invoice => {
+    const matchesSearch = searchTerm === "" || 
+      invoice.invoiceNumber.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      invoice.poNumber.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      invoice.vendorName.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      invoice.description.toLowerCase().includes(searchTerm.toLowerCase());
+    
+    const matchesStatus = statusFilter === "all" || invoice.status === statusFilter;
+    const matchesVendor = vendorFilter === "all" || invoice.vendorName === vendorFilter;
+    
+    return matchesSearch && matchesStatus && matchesVendor;
   });
 
-  const { data: vendors = [] } = useQuery({
-    queryKey: ["/api/vendors"],
-    queryFn: api.vendors.getAll,
-  });
+  const getStatusVariant = (status: string) => {
+    switch (status) {
+      case "paid": return "default";
+      case "approved": return "secondary";
+      case "pending": return "outline";
+      case "disputed": return "destructive";
+      case "rejected": return "destructive";
+      default: return "outline";
+    }
+  };
 
   const getStatusColor = (status: string) => {
     switch (status) {
-      case "paid":
-        return "status-approved";
-      case "approved":
-        return "status-approved";
-      case "pending":
-        return "status-pending";
-      case "rejected":
-        return "status-rejected";
-      case "on-hold":
-        return "status-rejected";
-      default:
-        return "status-pending";
+      case "paid": return "text-green-600";
+      case "approved": return "text-blue-600";
+      case "pending": return "text-yellow-600";
+      case "disputed": return "text-red-600";
+      case "rejected": return "text-red-600";
+      default: return "text-gray-600";
     }
   };
 
-  const filteredInvoices = invoices.filter(invoice => {
-    if (statusFilter !== "all" && invoice.status !== statusFilter) return false;
-    if (vendorFilter !== "all" && invoice.vendorId !== vendorFilter) return false;
-    
-    // In a real implementation, date filtering would be applied here
-    // based on the selected date range and invoice dates
-    
-    return true;
-  });
-
-  const handleViewInvoice = (invoiceId: string) => {
-    const invoice = invoices.find(inv => inv.id === invoiceId);
-    if (invoice) {
-      toast({
-        title: "Invoice Details",
-        description: `Viewing historical details for invoice ${invoice.invoiceNumber}.`,
-      });
-    }
-  };
-
-  const handleExportData = () => {
-    toast({
-      title: "Export Started",
-      description: "Invoice history data export has been initiated. You will receive a download link shortly.",
+  const formatDate = (date: Date) => {
+    return date.toLocaleDateString('en-US', { 
+      year: 'numeric', 
+      month: 'short', 
+      day: 'numeric' 
     });
   };
 
-  if (isLoading) {
-    return <div className="text-center py-8">Loading invoice history...</div>;
-  }
+  const InvoicePreview = ({ invoice }: { invoice: any }) => (
+    <div className="space-y-6">
+      {/* Invoice Header */}
+      <div className="grid grid-cols-2 gap-6">
+        <div>
+          <h4 className="font-semibold mb-2">Invoice Details</h4>
+          <div className="space-y-1 text-sm">
+            <p><span className="font-medium">Invoice #:</span> {invoice.invoiceNumber}</p>
+            <p><span className="font-medium">PO #:</span> {invoice.poNumber}</p>
+            <p><span className="font-medium">Invoice Date:</span> {formatDate(invoice.invoiceDate)}</p>
+            <p><span className="font-medium">Due Date:</span> {formatDate(invoice.dueDate)}</p>
+            <p><span className="font-medium">Received:</span> {formatDate(invoice.receivedDate)}</p>
+          </div>
+        </div>
+        <div>
+          <h4 className="font-semibold mb-2">Vendor Information</h4>
+          <div className="space-y-1 text-sm">
+            <p><span className="font-medium">Vendor:</span> {invoice.vendorName}</p>
+            <p><span className="font-medium">Payment Terms:</span> {invoice.paymentTerms}</p>
+            <p><span className="font-medium">Match Status:</span> 
+              <Badge variant="outline" className="ml-2">{invoice.matchStatus}</Badge>
+            </p>
+            <p><span className="font-medium">Status:</span> 
+              <Badge variant={getStatusVariant(invoice.status)} className="ml-2">
+                {invoice.status}
+              </Badge>
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <Separator />
+
+      {/* Line Items */}
+      <div>
+        <h4 className="font-semibold mb-3">Line Items</h4>
+        <Table>
+          <TableHeader>
+            <TableRow>
+              <TableHead>Description</TableHead>
+              <TableHead>Qty</TableHead>
+              <TableHead>Unit Price</TableHead>
+              <TableHead>GL Code</TableHead>
+              <TableHead className="text-right">Total</TableHead>
+            </TableRow>
+          </TableHeader>
+          <TableBody>
+            {invoice.items.map((item: any, index: number) => (
+              <TableRow key={index}>
+                <TableCell>{item.description}</TableCell>
+                <TableCell>{item.quantity}</TableCell>
+                <TableCell>${item.unitPrice.toLocaleString()}</TableCell>
+                <TableCell>
+                  <Badge variant="outline">{item.glCode}</Badge>
+                </TableCell>
+                <TableCell className="text-right font-medium">
+                  ${item.total.toLocaleString()}
+                </TableCell>
+              </TableRow>
+            ))}
+          </TableBody>
+        </Table>
+      </div>
+
+      <Separator />
+
+      {/* Total */}
+      <div className="flex justify-end">
+        <div className="text-right">
+          <p className="text-lg font-semibold">
+            Total Amount: <span className="text-green-600">${invoice.amount.toLocaleString()}</span>
+          </p>
+        </div>
+      </div>
+
+      {/* Attachments */}
+      {invoice.attachments && invoice.attachments.length > 0 && (
+        <>
+          <Separator />
+          <div>
+            <h4 className="font-semibold mb-2">Attachments</h4>
+            <div className="flex flex-wrap gap-2">
+              {invoice.attachments.map((attachment: string, index: number) => (
+                <Badge key={index} variant="outline" className="cursor-pointer hover:bg-accent">
+                  <FileText className="h-3 w-3 mr-1" />
+                  {attachment}
+                </Badge>
+              ))}
+            </div>
+          </div>
+        </>
+      )}
+    </div>
+  );
 
   return (
     <div className="space-y-6">
-      <Card>
-        <CardHeader>
-          <CardTitle className="flex items-center gap-2">
-            <Archive className="h-5 w-5" />
-            Invoice History
-          </CardTitle>
-        </CardHeader>
-        <CardContent>
-          {/* Filters */}
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-6">
-            <div>
-              <label className="text-sm font-medium mb-2 block">Date Range</label>
-              <Select value={dateRange} onValueChange={setDateRange}>
-                <SelectTrigger>
-                  <SelectValue />
-                </SelectTrigger>
-                <SelectContent>
-                  <SelectItem value="last-30-days">Last 30 days</SelectItem>
-                  <SelectItem value="last-90-days">Last 90 days</SelectItem>
-                  <SelectItem value="last-6-months">Last 6 months</SelectItem>
-                  <SelectItem value="last-year">Last year</SelectItem>
-                  <SelectItem value="custom">Custom range</SelectItem>
-                </SelectContent>
-              </Select>
-            </div>
+      <div>
+        <h1 className="text-3xl font-bold">Invoice History</h1>
+        <p className="text-muted-foreground">
+          Search and manage all invoice records with detailed preview capabilities
+        </p>
+      </div>
 
-            <div>
-              <label className="text-sm font-medium mb-2 block">Status Filter</label>
+      {/* Summary Cards */}
+      <div className="grid grid-cols-1 md:grid-cols-5 gap-4">
+        <Card className="border-green-200 dark:border-green-800">
+          <CardContent className="p-4 text-center">
+            <DollarSign className="h-8 w-8 text-green-600 mx-auto mb-2" />
+            <div className="text-2xl font-bold text-green-600">{invoicesByStatus.paid.length}</div>
+            <div className="text-xs text-muted-foreground">Paid</div>
+          </CardContent>
+        </Card>
+        <Card className="border-blue-200 dark:border-blue-800">
+          <CardContent className="p-4 text-center">
+            <FileText className="h-8 w-8 text-blue-600 mx-auto mb-2" />
+            <div className="text-2xl font-bold text-blue-600">{invoicesByStatus.approved.length}</div>
+            <div className="text-xs text-muted-foreground">Approved</div>
+          </CardContent>
+        </Card>
+        <Card className="border-yellow-200 dark:border-yellow-800">
+          <CardContent className="p-4 text-center">
+            <Calendar className="h-8 w-8 text-yellow-600 mx-auto mb-2" />
+            <div className="text-2xl font-bold text-yellow-600">{invoicesByStatus.pending.length}</div>
+            <div className="text-xs text-muted-foreground">Pending</div>
+          </CardContent>
+        </Card>
+        <Card className="border-red-200 dark:border-red-800">
+          <CardContent className="p-4 text-center">
+            <Receipt className="h-8 w-8 text-red-600 mx-auto mb-2" />
+            <div className="text-2xl font-bold text-red-600">{invoicesByStatus.disputed.length}</div>
+            <div className="text-xs text-muted-foreground">Disputed</div>
+          </CardContent>
+        </Card>
+        <Card>
+          <CardContent className="p-4 text-center">
+            <Building2 className="h-8 w-8 text-blue-600 mx-auto mb-2" />
+            <div className="text-2xl font-bold text-blue-600">{mockInvoicesData.length}</div>
+            <div className="text-xs text-muted-foreground">Total</div>
+          </CardContent>
+        </Card>
+      </div>
+
+      {/* Search and Filter Controls */}
+      <Card>
+        <CardContent className="p-4">
+          <div className="flex flex-wrap gap-4 items-center">
+            <div className="flex-1 min-w-64">
+              <div className="relative">
+                <Search className="absolute left-3 top-3 h-4 w-4 text-muted-foreground" />
+                <Input
+                  placeholder="Search invoice number, PO number, vendor, or description..."
+                  value={searchTerm}
+                  onChange={(e) => setSearchTerm(e.target.value)}
+                  className="pl-9"
+                />
+              </div>
+            </div>
+            <div className="flex gap-2">
               <Select value={statusFilter} onValueChange={setStatusFilter}>
-                <SelectTrigger>
-                  <SelectValue />
+                <SelectTrigger className="w-40">
+                  <Filter className="h-4 w-4 mr-2" />
+                  <SelectValue placeholder="Status" />
                 </SelectTrigger>
                 <SelectContent>
                   <SelectItem value="all">All Statuses</SelectItem>
-                  <SelectItem value="paid">Paid</SelectItem>
-                  <SelectItem value="approved">Approved</SelectItem>
                   <SelectItem value="pending">Pending</SelectItem>
+                  <SelectItem value="approved">Approved</SelectItem>
+                  <SelectItem value="paid">Paid</SelectItem>
+                  <SelectItem value="disputed">Disputed</SelectItem>
                   <SelectItem value="rejected">Rejected</SelectItem>
-                  <SelectItem value="on-hold">On Hold</SelectItem>
                 </SelectContent>
               </Select>
-            </div>
-
-            <div>
-              <label className="text-sm font-medium mb-2 block">Vendor</label>
               <Select value={vendorFilter} onValueChange={setVendorFilter}>
-                <SelectTrigger>
-                  <SelectValue />
+                <SelectTrigger className="w-48">
+                  <Building2 className="h-4 w-4 mr-2" />
+                  <SelectValue placeholder="Vendor" />
                 </SelectTrigger>
                 <SelectContent>
                   <SelectItem value="all">All Vendors</SelectItem>
-                  {vendors.map((vendor) => (
-                    <SelectItem key={vendor.id} value={vendor.id}>
-                      {vendor.name}
-                    </SelectItem>
+                  {uniqueVendors.map(vendor => (
+                    <SelectItem key={vendor} value={vendor}>{vendor}</SelectItem>
                   ))}
                 </SelectContent>
               </Select>
             </div>
-
-            <div className="flex items-end">
-              <Button onClick={handleExportData} className="w-full">
-                <Download className="h-4 w-4 mr-2" />
-                Export Data
-              </Button>
-            </div>
           </div>
+        </CardContent>
+      </Card>
 
-          {/* History Table */}
-          {filteredInvoices.length === 0 ? (
-            <div className="text-center py-8 text-muted-foreground">
-              No invoices found for the selected criteria
-            </div>
-          ) : (
-            <Table>
-              <TableHeader>
-                <TableRow>
-                  <TableHead>Invoice Number</TableHead>
-                  <TableHead>Vendor</TableHead>
-                  <TableHead>PO Number</TableHead>
-                  <TableHead>Amount</TableHead>
-                  <TableHead>Status</TableHead>
-                  <TableHead>Received Date</TableHead>
-                  <TableHead>Paid Date</TableHead>
-                  <TableHead>Actions</TableHead>
+      <Card>
+        <CardHeader>
+          <CardTitle className="flex items-center gap-2">
+            <Receipt className="h-5 w-5" />
+            Invoice History ({filteredInvoices.length} of {mockInvoicesData.length})
+          </CardTitle>
+        </CardHeader>
+        <CardContent>
+          <Table>
+            <TableHeader>
+              <TableRow>
+                <TableHead>Invoice Details</TableHead>
+                <TableHead>Vendor</TableHead>
+                <TableHead>PO Number</TableHead>
+                <TableHead>Amount</TableHead>
+                <TableHead>Date</TableHead>
+                <TableHead>Status</TableHead>
+                <TableHead>Actions</TableHead>
+              </TableRow>
+            </TableHeader>
+            <TableBody>
+              {filteredInvoices.map((invoice) => (
+                <TableRow key={invoice.id} className="hover:bg-accent/50">
+                  <TableCell>
+                    <div>
+                      <p className="font-medium">{invoice.invoiceNumber}</p>
+                      <p className="text-sm text-muted-foreground">{invoice.description}</p>
+                    </div>
+                  </TableCell>
+                  <TableCell>
+                    <div className="flex items-center gap-2">
+                      <Building2 className="h-4 w-4 text-muted-foreground" />
+                      {invoice.vendorName}
+                    </div>
+                  </TableCell>
+                  <TableCell>
+                    <Badge variant="outline">{invoice.poNumber}</Badge>
+                  </TableCell>
+                  <TableCell>
+                    <span className="font-semibold">${invoice.amount.toLocaleString()}</span>
+                  </TableCell>
+                  <TableCell>
+                    <div className="text-sm">
+                      <p>{formatDate(invoice.invoiceDate)}</p>
+                      <p className="text-muted-foreground">Due: {formatDate(invoice.dueDate)}</p>
+                    </div>
+                  </TableCell>
+                  <TableCell>
+                    <Badge variant={getStatusVariant(invoice.status)}>
+                      {invoice.status}
+                    </Badge>
+                  </TableCell>
+                  <TableCell>
+                    <Dialog>
+                      <DialogTrigger asChild>
+                        <Button 
+                          variant="outline" 
+                          size="sm"
+                          onClick={() => setSelectedInvoice(invoice)}
+                        >
+                          <Eye className="h-4 w-4 mr-1" />
+                          Preview
+                        </Button>
+                      </DialogTrigger>
+                      <DialogContent className="max-w-4xl max-h-[80vh] overflow-y-auto">
+                        <DialogHeader>
+                          <DialogTitle>Invoice Preview - {invoice.invoiceNumber}</DialogTitle>
+                        </DialogHeader>
+                        {selectedInvoice && <InvoicePreview invoice={selectedInvoice} />}
+                      </DialogContent>
+                    </Dialog>
+                  </TableCell>
                 </TableRow>
-              </TableHeader>
-              <TableBody>
-                {filteredInvoices.map((invoice) => (
-                  <TableRow key={invoice.id}>
-                    <TableCell className="font-medium">
-                      {invoice.invoiceNumber}
-                    </TableCell>
-                    <TableCell>{invoice.vendorId}</TableCell>
-                    <TableCell>{invoice.poId}</TableCell>
-                    <TableCell>
-                      ${parseFloat(invoice.amount).toLocaleString()}
-                    </TableCell>
-                    <TableCell>
-                      <Badge className={getStatusColor(invoice.status)}>
-                        {invoice.status}
-                      </Badge>
-                    </TableCell>
-                    <TableCell>
-                      {invoice.receivedAt 
-                        ? new Date(invoice.receivedAt).toLocaleDateString()
-                        : "-"
-                      }
-                    </TableCell>
-                    <TableCell>
-                      {invoice.paidAt 
-                        ? new Date(invoice.paidAt).toLocaleDateString()
-                        : "-"
-                      }
-                    </TableCell>
-                    <TableCell>
-                      <Button 
-                        variant="outline" 
-                        size="sm"
-                        onClick={() => handleViewInvoice(invoice.id)}
-                      >
-                        <Eye className="h-4 w-4" />
-                        View
-                      </Button>
-                    </TableCell>
-                  </TableRow>
-                ))}
-              </TableBody>
-            </Table>
-          )}
-
-          {/* Summary Statistics */}
-          <div className="mt-6 grid grid-cols-1 md:grid-cols-4 gap-4">
-            <div className="kpi-card">
-              <div className="kpi-value">
-                {filteredInvoices.filter(inv => inv.status === "paid").length}
-              </div>
-              <div className="kpi-label">Paid Invoices</div>
-            </div>
-            <div className="kpi-card">
-              <div className="kpi-value">
-                ${filteredInvoices
-                  .filter(inv => inv.status === "paid")
-                  .reduce((sum, inv) => sum + parseFloat(inv.amount), 0)
-                  .toLocaleString()}
-              </div>
-              <div className="kpi-label">Total Paid Amount</div>
-            </div>
-            <div className="kpi-card">
-              <div className="kpi-value">
-                {filteredInvoices.filter(inv => inv.status === "rejected").length}
-              </div>
-              <div className="kpi-label">Rejected Invoices</div>
-            </div>
-            <div className="kpi-card">
-              <div className="kpi-value">
-                {Math.round(
-                  (filteredInvoices.filter(inv => inv.status === "paid").length / 
-                   Math.max(filteredInvoices.length, 1)) * 100
-                )}%
-              </div>
-              <div className="kpi-label">Processing Success Rate</div>
-            </div>
-          </div>
+              ))}
+            </TableBody>
+          </Table>
         </CardContent>
       </Card>
     </div>

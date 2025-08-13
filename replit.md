@@ -4,7 +4,25 @@
 
 A comprehensive full-stack web application that provides a unified Procure-to-Pay (P2P) procurement system for professional procurement organizations. The system handles the complete procurement workflow from requisition intake through approval workflows to purchase order management and invoice processing, with AI-assisted chat functionality and analytics capabilities.
 
-The application follows standard P2P workflow: Requisition → Approval Workflow → PO (fully approved) → Sent to vendor for processing. It supports role-based dashboards, multi-vendor requisitions, vendor integrations (cXML, OCI, hosted catalogs), Blanket POs for recurring purchases, contract management through PO fields, and provides analytics with realistic anomaly detection. Budget management is handled by external ERP systems, not within the P2P system.
+The application follows standard P2P workflow: Purchase Requisition → Approval Workflow → PO (fully approved) → Sent to vendor for processing. It supports role-based dashboards, multi-vendor requisitions, vendor integrations (cXML, OCI, hosted catalogs), Blanket POs for recurring purchases, contract management through PO fields, and provides analytics with realistic anomaly detection. Budget management is handled by external ERP systems, not within the P2P system.
+
+## Recent Changes (December 2024)
+
+✅ **Renamed "Procurement Request" to "Purchase Requisition"** throughout the application
+✅ **Moved General Ledger Codes from requisition level to line items** with dropdown options for non-finance users  
+✅ **Replaced Agreement Summary with risk-based Contracts page** showing expired, critical (≤30 days), upcoming (≤90 days), and active contracts
+✅ **Added comprehensive dummy data** for approvals queue, purchase orders, and invoices with realistic workflows
+✅ **Enhanced Purchase Orders page** with search functionality by vendor, PO#, product number and customizable columns
+✅ **Created Invoice History page** with preview capabilities and detailed line item views with GL codes
+✅ **Improved Approvals page** with priority-based tabs and comprehensive approval workflow data
+
+## Key Features Implemented
+
+- **Line-item GL Codes**: Each requisition line item requires a GL code selection from predefined dropdown options
+- **Contract Risk Management**: Proactive contract expiration tracking with color-coded risk tiers
+- **Advanced Search & Filtering**: Vendor, PO number, product number search across all tables
+- **Invoice Preview**: Detailed invoice preview with line items, GL codes, and attachment management
+- **Complete Approval Workflow**: Priority-based approval queues with pending POs, requisitions, and invoices
 
 ## User Preferences
 

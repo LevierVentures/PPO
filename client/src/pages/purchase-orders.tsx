@@ -1,13 +1,19 @@
+import { useState } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { FileText, Eye, Calendar, Building2 } from "lucide-react";
+import { Input } from "@/components/ui/input";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { FileText, Eye, Calendar, Building2, Search, Filter } from "lucide-react";
 import { useLocation } from "wouter";
 import { dummyPurchaseOrders } from "@/lib/dummy-pos";
 
 export default function PurchaseOrders() {
   const [, setLocation] = useLocation();
+  const [searchTerm, setSearchTerm] = useState("");
+  const [statusFilter, setStatusFilter] = useState("all");
+  const [vendorFilter, setVendorFilter] = useState("all");
 
   const getStatusVariant = (status: string) => {
     switch (status) {
@@ -28,20 +34,82 @@ export default function PurchaseOrders() {
     }
   };
 
+  // Filter data based on search and filters
+  const uniqueVendors = [...new Set(dummyPurchaseOrders.map(po => po.vendorName))];
+  
+  const filteredPOs = dummyPurchaseOrders.filter(po => {
+    const matchesSearch = searchTerm === "" || 
+      po.poNumber.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      po.vendorName.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      po.description.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      (po.contractNumber && po.contractNumber.toLowerCase().includes(searchTerm.toLowerCase()));
+    
+    const matchesStatus = statusFilter === "all" || po.status === statusFilter;
+    const matchesVendor = vendorFilter === "all" || po.vendorName === vendorFilter;
+    
+    return matchesSearch && matchesStatus && matchesVendor;
+  });
+
   return (
     <div className="space-y-6">
       <div>
         <h1 className="text-3xl font-bold">Purchase Orders</h1>
         <p className="text-muted-foreground">
-          Complete history of all purchase orders with contract details
+          Search and filter purchase orders with advanced capabilities
         </p>
       </div>
+
+      {/* Search and Filter Controls */}
+      <Card>
+        <CardContent className="p-4">
+          <div className="flex flex-wrap gap-4 items-center">
+            <div className="flex-1 min-w-64">
+              <div className="relative">
+                <Search className="absolute left-3 top-3 h-4 w-4 text-muted-foreground" />
+                <Input
+                  placeholder="Search PO number, vendor, description, or contract number..."
+                  value={searchTerm}
+                  onChange={(e) => setSearchTerm(e.target.value)}
+                  className="pl-9"
+                />
+              </div>
+            </div>
+            <div className="flex gap-2">
+              <Select value={statusFilter} onValueChange={setStatusFilter}>
+                <SelectTrigger className="w-40">
+                  <Filter className="h-4 w-4 mr-2" />
+                  <SelectValue placeholder="Status" />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="all">All Statuses</SelectItem>
+                  <SelectItem value="pending">Pending</SelectItem>
+                  <SelectItem value="approved">Approved</SelectItem>
+                  <SelectItem value="in-progress">In Progress</SelectItem>
+                  <SelectItem value="completed">Completed</SelectItem>
+                </SelectContent>
+              </Select>
+              <Select value={vendorFilter} onValueChange={setVendorFilter}>
+                <SelectTrigger className="w-48">
+                  <Building2 className="h-4 w-4 mr-2" />
+                  <SelectValue placeholder="Vendor" />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="all">All Vendors</SelectItem>
+                  {uniqueVendors.map(vendor => (
+                    <SelectItem key={vendor} value={vendor}>{vendor}</SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
+            </div>
+          </div>
+        </CardContent>
+      </Card>
       
       <Card>
         <CardHeader>
           <CardTitle className="flex items-center gap-2">
             <FileText className="h-5 w-5" />
-            Purchase Orders ({dummyPurchaseOrders.length})
+            Purchase Orders ({filteredPOs.length} of {dummyPurchaseOrders.length})
           </CardTitle>
         </CardHeader>
         <CardContent>
@@ -57,7 +125,7 @@ export default function PurchaseOrders() {
               </TableRow>
             </TableHeader>
             <TableBody>
-              {dummyPurchaseOrders.map((po) => (
+              {filteredPOs.map((po) => (
                 <TableRow key={po.id} className="hover:bg-accent/50">
                   <TableCell>
                     <div>
