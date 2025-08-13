@@ -32,14 +32,22 @@ export default function Dashboard() {
 
   const handleAnomalyAction = (anomaly: any) => {
     switch (anomaly.action) {
-      case "Review Budget Allocation":
-        setLocation("/purchase-orders");
+      case "Review Contract Renewal":
+        if (anomaly.poId) {
+          setLocation(`/purchase-orders?highlight=${anomaly.poId}`);
+        } else {
+          setLocation("/purchase-orders");
+        }
         break;
-      case "Analyze Vendors":
-        setLocation("/vendors");
+      case "Create Blanket PO":
+        setLocation("/request?type=blanket");
         break;
-      case "Prepare Budget Plan":
-        setLocation("/analytics");
+      case "Review Vendor Status":
+        if (anomaly.vendorId) {
+          setLocation(`/vendors?highlight=${anomaly.vendorId}`);
+        } else {
+          setLocation("/vendors");
+        }
         break;
       default:
         setLocation("/analytics");
@@ -130,9 +138,9 @@ export default function Dashboard() {
                   <div 
                     key={index} 
                     className="text-sm p-2 rounded hover:bg-accent cursor-pointer transition-colors flex items-center justify-between"
-                    onClick={() => setLocation("/vendors")}
+                    onClick={() => setLocation(`/purchase-orders?highlight=${contract.poId}`)}
                   >
-                    <span>{contract.vendor} - {contract.service}</span>
+                    <span>{contract.poNumber} - {contract.vendor} ({contract.service})</span>
                     <Badge variant="outline" className="text-xs">
                       {contract.daysLeft} days
                     </Badge>
@@ -142,15 +150,15 @@ export default function Dashboard() {
             </div>
 
             <div>
-              <h4 className="font-medium mb-2">Forecasted Spikes</h4>
+              <h4 className="font-medium mb-2">Blanket PO Opportunities</h4>
               <div className="space-y-2">
-                {mockWorkloadData.forecastedSpikes.map((spike, index) => (
+                {mockWorkloadData.blanketPOOpportunities.map((opportunity, index) => (
                   <div 
                     key={index} 
                     className="text-sm p-2 rounded hover:bg-accent cursor-pointer transition-colors"
-                    onClick={() => setLocation("/analytics")}
+                    onClick={() => setLocation("/request?type=blanket")}
                   >
-                    {spike.description}
+                    {opportunity.description}
                   </div>
                 ))}
               </div>

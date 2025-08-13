@@ -2,9 +2,9 @@
 
 ## Overview
 
-A comprehensive full-stack web application that provides a unified Procure-to-Pay (P2P) procurement system for professional procurement organizations. The system handles the complete procurement workflow from request intake through purchase order management to invoice processing, with AI-assisted chat functionality and analytics capabilities.
+A comprehensive full-stack web application that provides a unified Procure-to-Pay (P2P) procurement system for professional procurement organizations. The system handles the complete procurement workflow from requisition intake through approval workflows to purchase order management and invoice processing, with AI-assisted chat functionality and analytics capabilities.
 
-The application supports role-based dashboards, multi-vendor requisitions, vendor integrations (cXML, OCI, hosted catalogs), workflow approvals, and provides analytics with anomaly detection. It's designed to streamline procurement operations while maintaining compliance and providing actionable insights.
+The application follows standard P2P workflow: Requisition → Approval Workflow → PO (fully approved) → Sent to vendor for processing. It supports role-based dashboards, multi-vendor requisitions, vendor integrations (cXML, OCI, hosted catalogs), Blanket POs for recurring purchases, contract management through PO fields, and provides analytics with realistic anomaly detection. Budget management is handled by external ERP systems, not within the P2P system.
 
 ## User Preferences
 

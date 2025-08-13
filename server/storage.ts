@@ -246,8 +246,12 @@ export class MemStorage implements IStorage {
       id, 
       poNumber,
       status: insertPO.status ?? "pending",
+      poType: insertPO.poType ?? "standard",
       requisitionId: insertPO.requisitionId ?? null,
       vendorId: insertPO.vendorId ?? null,
+      contractStartDate: insertPO.contractStartDate ?? null,
+      contractEndDate: insertPO.contractEndDate ?? null,
+      contractNumber: insertPO.contractNumber ?? null,
       createdAt: new Date(),
       approvedAt: null,
       completedAt: null

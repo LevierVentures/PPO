@@ -13,12 +13,12 @@ export const mockWorkloadData = {
     { id: "REQ-24120", description: "Marketing Services", amount: 8900 },
   ],
   contractsExpiring: [
-    { vendor: "ACME Corp", service: "Maintenance", daysLeft: 30 },
-    { vendor: "TechSupply Inc", service: "Software License", daysLeft: 15 },
+    { poNumber: "PO-24568", vendor: "ACME Corp", service: "Maintenance Contract", daysLeft: 30, poId: "po-123" },
+    { poNumber: "PO-24569", vendor: "TechSupply Inc", service: "Software License", daysLeft: 15, poId: "po-124" },
   ],
-  forecastedSpikes: [
-    { description: "Q4 Marketing Spend - 40% increase projected" },
-    { description: "R&D Equipment - Budget threshold approaching" },
+  blanketPOOpportunities: [
+    { description: "Office supplies showing recurring monthly orders - consider Blanket PO" },
+    { description: "IT services showing consistent usage pattern - Blanket PO recommended" },
   ],
 };
 
@@ -32,21 +32,23 @@ export const mockRecentActivity = [
 export const mockAnalyticsAnomalies = [
   {
     type: "warning",
-    title: "PO Running Out of Funds",
-    description: "PO-24568 (TechSupply Inc) - 87% of budget consumed with 3 months remaining",
-    action: "Review Budget Allocation",
+    title: "Contract Expiring Soon",
+    description: "Blanket PO-24568 (TechSupply Inc) contract expires in 15 days - consider renewal or replacement",
+    action: "Review Contract Renewal",
+    poId: "PO-24568",
   },
   {
     type: "success",
-    title: "Opportunity Identified",
-    description: "R&D SKU 55-9876 showing 40% price variance across vendors - consider consolidation",
-    action: "Analyze Vendors",
+    title: "Blanket PO Optimization",
+    description: "Office supplies showing consistent usage - recommend converting to Blanket PO for better pricing",
+    action: "Create Blanket PO",
   },
   {
     type: "info",
-    title: "Seasonal Forecast",
-    description: "Q4 Marketing spend projected to increase 40% based on historical patterns",
-    action: "Prepare Budget Plan",
+    title: "Vendor Performance Alert",
+    description: "ABC Corp has 95% on-time delivery rate - consider for preferred vendor status",
+    action: "Review Vendor Status",
+    vendorId: "vendor-123",
   },
 ];
 
