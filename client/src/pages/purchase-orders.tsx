@@ -109,7 +109,7 @@ export default function PurchaseOrders() {
         <CardHeader>
           <CardTitle className="flex items-center gap-2">
             <FileText className="h-5 w-5" />
-            Purchase Orders ({filteredPOs.length} of {dummyPurchaseOrders.length})
+            Purchase Orders ({filteredPOs.length})
           </CardTitle>
         </CardHeader>
         <CardContent>
@@ -119,6 +119,7 @@ export default function PurchaseOrders() {
                 <TableHead>PO Details</TableHead>
                 <TableHead>Vendor</TableHead>
                 <TableHead>Amount & Type</TableHead>
+                <TableHead>Date Approved</TableHead>
                 <TableHead>Contract Info</TableHead>
                 <TableHead>Status</TableHead>
                 <TableHead>Actions</TableHead>
@@ -150,6 +151,18 @@ export default function PurchaseOrders() {
                         <Badge variant="outline" className="text-xs mt-1">
                           Blanket PO
                         </Badge>
+                      )}
+                    </div>
+                  </TableCell>
+                  <TableCell>
+                    <div className="text-sm">
+                      {po.approvedAt ? (
+                        <>
+                          <p className="font-medium">{po.approvedAt.toLocaleDateString()}</p>
+                          <p className="text-muted-foreground">{po.approvedAt.toLocaleTimeString()}</p>
+                        </>
+                      ) : (
+                        <span className="text-muted-foreground">Pending</span>
                       )}
                     </div>
                   </TableCell>

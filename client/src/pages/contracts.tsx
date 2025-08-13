@@ -1,15 +1,36 @@
+import { useState } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { Calendar, FileText, Building2, AlertTriangle, CheckCircle, Clock, XCircle } from "lucide-react";
+import { Input } from "@/components/ui/input";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { Calendar, FileText, Building2, AlertTriangle, CheckCircle, Clock, XCircle, Search, Filter } from "lucide-react";
 import { useLocation } from "wouter";
 import { dummyPurchaseOrders } from "@/lib/dummy-pos";
 
 export default function Contracts() {
   const [, setLocation] = useLocation();
+  const [searchTerm, setSearchTerm] = useState("");
+  const [vendorFilter, setVendorFilter] = useState("all");
 
   // Filter POs with contract information
   const contractPOs = dummyPurchaseOrders.filter(po => po.contractNumber);
+  
+  // Get unique vendors for filter
+  const uniqueVendors = [...new Set(contractPOs.map(po => po.vendorName))];
+
+  // Filter contracts based on search and filters
+  const filteredContracts = contractPOs.filter(contract => {
+    const matchesSearch = searchTerm === "" || 
+      contract.contractNumber?.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      contract.poNumber.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      contract.vendorName.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      contract.description.toLowerCase().includes(searchTerm.toLowerCase());
+    
+    const matchesVendor = vendorFilter === "all" || contract.vendorName === vendorFilter;
+    
+    return matchesSearch && matchesVendor;
+  });
 
   const getDaysUntilExpiry = (endDate: Date | null) => {
     if (!endDate) return null;
@@ -203,6 +224,39 @@ export default function Contracts() {
         </p>
       </div>
 
+      {/* Search and Filter Controls */}
+      <Card>
+        <CardContent className="p-4">
+          <div className="flex flex-wrap gap-4 items-center">
+            <div className="flex-1 min-w-64">
+              <div className="relative">
+                <Search className="absolute left-3 top-3 h-4 w-4 text-muted-foreground" />
+                <Input
+                  placeholder="Search contract number, PO number, vendor, or description..."
+                  value={searchTerm}
+                  onChange={(e) => setSearchTerm(e.target.value)}
+                  className="pl-9"
+                />
+              </div>
+            </div>
+            <div className="flex gap-2">
+              <Select value={vendorFilter} onValueChange={setVendorFilter}>
+                <SelectTrigger className="w-48">
+                  <Filter className="h-4 w-4 mr-2" />
+                  <SelectValue placeholder="Vendor" />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="all">All Vendors</SelectItem>
+                  {uniqueVendors.map(vendor => (
+                    <SelectItem key={vendor} value={vendor}>{vendor}</SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
+            </div>
+          </div>
+        </CardContent>
+      </Card>
+
       {/* Risk Summary Cards */}
       <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-6">
         <Card className="border-red-200 dark:border-red-800">
@@ -236,52 +290,90 @@ export default function Contracts() {
       </div>
 
       {/* Contract Sections by Risk Tier */}
-      {contractsByTier.expired.length > 0 && (
-        <div>
-          <h2 className="text-xl font-semibold mb-4 text-red-600 flex items-center">
-            <XCircle className="h-5 w-5 mr-2" />
-            Expired Contracts - Immediate Action Required
-          </h2>
-          <div className="grid gap-4">
-            {contractsByTier.expired.map(renderContractCard)}
-          </div>
-        </div>
-      )}
+      {filteredContracts.length > 0 ? (
+        <>
+          {filteredContracts.filter(c => getRiskTier(getDaysUntilExpiry(c.contractEndDate)) === 'expired').length > 0 && (
+            <div>
+              <h2 className="text-xl font-semibold mb-4 text-red-600 flex items-center">
+                <XCircle className="h-5 w-5 mr-2" />
+                Expired Contracts - Immediate Action Required
+              </h2>
+              <div className="grid gap-4">
+                {filteredContracts
+                  .filter(c => getRiskTier(getDaysUntilExpiry(c.contractEndDate)) === 'expired')
+                  .map(contract => {
+                    const daysUntilExpiry = getDaysUntilExpiry(contract.contractEndDate);
+                    const riskTier = getRiskTier(daysUntilExpiry);
+                    return renderContractCard({ ...contract, daysUntilExpiry, riskTier });
+                  })}
+              </div>
+            </div>
+          )}
 
-      {contractsByTier.critical.length > 0 && (
-        <div>
-          <h2 className="text-xl font-semibold mb-4 text-orange-600 flex items-center">
-            <AlertTriangle className="h-5 w-5 mr-2" />
-            Critical Risk - Expiring Within 30 Days
-          </h2>
-          <div className="grid gap-4">
-            {contractsByTier.critical.map(renderContractCard)}
-          </div>
-        </div>
-      )}
+          {filteredContracts.filter(c => getRiskTier(getDaysUntilExpiry(c.contractEndDate)) === 'critical').length > 0 && (
+            <div>
+              <h2 className="text-xl font-semibold mb-4 text-orange-600 flex items-center">
+                <AlertTriangle className="h-5 w-5 mr-2" />
+                Critical Risk - Expiring Within 30 Days
+              </h2>
+              <div className="grid gap-4">
+                {filteredContracts
+                  .filter(c => getRiskTier(getDaysUntilExpiry(c.contractEndDate)) === 'critical')
+                  .map(contract => {
+                    const daysUntilExpiry = getDaysUntilExpiry(contract.contractEndDate);
+                    const riskTier = getRiskTier(daysUntilExpiry);
+                    return renderContractCard({ ...contract, daysUntilExpiry, riskTier });
+                  })}
+              </div>
+            </div>
+          )}
 
-      {contractsByTier.warning.length > 0 && (
-        <div>
-          <h2 className="text-xl font-semibold mb-4 text-yellow-600 flex items-center">
-            <Clock className="h-5 w-5 mr-2" />
-            Upcoming Renewals - Within 90 Days
-          </h2>
-          <div className="grid gap-4">
-            {contractsByTier.warning.map(renderContractCard)}
-          </div>
-        </div>
-      )}
+          {filteredContracts.filter(c => getRiskTier(getDaysUntilExpiry(c.contractEndDate)) === 'warning').length > 0 && (
+            <div>
+              <h2 className="text-xl font-semibold mb-4 text-yellow-600 flex items-center">
+                <Clock className="h-5 w-5 mr-2" />
+                Upcoming Renewals - Within 90 Days
+              </h2>
+              <div className="grid gap-4">
+                {filteredContracts
+                  .filter(c => getRiskTier(getDaysUntilExpiry(c.contractEndDate)) === 'warning')
+                  .map(contract => {
+                    const daysUntilExpiry = getDaysUntilExpiry(contract.contractEndDate);
+                    const riskTier = getRiskTier(daysUntilExpiry);
+                    return renderContractCard({ ...contract, daysUntilExpiry, riskTier });
+                  })}
+              </div>
+            </div>
+          )}
 
-      {contractsByTier.active.length > 0 && (
-        <div>
-          <h2 className="text-xl font-semibold mb-4 text-green-600 flex items-center">
-            <CheckCircle className="h-5 w-5 mr-2" />
-            Active Contracts
-          </h2>
-          <div className="grid gap-4">
-            {contractsByTier.active.map(renderContractCard)}
-          </div>
-        </div>
+          {filteredContracts.filter(c => getRiskTier(getDaysUntilExpiry(c.contractEndDate)) === 'active').length > 0 && (
+            <div>
+              <h2 className="text-xl font-semibold mb-4 text-green-600 flex items-center">
+                <CheckCircle className="h-5 w-5 mr-2" />
+                Active Contracts
+              </h2>
+              <div className="grid gap-4">
+                {filteredContracts
+                  .filter(c => getRiskTier(getDaysUntilExpiry(c.contractEndDate)) === 'active')
+                  .map(contract => {
+                    const daysUntilExpiry = getDaysUntilExpiry(contract.contractEndDate);
+                    const riskTier = getRiskTier(daysUntilExpiry);
+                    return renderContractCard({ ...contract, daysUntilExpiry, riskTier });
+                  })}
+              </div>
+            </div>
+          )}
+        </>
+      ) : (
+        <Card>
+          <CardContent className="p-8 text-center">
+            <FileText className="h-12 w-12 text-muted-foreground mx-auto mb-4" />
+            <h3 className="text-lg font-semibold mb-2">No contracts found</h3>
+            <p className="text-muted-foreground">
+              Try adjusting your search criteria or filters
+            </p>
+          </CardContent>
+        </Card>
       )}
 
       {contractPOs.length === 0 && (

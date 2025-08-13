@@ -118,8 +118,11 @@ export default function RequestIntake() {
         quantity: 1,
         unitOfMeasure: "Each",
         unitPrice: 0,
+        generalLedgerCode: "",
         isHazmat: false,
         contractNumber: "",
+        contractStartDate: "",
+        contractEndDate: "",
       },
     ]);
   };
@@ -152,6 +155,7 @@ export default function RequestIntake() {
       totalAmount: totalAmount.toString(),
       businessJustification: data.businessJustification,
       shippingAddress: data.shippingAddress || null,
+      generalLedgerCode: items[0]?.generalLedgerCode || "",
       isMultiVendor: false,
     });
   };

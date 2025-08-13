@@ -191,10 +191,13 @@ export default function Approvals() {
                     Preview
                   </Button>
                 </DialogTrigger>
-                <DialogContent className="max-w-4xl max-h-[80vh] overflow-y-auto">
+                <DialogContent className="max-w-4xl max-h-[80vh] overflow-y-auto" aria-describedby="po-preview-description">
                   <DialogHeader>
                     <DialogTitle>Purchase Order Preview - {selectedPO?.poNumber}</DialogTitle>
                   </DialogHeader>
+                  <div id="po-preview-description" className="sr-only">
+                    Preview of purchase order details including contract information, workflow steps, and attachments
+                  </div>
                   {selectedPO && <POPreview po={selectedPO} />}
                 </DialogContent>
               </Dialog>
