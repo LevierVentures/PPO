@@ -22,7 +22,7 @@ const requestFormSchema = z.object({
   requestType: z.enum(["goods", "services", "mixed", "new-vendor"]),
   department: z.string().min(1, "Department is required"),
   budgetCode: z.string().optional(),
-
+  dateNeededBy: z.string().min(1, "Date needed by is required"),
   vendorId: z.string().optional(),
   shippingAddress: z.string().optional(),
   businessJustification: z.string().min(1, "Business justification is required"),
@@ -52,6 +52,8 @@ export default function RequestIntake() {
       generalLedgerCode: "",
       isHazmat: false,
       contractNumber: "",
+      contractStartDate: "",
+      contractEndDate: "",
     },
   ]);
 
@@ -60,6 +62,7 @@ export default function RequestIntake() {
     defaultValues: {
       requestType: "goods",
       department: state.currentUser.department,
+      dateNeededBy: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000).toISOString().split('T')[0], // 7 days from now
       shippingAddress: "Default: 123 Corporate Blvd, Business City, ST 12345",
     },
   });
@@ -345,6 +348,20 @@ export default function RequestIntake() {
                     </FormItem>
                   )}
                 />
+
+                <FormField
+                  control={form.control}
+                  name="dateNeededBy"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>Date Needed By *</FormLabel>
+                      <FormControl>
+                        <Input type="date" {...field} />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
               </div>
 
               {/* Vendor Selection */}
@@ -515,6 +532,28 @@ export default function RequestIntake() {
                           </div>
                         )}
                       </div>
+
+                      {/* Contract Dates for Service Items */}
+                      {item.itemType === "service" && (
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                          <div>
+                            <label className="text-sm font-medium">Contract Start Date</label>
+                            <Input
+                              type="date"
+                              value={item.contractStartDate}
+                              onChange={(e) => updateItem(item.id, "contractStartDate", e.target.value)}
+                            />
+                          </div>
+                          <div>
+                            <label className="text-sm font-medium">Contract End Date</label>
+                            <Input
+                              type="date"
+                              value={item.contractEndDate}
+                              onChange={(e) => updateItem(item.id, "contractEndDate", e.target.value)}
+                            />
+                          </div>
+                        </div>
+                      )}
 
                       {/* GL Code - Required for all line items */}
                       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">

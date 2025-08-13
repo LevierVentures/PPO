@@ -4,12 +4,16 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { AlertTriangle, CheckCircle, Clock, FileText, Building2, User } from "lucide-react";
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
+import { Separator } from "@/components/ui/separator";
+import { AlertTriangle, CheckCircle, Clock, FileText, Building2, User, Eye } from "lucide-react";
 import { mockApprovalsData, getApprovalsByPriority } from "@/lib/approvals-data";
+import { dummyPurchaseOrders } from "@/lib/dummy-pos";
 import { useLocation } from "wouter";
 
 export default function Approvals() {
   const [, setLocation] = useLocation();
+  const [selectedPO, setSelectedPO] = useState<any>(null);
   const approvalsByPriority = getApprovalsByPriority();
 
   const getStatusVariant = (priority: string) => {
@@ -39,6 +43,93 @@ export default function Approvals() {
     console.log('Reject:', item.id);
     // Here you would make API call to reject the item
   };
+
+  const handlePreview = (item: any) => {
+    if (item.type === 'po') {
+      // Find the PO details from the dummy data
+      const poDetails = dummyPurchaseOrders.find(po => po.id === item.id);
+      setSelectedPO(poDetails);
+    }
+  };
+
+  const POPreview = ({ po }: { po: any }) => (
+    <div className="space-y-6">
+      {/* PO Header */}
+      <div className="grid grid-cols-2 gap-6">
+        <div>
+          <h4 className="font-semibold mb-2">Purchase Order Details</h4>
+          <div className="space-y-1 text-sm">
+            <p><span className="font-medium">PO Number:</span> {po.poNumber}</p>
+            <p><span className="font-medium">Vendor:</span> {po.vendorName}</p>
+            <p><span className="font-medium">Amount:</span> ${parseFloat(po.amount).toLocaleString()}</p>
+            <p><span className="font-medium">Status:</span> {po.status}</p>
+            <p><span className="font-medium">Created:</span> {po.createdAt.toLocaleDateString()}</p>
+          </div>
+        </div>
+        <div>
+          <h4 className="font-semibold mb-2">Contract Information</h4>
+          <div className="space-y-1 text-sm">
+            <p><span className="font-medium">Contract Number:</span> {po.contractNumber}</p>
+            <p><span className="font-medium">Agreement Date:</span> {po.agreementDate?.toLocaleDateString()}</p>
+            <p><span className="font-medium">Contract End:</span> {po.contractEndDate?.toLocaleDateString()}</p>
+            <p><span className="font-medium">Blanket PO:</span> {po.isBlanketPO ? 'Yes' : 'No'}</p>
+          </div>
+        </div>
+      </div>
+
+      <Separator />
+
+      {/* Description */}
+      <div>
+        <h4 className="font-semibold mb-2">Description</h4>
+        <p className="text-sm">{po.description}</p>
+      </div>
+
+      <Separator />
+
+      {/* Workflow Steps */}
+      <div>
+        <h4 className="font-semibold mb-3">Approval Workflow</h4>
+        <div className="space-y-2">
+          {po.workflowSteps.map((step: any, index: number) => (
+            <div key={index} className="flex items-center justify-between p-2 border rounded">
+              <div className="flex items-center space-x-2">
+                <div className={`w-3 h-3 rounded-full ${
+                  step.status === 'completed' ? 'bg-green-500' : 
+                  step.status === 'pending' ? 'bg-yellow-500' : 'bg-gray-300'
+                }`} />
+                <span className="font-medium">{step.step}</span>
+              </div>
+              <div className="text-sm text-muted-foreground">
+                <span>{step.assignee}</span>
+                {step.completedAt && (
+                  <span className="ml-2">({step.completedAt.toLocaleDateString()})</span>
+                )}
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      {/* Attachments */}
+      {po.attachments && po.attachments.length > 0 && (
+        <>
+          <Separator />
+          <div>
+            <h4 className="font-semibold mb-2">Attachments</h4>
+            <div className="flex flex-wrap gap-2">
+              {po.attachments.map((attachment: string, index: number) => (
+                <Badge key={index} variant="outline" className="cursor-pointer hover:bg-accent">
+                  <FileText className="h-3 w-3 mr-1" />
+                  {attachment}
+                </Badge>
+              ))}
+            </div>
+          </div>
+        </>
+      )}
+    </div>
+  );
 
   const renderApprovalRow = (item: any) => {
     const Icon = getTypeIcon(item.type);
@@ -88,6 +179,26 @@ export default function Approvals() {
         </TableCell>
         <TableCell>
           <div className="flex space-x-2">
+            {item.type === 'po' && (
+              <Dialog>
+                <DialogTrigger asChild>
+                  <Button 
+                    variant="outline" 
+                    size="sm"
+                    onClick={() => handlePreview(item)}
+                  >
+                    <Eye className="h-4 w-4 mr-1" />
+                    Preview
+                  </Button>
+                </DialogTrigger>
+                <DialogContent className="max-w-4xl max-h-[80vh] overflow-y-auto">
+                  <DialogHeader>
+                    <DialogTitle>Purchase Order Preview - {selectedPO?.poNumber}</DialogTitle>
+                  </DialogHeader>
+                  {selectedPO && <POPreview po={selectedPO} />}
+                </DialogContent>
+              </Dialog>
+            )}
             <Button 
               variant="default" 
               size="sm"

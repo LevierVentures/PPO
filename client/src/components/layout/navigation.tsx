@@ -19,8 +19,7 @@ const navItems = [
   { path: "/contracts", label: "Contracts", icon: FileText },
   { path: "/purchase-orders", label: "Purchase Orders", icon: History },
   { path: "/vendors", label: "Vendors", icon: Handshake },
-  { path: "/invoices", label: "Invoices", icon: Receipt },
-  { path: "/invoice-history", label: "Invoice History", icon: Archive },
+  { path: "/invoice-history", label: "Invoices", icon: Receipt },
   { path: "/analytics", label: "Analytics", icon: BarChart3 },
 ];
 

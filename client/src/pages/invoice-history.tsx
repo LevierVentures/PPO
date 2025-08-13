@@ -83,12 +83,12 @@ export default function InvoiceHistory() {
             <p><span className="font-medium">Vendor:</span> {invoice.vendorName}</p>
             <p><span className="font-medium">Payment Terms:</span> {invoice.paymentTerms}</p>
             <p><span className="font-medium">Match Status:</span> 
-              <Badge variant="outline" className="ml-2">{invoice.matchStatus}</Badge>
+              <span className="ml-2">{invoice.matchStatus}</span>
             </p>
             <p><span className="font-medium">Status:</span> 
-              <Badge variant={getStatusVariant(invoice.status)} className="ml-2">
+              <span className={`ml-2 ${getStatusColor(invoice.status)}`}>
                 {invoice.status}
-              </Badge>
+              </span>
             </p>
           </div>
         </div>
@@ -161,7 +161,7 @@ export default function InvoiceHistory() {
   return (
     <div className="space-y-6">
       <div>
-        <h1 className="text-3xl font-bold">Invoice History</h1>
+        <h1 className="text-3xl font-bold">Invoices</h1>
         <p className="text-muted-foreground">
           Search and manage all invoice records with detailed preview capabilities
         </p>
@@ -257,7 +257,7 @@ export default function InvoiceHistory() {
         <CardHeader>
           <CardTitle className="flex items-center gap-2">
             <Receipt className="h-5 w-5" />
-            Invoice History ({filteredInvoices.length} of {mockInvoicesData.length})
+            Invoices ({filteredInvoices.length} of {mockInvoicesData.length})
           </CardTitle>
         </CardHeader>
         <CardContent>
