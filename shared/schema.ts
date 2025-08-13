@@ -37,6 +37,7 @@ export const requisitions = pgTable("requisitions", {
   businessJustification: text("business_justification"),
   shippingAddress: text("shipping_address"),
   isMultiVendor: boolean("is_multi_vendor").default(false),
+  attachments: text("attachments").array(),
   submittedAt: timestamp("submitted_at").defaultNow(),
   approvedAt: timestamp("approved_at"),
 });
@@ -62,10 +63,12 @@ export const purchaseOrders = pgTable("purchase_orders", {
   requisitionId: varchar("requisition_id").references(() => requisitions.id),
   vendorId: varchar("vendor_id").references(() => vendors.id),
   amount: decimal("amount", { precision: 12, scale: 2 }).notNull(),
-  poType: text("po_type").notNull().default("standard"), // standard, blanket, contract
+  isBlanketPO: boolean("is_blanket_po").default(false),
   contractStartDate: timestamp("contract_start_date"),
   contractEndDate: timestamp("contract_end_date"),
   contractNumber: text("contract_number"),
+  agreementDate: timestamp("agreement_date"),
+  attachments: text("attachments").array(),
   status: text("status").notNull().default("pending"), // pending, approved, rejected, in-progress, completed, cancelled
   createdAt: timestamp("created_at").defaultNow(),
   approvedAt: timestamp("approved_at"),

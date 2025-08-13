@@ -12,13 +12,13 @@ export const mockWorkloadData = {
     { id: "REQ-24119", description: "IT Equipment", amount: 15670 },
     { id: "REQ-24120", description: "Marketing Services", amount: 8900 },
   ],
-  contractsExpiring: [
-    { poNumber: "PO-24568", vendor: "ACME Corp", service: "Maintenance Contract", daysLeft: 30, poId: "po-123" },
-    { poNumber: "PO-24569", vendor: "TechSupply Inc", service: "Software License", daysLeft: 15, poId: "po-124" },
+  pendingPOs: [
+    { poNumber: "PO-24568", vendor: "ACME Corp", description: "Annual Maintenance Services", amount: 25000, status: "pending", daysInWorkflow: 3, poId: "po-001" },
+    { poNumber: "PO-24569", vendor: "TechSupply Inc", description: "Software License Renewal", amount: 15750, status: "pending", daysInWorkflow: 1, poId: "po-002" },
   ],
-  blanketPOOpportunities: [
-    { description: "Office supplies showing recurring monthly orders - consider Blanket PO" },
-    { description: "IT services showing consistent usage pattern - Blanket PO recommended" },
+  contractsExpiring: [
+    { poNumber: "PO-24568", vendor: "ACME Corp", service: "Maintenance Contract", daysLeft: 30, poId: "po-001", agreementDate: "2024-01-10" },
+    { poNumber: "PO-24569", vendor: "TechSupply Inc", service: "Software License", daysLeft: 15, poId: "po-002", agreementDate: "2024-10-25" },
   ],
 };
 

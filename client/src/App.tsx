@@ -12,6 +12,8 @@ import RequestIntake from "./pages/request-intake";
 import Approvals from "./pages/approvals";
 import POWorkbench from "./pages/po-workbench";
 import POHistory from "./pages/po-history";
+import POSummary from "./pages/po-summary";
+import UserReview from "./pages/user-review";
 import Vendors from "./pages/vendors";
 import Invoices from "./pages/invoices";
 import InvoiceHistory from "./pages/invoice-history";
@@ -26,6 +28,8 @@ function Router() {
       <Route path="/approvals" component={Approvals} />
       <Route path="/po-workbench" component={POWorkbench} />
       <Route path="/po-history" component={POHistory} />
+      <Route path="/po-summary" component={POSummary} />
+      <Route path="/user-review" component={UserReview} />
       <Route path="/vendors" component={Vendors} />
       <Route path="/invoices" component={Invoices} />
       <Route path="/invoice-history" component={InvoiceHistory} />

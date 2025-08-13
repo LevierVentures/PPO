@@ -107,58 +107,87 @@ export default function Dashboard() {
       {/* Main Content Grid */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
         {/* Workload Panel */}
-        <Card>
-          <CardHeader>
-            <CardTitle className="flex items-center gap-2">
-              <Check className="h-5 w-5" />
-              Workload Panel
+        <Card className="shadow-lg border-0 bg-gradient-to-br from-background to-accent/10">
+          <CardHeader className="pb-3">
+            <CardTitle className="flex items-center text-lg font-semibold text-primary">
+              <svg className="w-5 h-5 mr-2 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5H7a2 2 0 00-2 2v10a2 2 0 002 2h8a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01" />
+              </svg>
+              Priority Actions Dashboard
             </CardTitle>
+            <p className="text-sm text-muted-foreground">Critical items requiring immediate attention</p>
           </CardHeader>
           <CardContent className="space-y-6">
             <div>
-              <h4 className="font-medium mb-2">Approvals Due Today</h4>
+              <div className="flex items-center justify-between mb-3">
+                <h4 className="font-semibold text-primary">Approvals Due Today</h4>
+                <Badge variant="secondary" className="text-xs">{mockWorkloadData.approvalsDueToday.length}</Badge>
+              </div>
               <div className="space-y-2">
                 {mockWorkloadData.approvalsDueToday.map((item) => (
                   <div 
                     key={item.id} 
-                    className="text-sm p-2 rounded hover:bg-accent cursor-pointer transition-colors flex items-center justify-between"
+                    className="p-3 border rounded-lg hover:shadow-sm cursor-pointer transition-all bg-gradient-to-r from-background to-accent/20"
                     onClick={() => setLocation("/approvals")}
                   >
-                    <span>{item.id} - {item.description}</span>
-                    <span className="font-medium">${item.amount.toLocaleString()}</span>
+                    <div className="flex items-center justify-between">
+                      <div>
+                        <p className="font-medium text-sm">{item.id}</p>
+                        <p className="text-xs text-muted-foreground">{item.description}</p>
+                      </div>
+                      <span className="font-semibold text-primary">${item.amount.toLocaleString()}</span>
+                    </div>
                   </div>
                 ))}
               </div>
             </div>
 
             <div>
-              <h4 className="font-medium mb-2">Contracts Expiring</h4>
+              <div className="flex items-center justify-between mb-3">
+                <h4 className="font-semibold text-primary">POs Pending Approval</h4>
+                <Badge variant="secondary" className="text-xs">{mockWorkloadData.pendingPOs.length}</Badge>
+              </div>
+              <div className="space-y-2">
+                {mockWorkloadData.pendingPOs.map((po, index) => (
+                  <div 
+                    key={index} 
+                    className="p-3 border rounded-lg hover:shadow-sm cursor-pointer transition-all bg-gradient-to-r from-background to-yellow-50 dark:to-yellow-900/20"
+                    onClick={() => setLocation(`/po-summary?id=${po.poId}`)}
+                  >
+                    <div className="flex items-center justify-between mb-1">
+                      <p className="font-medium text-sm">{po.poNumber}</p>
+                      <span className="font-semibold text-primary">${po.amount.toLocaleString()}</span>
+                    </div>
+                    <p className="text-xs text-muted-foreground mb-1">{po.vendor} - {po.description}</p>
+                    <div className="flex items-center justify-between">
+                      <Badge variant="outline" className="text-xs">{po.status}</Badge>
+                      <span className="text-xs text-muted-foreground">{po.daysInWorkflow} days in workflow</span>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            <div>
+              <div className="flex items-center justify-between mb-3">
+                <h4 className="font-semibold text-destructive">Contracts Expiring</h4>
+                <Badge variant="destructive" className="text-xs">{mockWorkloadData.contractsExpiring.length}</Badge>
+              </div>
               <div className="space-y-2">
                 {mockWorkloadData.contractsExpiring.map((contract, index) => (
                   <div 
                     key={index} 
-                    className="text-sm p-2 rounded hover:bg-accent cursor-pointer transition-colors flex items-center justify-between"
-                    onClick={() => setLocation(`/purchase-orders?highlight=${contract.poId}`)}
+                    className="p-3 border rounded-lg hover:shadow-sm cursor-pointer transition-all bg-gradient-to-r from-background to-red-50 dark:to-red-900/20 border-red-200 dark:border-red-800"
+                    onClick={() => setLocation(`/po-summary?id=${contract.poId}`)}
                   >
-                    <span>{contract.poNumber} - {contract.vendor} ({contract.service})</span>
-                    <Badge variant="outline" className="text-xs">
-                      {contract.daysLeft} days
-                    </Badge>
-                  </div>
-                ))}
-              </div>
-            </div>
-
-            <div>
-              <h4 className="font-medium mb-2">Blanket PO Opportunities</h4>
-              <div className="space-y-2">
-                {mockWorkloadData.blanketPOOpportunities.map((opportunity, index) => (
-                  <div 
-                    key={index} 
-                    className="text-sm p-2 rounded hover:bg-accent cursor-pointer transition-colors"
-                    onClick={() => setLocation("/request?type=blanket")}
-                  >
-                    {opportunity.description}
+                    <div className="flex items-center justify-between mb-1">
+                      <p className="font-medium text-sm">{contract.poNumber}</p>
+                      <Badge variant="destructive" className="text-xs">
+                        {contract.daysLeft} days
+                      </Badge>
+                    </div>
+                    <p className="text-xs text-muted-foreground mb-1">{contract.vendor} - {contract.service}</p>
+                    <p className="text-xs text-muted-foreground">Agreement: {contract.agreementDate}</p>
                   </div>
                 ))}
               </div>
