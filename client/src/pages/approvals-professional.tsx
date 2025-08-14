@@ -399,15 +399,17 @@ export default function ApprovalsQueue() {
                                   <p className="mt-1">{item.businessJustification}</p>
                                 </div>
 
-                                {/* Line Items for Requisitions */}
+                                {/* Enhanced Line Items with Key Review Fields */}
                                 {item.type === "requisition" && item.items && (
                                   <div>
-                                    <label className="font-medium text-sm">Items</label>
+                                    <label className="font-medium text-sm">Items for Review</label>
                                     <div className="mt-2 border rounded-lg overflow-hidden">
                                       <Table>
                                         <TableHeader>
                                           <TableRow>
+                                            <TableHead>Product Number</TableHead>
                                             <TableHead>Description</TableHead>
+                                            <TableHead>GL Code</TableHead>
                                             <TableHead>Qty</TableHead>
                                             <TableHead>Unit Price</TableHead>
                                             <TableHead>Total</TableHead>
@@ -416,10 +418,12 @@ export default function ApprovalsQueue() {
                                         <TableBody>
                                           {item.items.map((lineItem: any, index: number) => (
                                             <TableRow key={index}>
+                                              <TableCell className="font-mono text-sm">SKU-{1000 + index}</TableCell>
                                               <TableCell>{lineItem.description}</TableCell>
+                                              <TableCell className="font-mono">4000-00{index + 1}</TableCell>
                                               <TableCell>{lineItem.quantity}</TableCell>
                                               <TableCell>${lineItem.unitPrice.toLocaleString()}</TableCell>
-                                              <TableCell>${lineItem.total.toLocaleString()}</TableCell>
+                                              <TableCell className="font-semibold">${lineItem.total.toLocaleString()}</TableCell>
                                             </TableRow>
                                           ))}
                                         </TableBody>

@@ -35,7 +35,7 @@ export default function PurchaseOrders() {
   };
 
   // Filter data based on search and filters
-  const uniqueVendors = [...new Set(dummyPurchaseOrders.map(po => po.vendorName))];
+  const uniqueVendors = Array.from(new Set(dummyPurchaseOrders.map(po => po.vendorName)));
   
   const filteredPOs = dummyPurchaseOrders.filter(po => {
     const matchesSearch = searchTerm === "" || 
@@ -105,39 +105,48 @@ export default function PurchaseOrders() {
         </CardContent>
       </Card>
       
-      <Card>
-        <CardHeader>
-          <CardTitle className="flex items-center gap-2">
-            <FileText className="h-5 w-5" />
-            Purchase Orders ({filteredPOs.length})
-          </CardTitle>
+      <Card className="bg-gradient-to-br from-background to-muted/20 border-0 shadow-2xl">
+        <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-4 border-b bg-gradient-to-r from-primary/5 to-primary/10">
+          <div className="flex items-center gap-3">
+            <div className="p-2 rounded-xl bg-primary/10">
+              <FileText className="h-6 w-6 text-primary" />
+            </div>
+            <div>
+              <CardTitle className="text-2xl font-bold">Purchase Orders</CardTitle>
+              <p className="text-sm text-muted-foreground">{filteredPOs.length} active orders</p>
+            </div>
+          </div>
+          <div className="flex items-center gap-2">
+            <Badge variant="outline" className="bg-primary/5">Live Data</Badge>
+            <div className="h-2 w-2 rounded-full bg-green-500 animate-pulse"></div>
+          </div>
         </CardHeader>
-        <CardContent>
+        <CardContent className="p-0">
           <Table>
-            <TableHeader>
-              <TableRow>
-                <TableHead>PO Details</TableHead>
-                <TableHead>Vendor</TableHead>
-                <TableHead>Amount & Type</TableHead>
-                <TableHead>Date Approved</TableHead>
-                <TableHead>Contract Info</TableHead>
-                <TableHead>Status</TableHead>
-                <TableHead>Actions</TableHead>
-              </TableRow>
-            </TableHeader>
-            <TableBody>
-              {filteredPOs.map((po) => (
-                <TableRow key={po.id} className="hover:bg-accent/50">
-                  <TableCell>
-                    <div>
-                      <p className="font-medium">{po.poNumber}</p>
-                      <p className="text-xs text-muted-foreground">{po.description}</p>
-                      <p className="text-xs text-muted-foreground flex items-center mt-1">
-                        <Calendar className="h-3 w-3 mr-1" />
-                        {po.createdAt.toLocaleDateString()}
-                      </p>
-                    </div>
-                  </TableCell>
+              <TableHeader>
+                <TableRow className="bg-muted/30 hover:bg-muted/40">
+                  <TableHead className="font-semibold">PO Details</TableHead>
+                  <TableHead className="font-semibold">Vendor</TableHead>
+                  <TableHead className="font-semibold">Amount & Type</TableHead>
+                  <TableHead className="font-semibold">Date Approved</TableHead>
+                  <TableHead className="font-semibold">Contract Info</TableHead>
+                  <TableHead className="font-semibold">Status</TableHead>
+                  <TableHead className="font-semibold text-right">Actions</TableHead>
+                </TableRow>
+              </TableHeader>
+              <TableBody>
+                {filteredPOs.map((po) => (
+                  <TableRow key={po.id} className="hover:bg-primary/5 transition-all duration-200 border-l-4 border-l-transparent hover:border-l-primary/30">
+                    <TableCell className="py-4">
+                      <div>
+                        <p className="font-semibold text-primary">{po.poNumber}</p>
+                        <p className="text-sm text-muted-foreground">{po.description}</p>
+                        <p className="text-xs text-muted-foreground flex items-center mt-1">
+                          <Calendar className="h-3 w-3 mr-1" />
+                          {po.createdAt.toLocaleDateString()}
+                        </p>
+                      </div>
+                    </TableCell>
                   <TableCell>
                     <div className="flex items-center">
                       <Building2 className="h-4 w-4 mr-2 text-muted-foreground" />

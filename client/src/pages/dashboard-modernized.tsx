@@ -224,9 +224,9 @@ export default function Dashboard() {
         ))}
       </div>
 
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
         {/* Main Content */}
-        <div className="lg:col-span-2 space-y-6">
+        <div className="space-y-6">
           {/* Priority Actions */}
           <Card>
             <CardHeader>
@@ -312,7 +312,7 @@ export default function Dashboard() {
           </Card>
         </div>
 
-        {/* Sidebar */}
+        {/* Right Column */}
         <div className="space-y-6">
           {/* Smart Assistant */}
           <ChatAssistant />
@@ -358,29 +358,29 @@ export default function Dashboard() {
                 Quick Actions
               </CardTitle>
             </CardHeader>
-            <CardContent className="space-y-3">
+            <CardContent className="grid grid-cols-2 gap-3">
               <Link href="/request">
-                <Button variant="outline" className="w-full justify-start">
-                  <PlusCircle className="h-4 w-4 mr-2" />
-                  New Requisition
+                <Button variant="outline" className="w-full justify-start h-auto p-3 flex-col items-start">
+                  <PlusCircle className="h-5 w-5 mb-1" />
+                  <span className="text-xs">New Requisition</span>
                 </Button>
               </Link>
               <Link href="/contracts">
-                <Button variant="outline" className="w-full justify-start">
-                  <FileText className="h-4 w-4 mr-2" />
-                  View Contracts
+                <Button variant="outline" className="w-full justify-start h-auto p-3 flex-col items-start">
+                  <FileText className="h-5 w-5 mb-1" />
+                  <span className="text-xs">View Contracts</span>
                 </Button>
               </Link>
               <Link href="/approvals">
-                <Button variant="outline" className="w-full justify-start">
-                  <CheckCircle className="h-4 w-4 mr-2" />
-                  Review Approvals
+                <Button variant="outline" className="w-full justify-start h-auto p-3 flex-col items-start">
+                  <CheckCircle className="h-5 w-5 mb-1" />
+                  <span className="text-xs">Review Approvals</span>
                 </Button>
               </Link>
-              <Link href="/contracts">
-                <Button variant="outline" className="w-full justify-start">
-                  <AlertTriangle className="h-4 w-4 mr-2" />
-                  Contract Renewals
+              <Link href="/analytics">
+                <Button variant="outline" className="w-full justify-start h-auto p-3 flex-col items-start">
+                  <AlertTriangle className="h-5 w-5 mb-1" />
+                  <span className="text-xs">Analytics</span>
                 </Button>
               </Link>
             </CardContent>
