@@ -24,12 +24,18 @@ const requestFormSchema = z.object({
   dateNeededBy: z.string().min(1, "Date needed by is required"),
   vendorId: z.string().optional(),
   shippingAddress: z.string().optional(),
+  deliveryLocation: z.string().optional(), // Global delivery location
   contractNumber: z.string().optional(),
   contractStartDate: z.string().optional(),
   contractEndDate: z.string().optional(),
   poNumber: z.string().optional(), // For change orders
   changeDescription: z.string().optional(), // For change orders
   urgencyLevel: z.string().optional(),
+  // Cost savings fields (manual input from quotes)
+  originalPrice: z.number().optional(),
+  discountAmount: z.number().optional(),
+  discountPercentage: z.number().optional(),
+  costSavingsNotes: z.string().optional(),
 });
 
 type RequestFormData = z.infer<typeof requestFormSchema>;
@@ -556,14 +562,103 @@ export default function RequisitionUnified() {
           </div>
         </CardContent>
       </Card>
+
+      {/* Cost Savings Section for New Purchase */}
+      <Card className="border-0 shadow-lg bg-gradient-to-br from-blue-50/40 via-white to-blue-50/20 dark:from-blue-950/20 dark:via-gray-900 dark:to-blue-950/10">
+        <CardHeader>
+          <CardTitle className="text-lg font-semibold text-blue-700 dark:text-blue-300">Cost Savings (From Quotes)</CardTitle>
+        </CardHeader>
+        <CardContent>
+          <div className="grid grid-cols-3 gap-4">
+            <FormField
+              control={form.control}
+              name="originalPrice"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Original Price</FormLabel>
+                  <FormControl>
+                    <Input 
+                      type="number" 
+                      step="0.01" 
+                      placeholder="0.00"
+                      {...field}
+                      onChange={(e) => field.onChange(parseFloat(e.target.value) || 0)}
+                      className="border-blue-200 dark:border-blue-800 focus:border-blue-500 dark:focus:border-blue-400"
+                    />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            <FormField
+              control={form.control}
+              name="discountAmount"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Discount Amount</FormLabel>
+                  <FormControl>
+                    <Input 
+                      type="number" 
+                      step="0.01" 
+                      placeholder="0.00"
+                      {...field}
+                      onChange={(e) => field.onChange(parseFloat(e.target.value) || 0)}
+                      className="border-blue-200 dark:border-blue-800 focus:border-blue-500 dark:focus:border-blue-400"
+                    />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            <FormField
+              control={form.control}
+              name="discountPercentage"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Discount %</FormLabel>
+                  <FormControl>
+                    <Input 
+                      type="number" 
+                      step="0.1" 
+                      placeholder="0.0"
+                      {...field}
+                      onChange={(e) => field.onChange(parseFloat(e.target.value) || 0)}
+                      className="border-blue-200 dark:border-blue-800 focus:border-blue-500 dark:focus:border-blue-400"
+                    />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+          </div>
+          <FormField
+            control={form.control}
+            name="costSavingsNotes"
+            render={({ field }) => (
+              <FormItem className="mt-4">
+                <FormLabel>Cost Savings Notes</FormLabel>
+                <FormControl>
+                  <Textarea 
+                    {...field} 
+                    placeholder="Details about negotiated savings, quote comparisons, etc..."
+                    rows={2}
+                    className="border-blue-200 dark:border-blue-800 focus:border-blue-500 dark:focus:border-blue-400"
+                  />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+        </CardContent>
+      </Card>
     </div>
   );
 
   const ChangeOrderForm = () => (
     <div className="space-y-6">
-      <Card>
+      <Card className="border-0 shadow-lg bg-gradient-to-br from-violet-50/60 via-white to-violet-50/40 dark:from-violet-950/20 dark:via-gray-900 dark:to-violet-950/10">
         <CardHeader>
-          <CardTitle>Change Order Details</CardTitle>
+          <CardTitle className="text-lg font-semibold text-violet-700 dark:text-violet-300">Change Order Details</CardTitle>
         </CardHeader>
         <CardContent className="space-y-4">
           <FormField
@@ -697,6 +792,95 @@ export default function RequisitionUnified() {
           </div>
         </CardContent>
       </Card>
+
+      {/* Cost Savings Section for Change Order */}
+      <Card className="border-0 shadow-lg bg-gradient-to-br from-violet-50/40 via-white to-violet-50/20 dark:from-violet-950/20 dark:via-gray-900 dark:to-violet-950/10">
+        <CardHeader>
+          <CardTitle className="text-lg font-semibold text-violet-700 dark:text-violet-300">Cost Savings (From Quotes)</CardTitle>
+        </CardHeader>
+        <CardContent>
+          <div className="grid grid-cols-3 gap-4">
+            <FormField
+              control={form.control}
+              name="originalPrice"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Original Price</FormLabel>
+                  <FormControl>
+                    <Input 
+                      type="number" 
+                      step="0.01" 
+                      placeholder="0.00"
+                      {...field}
+                      onChange={(e) => field.onChange(parseFloat(e.target.value) || 0)}
+                      className="border-violet-200 dark:border-violet-800 focus:border-violet-500 dark:focus:border-violet-400"
+                    />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            <FormField
+              control={form.control}
+              name="discountAmount"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Discount Amount</FormLabel>
+                  <FormControl>
+                    <Input 
+                      type="number" 
+                      step="0.01" 
+                      placeholder="0.00"
+                      {...field}
+                      onChange={(e) => field.onChange(parseFloat(e.target.value) || 0)}
+                      className="border-violet-200 dark:border-violet-800 focus:border-violet-500 dark:focus:border-violet-400"
+                    />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            <FormField
+              control={form.control}
+              name="discountPercentage"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Discount %</FormLabel>
+                  <FormControl>
+                    <Input 
+                      type="number" 
+                      step="0.1" 
+                      placeholder="0.0"
+                      {...field}
+                      onChange={(e) => field.onChange(parseFloat(e.target.value) || 0)}
+                      className="border-violet-200 dark:border-violet-800 focus:border-violet-500 dark:focus:border-violet-400"
+                    />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+          </div>
+          <FormField
+            control={form.control}
+            name="costSavingsNotes"
+            render={({ field }) => (
+              <FormItem className="mt-4">
+                <FormLabel>Cost Savings Notes</FormLabel>
+                <FormControl>
+                  <Textarea 
+                    {...field} 
+                    placeholder="Details about negotiated savings, quote comparisons, etc..."
+                    rows={2}
+                    className="border-violet-200 dark:border-violet-800 focus:border-violet-500 dark:focus:border-violet-400"
+                  />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+        </CardContent>
+      </Card>
     </div>
   );
 
@@ -726,24 +910,46 @@ export default function RequisitionUnified() {
           />
 
           <div className="grid grid-cols-2 gap-4">
-            <div>
-              <label className="text-sm font-medium">Estimated Annual Value</label>
-              <Input type="number" placeholder="$0.00" />
-            </div>
-            <div>
-              <label className="text-sm font-medium">Contract Duration</label>
-              <Select>
-                <SelectTrigger>
-                  <SelectValue placeholder="Select duration" />
-                </SelectTrigger>
-                <SelectContent>
-                  <SelectItem value="6-months">6 Months</SelectItem>
-                  <SelectItem value="1-year">1 Year</SelectItem>
-                  <SelectItem value="2-years">2 Years</SelectItem>
-                  <SelectItem value="3-years">3 Years</SelectItem>
-                </SelectContent>
-              </Select>
-            </div>
+            <FormField
+              control={form.control}
+              name="deliveryLocation"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Delivery Location</FormLabel>
+                  <Select onValueChange={field.onChange} value={field.value}>
+                    <FormControl>
+                      <SelectTrigger className="border-emerald-200 dark:border-emerald-800 focus:border-emerald-500 dark:focus:border-emerald-400">
+                        <SelectValue placeholder="Select delivery location" />
+                      </SelectTrigger>
+                    </FormControl>
+                    <SelectContent>
+                      <SelectItem value="warehouse-a">Warehouse A</SelectItem>
+                      <SelectItem value="warehouse-b">Warehouse B</SelectItem>
+                      <SelectItem value="production-floor">Production Floor</SelectItem>
+                      <SelectItem value="main-office">Main Office</SelectItem>
+                    </SelectContent>
+                  </Select>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            <FormField
+              control={form.control}
+              name="dateNeededBy"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Date Needed By</FormLabel>
+                  <FormControl>
+                    <Input 
+                      type="date" 
+                      {...field} 
+                      className="border-emerald-200 dark:border-emerald-800 focus:border-emerald-500 dark:focus:border-emerald-400"
+                    />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
           </div>
         </CardContent>
       </Card>
@@ -820,7 +1026,7 @@ export default function RequisitionUnified() {
                   </div>
                 </div>
 
-                <div className="grid grid-cols-5 gap-4">
+                <div className="grid grid-cols-4 gap-4">
                   <div>
                     <label className="text-sm font-medium text-emerald-700 dark:text-emerald-300">Expected Quantity *</label>
                     <Input
@@ -874,20 +1080,6 @@ export default function RequisitionUnified() {
                       className="bg-emerald-50 dark:bg-emerald-950/30 border-emerald-200 dark:border-emerald-800"
                     />
                   </div>
-                  <div>
-                    <label className="text-sm font-medium text-emerald-700 dark:text-emerald-300">Delivery Location</label>
-                    <Select>
-                      <SelectTrigger className="border-emerald-200 dark:border-emerald-800 focus:border-emerald-500 dark:focus:border-emerald-400">
-                        <SelectValue placeholder="Select location" />
-                      </SelectTrigger>
-                      <SelectContent>
-                        <SelectItem value="warehouse-a">Warehouse A</SelectItem>
-                        <SelectItem value="warehouse-b">Warehouse B</SelectItem>
-                        <SelectItem value="production-floor">Production Floor</SelectItem>
-                        <SelectItem value="main-office">Main Office</SelectItem>
-                      </SelectContent>
-                    </Select>
-                  </div>
                 </div>
 
                 <div className="grid grid-cols-2 gap-4">
@@ -920,6 +1112,95 @@ export default function RequisitionUnified() {
               </span>
             </div>
           </div>
+        </CardContent>
+      </Card>
+
+      {/* Cost Savings Section */}
+      <Card className="border-0 shadow-lg bg-gradient-to-br from-emerald-50/40 via-white to-emerald-50/20 dark:from-emerald-950/20 dark:via-gray-900 dark:to-emerald-950/10">
+        <CardHeader>
+          <CardTitle className="text-lg font-semibold text-emerald-700 dark:text-emerald-300">Cost Savings (From Quotes)</CardTitle>
+        </CardHeader>
+        <CardContent>
+          <div className="grid grid-cols-3 gap-4">
+            <FormField
+              control={form.control}
+              name="originalPrice"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Original Price</FormLabel>
+                  <FormControl>
+                    <Input 
+                      type="number" 
+                      step="0.01" 
+                      placeholder="0.00"
+                      {...field}
+                      onChange={(e) => field.onChange(parseFloat(e.target.value) || 0)}
+                      className="border-emerald-200 dark:border-emerald-800 focus:border-emerald-500 dark:focus:border-emerald-400"
+                    />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            <FormField
+              control={form.control}
+              name="discountAmount"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Discount Amount</FormLabel>
+                  <FormControl>
+                    <Input 
+                      type="number" 
+                      step="0.01" 
+                      placeholder="0.00"
+                      {...field}
+                      onChange={(e) => field.onChange(parseFloat(e.target.value) || 0)}
+                      className="border-emerald-200 dark:border-emerald-800 focus:border-emerald-500 dark:focus:border-emerald-400"
+                    />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            <FormField
+              control={form.control}
+              name="discountPercentage"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Discount %</FormLabel>
+                  <FormControl>
+                    <Input 
+                      type="number" 
+                      step="0.1" 
+                      placeholder="0.0"
+                      {...field}
+                      onChange={(e) => field.onChange(parseFloat(e.target.value) || 0)}
+                      className="border-emerald-200 dark:border-emerald-800 focus:border-emerald-500 dark:focus:border-emerald-400"
+                    />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+          </div>
+          <FormField
+            control={form.control}
+            name="costSavingsNotes"
+            render={({ field }) => (
+              <FormItem className="mt-4">
+                <FormLabel>Cost Savings Notes</FormLabel>
+                <FormControl>
+                  <Textarea 
+                    {...field} 
+                    placeholder="Details about negotiated savings, quote comparisons, etc..."
+                    rows={2}
+                    className="border-emerald-200 dark:border-emerald-800 focus:border-emerald-500 dark:focus:border-emerald-400"
+                  />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
         </CardContent>
       </Card>
     </div>
