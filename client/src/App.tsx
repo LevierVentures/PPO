@@ -7,7 +7,7 @@ import Header from "@/components/layout/header";
 import Navigation from "@/components/layout/navigation";
 import ChatDock from "@/components/ai-chat/chat-dock";
 import ErrorOverlay from "@/components/common/error-overlay";
-import Dashboard from "./pages/dashboard-futuristic";
+import Dashboard from "./pages/dashboard-intuitive";
 import RequisitionUnified from "./pages/requisition-unified";
 import ApprovalsQueue from "./pages/approvals-professional";
 import ContractsUnified from "./pages/contracts-unified";
@@ -20,6 +20,7 @@ import InvoiceHistory from "./pages/invoice-history";
 import Analytics from "./pages/analytics";
 import UserProfile from "./pages/user-profile";
 import Administration from "./pages/admin";
+import MyRequests from "./pages/my-requests";
 
 import { AppStateProvider } from "@/hooks/use-app-state";
 
@@ -39,6 +40,7 @@ function Router() {
       <Route path="/analytics" component={Analytics} />
       <Route path="/user-profile" component={UserProfile} />
       <Route path="/admin" component={Administration} />
+      <Route path="/my-requests" component={MyRequests} />
     </Switch>
   );
 }
