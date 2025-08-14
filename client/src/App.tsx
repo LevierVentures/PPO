@@ -4,7 +4,7 @@ import { QueryClientProvider } from "@tanstack/react-query";
 import { Toaster } from "@/components/ui/toaster";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import Header from "@/components/layout/header";
-import { BottomDock } from "@/components/layout/bottom-dock";
+import { FuturisticBottomDock } from "@/components/layout/bottom-dock-futuristic";
 import { FloatingMessaging } from "@/components/layout/floating-messaging";
 import ChatDock from "@/components/ai-chat/chat-dock";
 import ErrorOverlay from "@/components/common/error-overlay";
@@ -67,7 +67,7 @@ function App() {
                 <Router />
               </div>
             </main>
-            <BottomDock />
+            <FuturisticBottomDock />
             <FloatingMessaging />
             <ChatDock />
             <Toaster />

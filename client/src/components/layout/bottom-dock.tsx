@@ -10,7 +10,9 @@ import {
   Settings,
   FileCheck,
   Send,
-  BarChart3
+  BarChart3,
+  Zap,
+  Target
 } from 'lucide-react';
 import { Badge } from '@/components/ui/badge';
 import { cn } from '@/lib/utils';
@@ -24,17 +26,17 @@ interface DockItem {
 }
 
 const dockItems: DockItem[] = [
-  { icon: LayoutDashboard, label: 'Dashboard', href: '/', color: 'bg-blue-500' },
-  { icon: FileText, label: 'Requisitions', href: '/requisitions', color: 'bg-green-500' },
-  { icon: CheckSquare, label: 'Approvals', href: '/approvals', color: 'bg-orange-500', badge: 2 },
-  { icon: FileCheck, label: 'Contracts', href: '/contracts', color: 'bg-purple-500' },
-  { icon: ShoppingCart, label: 'Orders', href: '/purchase-orders', color: 'bg-indigo-500' },
-  { icon: Send, label: 'RFP', href: '/rfp', color: 'bg-pink-500' },
-  { icon: Users, label: 'Vendors', href: '/vendors', color: 'bg-cyan-500' },
-  { icon: Receipt, label: 'Invoices', href: '/invoices', color: 'bg-teal-500' },
-  { icon: BarChart3, label: 'Analytics', href: '/analytics', color: 'bg-red-500' },
-  { icon: TrendingUp, label: 'Savings', href: '/cost-savings', color: 'bg-emerald-500' },
-  { icon: Settings, label: 'Admin', href: '/administration', color: 'bg-gray-500' }
+  { icon: LayoutDashboard, label: 'Dashboard', href: '/', color: 'from-blue-500 to-cyan-500' },
+  { icon: FileText, label: 'Requisitions', href: '/requisitions', color: 'from-green-500 to-emerald-500' },
+  { icon: CheckSquare, label: 'Approvals', href: '/approvals', color: 'from-orange-500 to-red-500', badge: 2 },
+  { icon: FileCheck, label: 'Contracts', href: '/contracts', color: 'from-purple-500 to-pink-500' },
+  { icon: ShoppingCart, label: 'Orders', href: '/purchase-orders', color: 'from-indigo-500 to-blue-500' },
+  { icon: Send, label: 'RFP', href: '/rfp', color: 'from-pink-500 to-rose-500' },
+  { icon: Users, label: 'Vendors', href: '/vendors', color: 'from-cyan-500 to-teal-500' },
+  { icon: Receipt, label: 'Invoices', href: '/invoices', color: 'from-teal-500 to-green-500' },
+  { icon: BarChart3, label: 'Analytics', href: '/analytics', color: 'from-red-500 to-orange-500' },
+  { icon: Target, label: 'Savings', href: '/cost-savings', color: 'from-emerald-500 to-green-500' },
+  { icon: Settings, label: 'Admin', href: '/administration', color: 'from-gray-500 to-slate-500' }
 ];
 
 export function BottomDock() {
@@ -48,7 +50,7 @@ export function BottomDock() {
       {/* Dock container */}
       <div className="relative px-4 py-2">
         <div className="flex items-center justify-center">
-          <div className="flex items-center gap-1 p-2 bg-white/90 dark:bg-black/90 rounded-2xl shadow-2xl border border-border/20 backdrop-blur-xl overflow-x-auto scrollbar-hide max-w-[95vw]">
+          <div className="flex items-center gap-2 p-3 bg-white/80 dark:bg-black/80 rounded-3xl shadow-2xl border border-white/20 backdrop-blur-2xl overflow-x-auto scrollbar-hide max-w-[95vw]">
             {dockItems.map((item) => {
               const isActive = location === item.href || (item.href !== '/' && location.startsWith(item.href));
               const Icon = item.icon;
@@ -56,9 +58,9 @@ export function BottomDock() {
               return (
                 <Link key={item.href} href={item.href}>
                   <div className={cn(
-                    "group relative flex flex-col items-center p-2 rounded-xl transition-all duration-300 cursor-pointer min-w-[64px] flex-shrink-0",
-                    "hover:bg-gray-100/80 dark:hover:bg-gray-800/80 hover:scale-105",
-                    isActive && "bg-gray-100 dark:bg-gray-800 shadow-lg"
+                    "group relative flex flex-col items-center p-3 rounded-2xl transition-all duration-500 cursor-pointer min-w-[68px] flex-shrink-0",
+                    "hover:bg-white/60 dark:hover:bg-white/10 hover:scale-110 hover:shadow-xl",
+                    isActive && "bg-white/60 dark:bg-white/10 shadow-xl scale-105 backdrop-blur-sm"
                   )}>
                     {/* Icon container with dynamic background */}
                     <div className={cn(
