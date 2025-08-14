@@ -26,13 +26,21 @@ import {
   Activity,
   Brain,
   Sparkles,
-  Filter
+  Filter,
+  Move,
+  X,
+  Minimize2,
+  Maximize2
 } from "lucide-react";
 import { Link } from "wouter";
 import { useAppState } from "@/hooks/use-app-state";
 
 export default function FuturisticDashboard() {
   const { state } = useAppState();
+  const [assistantPosition, setAssistantPosition] = useState({ x: window.innerWidth - 350, y: 20 });
+  const [isAssistantMinimized, setIsAssistantMinimized] = useState(false);
+  const [isDragging, setIsDragging] = useState(false);
+  const [dragStart, setDragStart] = useState({ x: 0, y: 0 });
   
   // Mock current user for role-based filtering - in production, get from authentication
   const currentUser = {
@@ -170,48 +178,98 @@ export default function FuturisticDashboard() {
     }
   ];
 
-  const ChatAssistant = () => (
-    <Card className="bg-gradient-to-br from-blue-50 to-indigo-50 dark:from-blue-950/20 dark:to-indigo-950/20 border-blue-200 dark:border-blue-800 shadow-xl">
-      <div className="absolute -top-2 -right-2">
-        <div className="h-6 w-6 rounded-full bg-gradient-to-r from-blue-500 to-indigo-500 flex items-center justify-center">
-          <Sparkles className="h-3 w-3 text-white" />
-        </div>
-      </div>
-      <CardHeader className="pb-3 border-b border-blue-200 dark:border-blue-700 bg-gradient-to-r from-blue-100 to-indigo-100 dark:from-blue-900/30 dark:to-indigo-900/30">
-        <CardTitle className="flex items-center gap-2 text-blue-900 dark:text-blue-100">
-          <Brain className="h-5 w-5" />
-          Neural Assistant
-        </CardTitle>
-      </CardHeader>
-      <CardContent className="space-y-4 pt-4">
-        <div className="space-y-3">
-          <div className="p-3 bg-white dark:bg-gray-800 rounded-xl border border-blue-200 dark:border-blue-700 shadow-sm">
-            <p className="text-sm text-blue-800 dark:text-blue-200">
-              "You have 2 contracts expiring this month. Would you like me to help you start the renewal process?"
-            </p>
+  const handleMouseDown = (e: React.MouseEvent) => {
+    setIsDragging(true);
+    setDragStart({
+      x: e.clientX - assistantPosition.x,
+      y: e.clientY - assistantPosition.y,
+    });
+  };
+
+  const handleMouseMove = (e: React.MouseEvent) => {
+    if (!isDragging) return;
+    setAssistantPosition({
+      x: e.clientX - dragStart.x,
+      y: e.clientY - dragStart.y,
+    });
+  };
+
+  const handleMouseUp = () => {
+    setIsDragging(false);
+  };
+
+  const DraggableNeuralAssistant = () => (
+    <div
+      className="fixed z-50 w-80 cursor-move"
+      style={{
+        left: assistantPosition.x,
+        top: assistantPosition.y,
+        transform: isDragging ? 'scale(1.05)' : 'scale(1)',
+        transition: isDragging ? 'none' : 'transform 0.2s ease',
+      }}
+      onMouseDown={handleMouseDown}
+      onMouseMove={handleMouseMove}
+      onMouseUp={handleMouseUp}
+      onMouseLeave={handleMouseUp}
+    >
+      <Card className="bg-gradient-to-br from-blue-500/95 to-indigo-600/95 backdrop-blur-xl text-white border-0 shadow-2xl">
+        <div className="absolute -top-1 -right-1">
+          <div className="h-4 w-4 rounded-full bg-white/30 flex items-center justify-center animate-pulse">
+            <Sparkles className="h-2 w-2 text-white" />
           </div>
-          <div className="p-3 bg-white dark:bg-gray-800 rounded-xl border border-blue-200 dark:border-blue-700 shadow-sm">
-            <p className="text-sm text-blue-800 dark:text-blue-200">
-              "Based on your recent orders, I recommend creating a Blanket PO for office supplies to save 15% on processing costs."
-            </p>
-          </div>
         </div>
-        
-        <div className="flex gap-2">
-          <Button size="sm" className="bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 shadow-lg">
-            <Zap className="h-3 w-3 mr-1" />
-            Quick Actions
-          </Button>
-          <Button size="sm" variant="outline" className="border-blue-300 text-blue-700 dark:text-blue-300 hover:bg-blue-50">
-            <MessageCircle className="h-3 w-3 mr-1" />
-            Ask Assistant
-          </Button>
-        </div>
-      </CardContent>
-    </Card>
+        <CardHeader className="pb-3 cursor-move">
+          <CardTitle className="flex items-center justify-between text-white text-lg">
+            <div className="flex items-center gap-2">
+              <Brain className="h-5 w-5" />
+              Neural Assistant
+            </div>
+            <div className="flex gap-1">
+              <Button
+                size="sm" 
+                variant="ghost"
+                className="h-6 w-6 p-0 text-white hover:bg-white/20"
+                onClick={(e) => {
+                  e.stopPropagation();
+                  setIsAssistantMinimized(!isAssistantMinimized);
+                }}
+              >
+                {isAssistantMinimized ? <Maximize2 className="h-3 w-3" /> : <Minimize2 className="h-3 w-3" />}
+              </Button>
+            </div>
+          </CardTitle>
+        </CardHeader>
+        {!isAssistantMinimized && (
+          <CardContent className="space-y-3">
+            <div className="p-3 bg-white/10 backdrop-blur-sm rounded-xl border border-white/20">
+              <p className="text-xs font-medium">
+                "2 contracts expiring soon. Start renewals?"
+              </p>
+            </div>
+            <div className="flex gap-2">
+              <Button size="sm" className="flex-1 bg-white/20 hover:bg-white/30 text-white border-white/30 text-xs">
+                <Zap className="h-3 w-3 mr-1" />
+                Actions
+              </Button>
+              <Link href="/messages">
+                <Button size="sm" variant="outline" className="flex-1 border-white/30 text-white hover:bg-white/10 text-xs">
+                  <MessageCircle className="h-3 w-3 mr-1" />
+                  Messages
+                </Button>
+              </Link>
+            </div>
+          </CardContent>
+        )}
+      </Card>
+    </div>
   );
 
   return (
+    <>
+      {/* Draggable Neural Assistant */}
+      <DraggableNeuralAssistant />
+
+      {/* Main Dashboard */}
     <div className="min-h-screen bg-gradient-to-br from-background via-muted/10 to-primary/5 space-y-8 p-6">
       {/* Futuristic Header */}
       <div className="relative overflow-hidden bg-gradient-to-r from-primary/10 via-primary/5 to-background rounded-3xl border border-primary/20 p-8 shadow-2xl">
@@ -315,47 +373,9 @@ export default function FuturisticDashboard() {
         </CardContent>
       </Card>
 
-      {/* Revolutionary 2030 Dashboard Layout - Asymmetric & Creative */}
-      <div className="space-y-8">
-        {/* Floating Neural Assistant - Repositioned as sidebar overlay */}
-        <div className="relative">
-          <div className="absolute right-0 top-0 w-80 z-20">
-            <Card className="bg-gradient-to-br from-blue-500/90 to-indigo-600/90 backdrop-blur-xl text-white border-0 shadow-2xl">
-              <div className="absolute -top-1 -right-1">
-                <div className="h-4 w-4 rounded-full bg-white/30 flex items-center justify-center animate-pulse">
-                  <Sparkles className="h-2 w-2 text-white" />
-                </div>
-              </div>
-              <CardHeader className="pb-3">
-                <CardTitle className="flex items-center gap-2 text-white text-lg">
-                  <Brain className="h-5 w-5" />
-                  Neural Assistant
-                </CardTitle>
-              </CardHeader>
-              <CardContent className="space-y-3">
-                <div className="p-3 bg-white/10 backdrop-blur-sm rounded-xl border border-white/20">
-                  <p className="text-xs font-medium">
-                    "2 contracts expiring soon. Start renewals?"
-                  </p>
-                </div>
-                <div className="flex gap-2">
-                  <Button size="sm" className="flex-1 bg-white/20 hover:bg-white/30 text-white border-white/30 text-xs">
-                    <Zap className="h-3 w-3 mr-1" />
-                    Actions
-                  </Button>
-                  <Link href="/messages">
-                    <Button size="sm" variant="outline" className="flex-1 border-white/30 text-white hover:bg-white/10 text-xs">
-                      <MessageCircle className="h-3 w-3 mr-1" />
-                      Messages
-                    </Button>
-                  </Link>
-                </div>
-              </CardContent>
-            </Card>
-          </div>
 
-          {/* Priority Actions - Main Focus with Creative Grid */}
-          <div className="mr-84">
+
+        {/* Priority Actions - Main Focus with Creative Grid */}
             <Card className="bg-gradient-to-br from-orange-50 to-red-50 dark:from-orange-950/20 dark:to-red-950/20 border-orange-200 dark:border-orange-800 shadow-xl">
               <CardHeader className="pb-4 border-b border-orange-200 dark:border-orange-700 bg-gradient-to-r from-orange-100 to-red-100 dark:from-orange-900/30 dark:to-red-900/30">
                 <CardTitle className="flex items-center gap-2 text-orange-900 dark:text-orange-100 text-xl">
@@ -410,8 +430,6 @@ export default function FuturisticDashboard() {
                 </div>
               </CardContent>
             </Card>
-          </div>
-        </div>
 
         {/* Asymmetric Performance Grid - Creative 2030 Layout */}
         <div className="grid grid-cols-12 gap-6">
@@ -540,6 +558,6 @@ export default function FuturisticDashboard() {
           ))}
         </div>
       </div>
-    </div>
+    </>
   );
 }

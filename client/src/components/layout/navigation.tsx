@@ -8,7 +8,8 @@ import {
   Layout, 
   PlusCircle, 
   Receipt,
-  Archive
+  Archive,
+  MessageCircle
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 
@@ -20,6 +21,7 @@ const navItems = [
   { path: "/purchase-orders", label: "Purchase Orders", icon: History },
   { path: "/rfp", label: "RFP", icon: FileText },
   { path: "/vendors", label: "Vendors", icon: Handshake },
+  { path: "/messages", label: "Messages", icon: MessageCircle },
   { path: "/invoice-history", label: "Invoices", icon: Receipt },
   { path: "/cost-savings", label: "Cost Savings", icon: BarChart3 },
   { path: "/analytics", label: "Analytics", icon: BarChart3 },
