@@ -25,7 +25,7 @@ import Administration from "./pages/admin";
 import MyRequests from "./pages/my-requests";
 import RFPManagement from "./pages/rfp-management";
 import CostSavingsDataDriven from "./pages/cost-savings-data-driven";
-import MessagingSystem from "./pages/messaging-system";
+import MessagingSystem from "./pages/messaging-comprehensive";
 
 import { AppStateProvider } from "@/hooks/use-app-state";
 
