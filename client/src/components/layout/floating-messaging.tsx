@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { MessageCircle, X, Minus, Plus, Send, Users, Bell } from 'lucide-react';
+import { Link } from 'wouter';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
@@ -42,7 +43,7 @@ const recentMessages: Message[] = [
 export function FloatingMessaging() {
   const [isExpanded, setIsExpanded] = useState(false);
   const [isMinimized, setIsMinimized] = useState(true);
-  const [position, setPosition] = useState({ x: window.innerWidth - 380, y: 100 });
+  const [position, setPosition] = useState({ x: window.innerWidth - 420, y: 100 });
   const [isDragging, setIsDragging] = useState(false);
   const [dragStart, setDragStart] = useState({ x: 0, y: 0 });
 
@@ -101,7 +102,7 @@ export function FloatingMessaging() {
       {!isMinimized && (
         <Card className={cn(
           "bg-white/95 dark:bg-black/95 backdrop-blur-xl border border-border/50 shadow-2xl transition-all duration-300",
-          isExpanded ? "w-96 h-[500px]" : "w-80 h-60"
+          isExpanded ? "w-[480px] h-[600px]" : "w-96 h-80"
         )}>
           <CardHeader
             className="pb-3 cursor-move bg-gradient-to-r from-blue-50 to-purple-50 dark:from-blue-950/50 dark:to-purple-950/50 border-b border-border/30"
@@ -192,10 +193,12 @@ export function FloatingMessaging() {
                   </Button>
                 </div>
                 <div className="flex gap-2">
-                  <Button size="sm" variant="outline" className="flex-1 text-xs">
-                    <Users className="h-3 w-3 mr-1" />
-                    Teams
-                  </Button>
+                  <Link href="/messages">
+                    <Button size="sm" variant="outline" className="flex-1 text-xs">
+                      <Users className="h-3 w-3 mr-1" />
+                      Full Messages
+                    </Button>
+                  </Link>
                   <Button size="sm" variant="outline" className="flex-1 text-xs">
                     <Bell className="h-3 w-3 mr-1" />
                     Alerts

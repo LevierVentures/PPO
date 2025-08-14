@@ -7,7 +7,10 @@ import {
   ShoppingCart, 
   Receipt, 
   TrendingUp,
-  Settings
+  Settings,
+  FileCheck,
+  Send,
+  BarChart3
 } from 'lucide-react';
 import { Badge } from '@/components/ui/badge';
 import { cn } from '@/lib/utils';
@@ -24,9 +27,12 @@ const dockItems: DockItem[] = [
   { icon: LayoutDashboard, label: 'Dashboard', href: '/', color: 'bg-blue-500' },
   { icon: FileText, label: 'Requisitions', href: '/requisitions', color: 'bg-green-500' },
   { icon: CheckSquare, label: 'Approvals', href: '/approvals', color: 'bg-orange-500', badge: 2 },
-  { icon: ShoppingCart, label: 'Orders', href: '/purchase-orders', color: 'bg-purple-500' },
-  { icon: Users, label: 'Vendors', href: '/vendors', color: 'bg-indigo-500' },
+  { icon: FileCheck, label: 'Contracts', href: '/contracts', color: 'bg-purple-500' },
+  { icon: ShoppingCart, label: 'Orders', href: '/purchase-orders', color: 'bg-indigo-500' },
+  { icon: Send, label: 'RFP', href: '/rfp', color: 'bg-pink-500' },
+  { icon: Users, label: 'Vendors', href: '/vendors', color: 'bg-cyan-500' },
   { icon: Receipt, label: 'Invoices', href: '/invoices', color: 'bg-teal-500' },
+  { icon: BarChart3, label: 'Analytics', href: '/analytics', color: 'bg-red-500' },
   { icon: TrendingUp, label: 'Savings', href: '/cost-savings', color: 'bg-emerald-500' },
   { icon: Settings, label: 'Admin', href: '/administration', color: 'bg-gray-500' }
 ];
@@ -42,7 +48,7 @@ export function BottomDock() {
       {/* Dock container */}
       <div className="relative px-4 py-2">
         <div className="flex items-center justify-center">
-          <div className="flex items-center gap-1 p-2 bg-white/90 dark:bg-black/90 rounded-2xl shadow-2xl border border-border/20 backdrop-blur-xl">
+          <div className="flex items-center gap-1 p-2 bg-white/90 dark:bg-black/90 rounded-2xl shadow-2xl border border-border/20 backdrop-blur-xl overflow-x-auto scrollbar-hide max-w-[95vw]">
             {dockItems.map((item) => {
               const isActive = location === item.href || (item.href !== '/' && location.startsWith(item.href));
               const Icon = item.icon;
@@ -50,7 +56,7 @@ export function BottomDock() {
               return (
                 <Link key={item.href} href={item.href}>
                   <div className={cn(
-                    "group relative flex flex-col items-center p-3 rounded-xl transition-all duration-300 cursor-pointer min-w-[72px]",
+                    "group relative flex flex-col items-center p-2 rounded-xl transition-all duration-300 cursor-pointer min-w-[64px] flex-shrink-0",
                     "hover:bg-gray-100/80 dark:hover:bg-gray-800/80 hover:scale-105",
                     isActive && "bg-gray-100 dark:bg-gray-800 shadow-lg"
                   )}>
@@ -75,7 +81,7 @@ export function BottomDock() {
                     
                     {/* Label */}
                     <span className={cn(
-                      "text-[10px] font-medium transition-colors duration-300 text-center leading-tight",
+                      "text-[9px] font-medium transition-colors duration-300 text-center leading-tight px-1",
                       isActive ? "text-gray-900 dark:text-white" : "text-gray-600 dark:text-gray-400"
                     )}>
                       {item.label}
