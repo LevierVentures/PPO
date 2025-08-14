@@ -33,39 +33,43 @@ import { useAppState } from "@/hooks/use-app-state";
 export default function FuturisticDashboard() {
   const { state } = useAppState();
 
-  // Real performance metrics from actual data
-  const quickStats = [
+  // Unique performance insights - non-duplicated metrics
+  const uniqueInsights = [
     {
-      title: "Processing Time",
-      value: "2.1 days",
-      change: "-0.3 days",
-      period: "vs last month",
-      icon: Clock,
-      color: "blue"
-    },
-    {
-      title: "PO Count",
-      value: "23",
-      change: "+2",
-      period: "vs yesterday",
-      icon: FileText,
-      color: "orange"
-    },
-    {
-      title: "Total Spend Approved",
-      value: "$487K",
-      change: "+12% vs target",
-      period: "this month",
-      icon: DollarSign,
-      color: "green"
-    },
-    {
-      title: "Total Paid",
-      value: "$421K",
-      change: "86% completion",
-      period: "payment rate",
+      title: "Approval Velocity", 
+      value: "94%",
+      change: "+8% faster",
+      period: "vs last quarter",
       icon: TrendingUp,
-      color: "purple"
+      color: "blue",
+      description: "On-time approval rate"
+    },
+    {
+      title: "Vendor Response",
+      value: "1.2 days", 
+      change: "-0.4 days",
+      period: "avg response time",
+      icon: Users,
+      color: "orange", 
+      description: "Average vendor acknowledgment"
+    },
+    {
+      title: "Contract Utilization",
+      value: "78%",
+      change: "+15% efficiency",
+      period: "vs target",
+      icon: FileText,
+      color: "green",
+      description: "Active contract usage rate"
+    },
+    {
+      title: "Cost Savings",
+      value: "$47K",
+      change: "saved this month",
+      period: "through optimization",
+      icon: DollarSign,
+      color: "purple",
+      description: "Process efficiency gains"
     }
   ];
 
@@ -208,131 +212,147 @@ export default function FuturisticDashboard() {
         </div>
       </div>
 
-      {/* Neural Analytics Grid */}
+      {/* Unique Performance Insights - Non-duplicated metrics */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-        {quickStats.map((stat, index) => (
+        {uniqueInsights.map((insight, index) => (
           <Card key={index} className={`relative overflow-hidden border-0 shadow-xl bg-gradient-to-br ${
             index === 0 ? 'from-blue-50 to-blue-100 dark:from-blue-950/20 dark:to-blue-900/20' :
             index === 1 ? 'from-orange-50 to-orange-100 dark:from-orange-950/20 dark:to-orange-900/20' :
             index === 2 ? 'from-green-50 to-green-100 dark:from-green-950/20 dark:to-green-900/20' :
             'from-purple-50 to-purple-100 dark:from-purple-950/20 dark:to-purple-900/20'
-          } hover:shadow-2xl transition-all duration-300 hover:scale-105`}>
+          } hover:shadow-2xl transition-all duration-300 hover:scale-105 cursor-pointer group`}>
             <div className="absolute top-4 right-4">
               <div className={`p-3 rounded-2xl ${
                 index === 0 ? 'bg-blue-500 text-white' :
                 index === 1 ? 'bg-orange-500 text-white' :
                 index === 2 ? 'bg-green-500 text-white' :
                 'bg-purple-500 text-white'
-              } shadow-lg`}>
-                <stat.icon className="h-6 w-6" />
+              } shadow-lg group-hover:scale-110 transition-transform`}>
+                <insight.icon className="h-6 w-6" />
               </div>
             </div>
             <CardHeader className="pb-2">
-              <CardTitle className="text-sm font-medium text-muted-foreground">{stat.title}</CardTitle>
+              <CardTitle className="text-sm font-medium text-muted-foreground">{insight.title}</CardTitle>
+              <p className="text-xs text-muted-foreground">{insight.description}</p>
             </CardHeader>
             <CardContent className="pt-0">
-              <div className="text-3xl font-bold mb-2">{stat.value}</div>
+              <div className="text-3xl font-bold mb-2 group-hover:text-primary transition-colors">{insight.value}</div>
               <div className="flex items-center text-sm">
-                <span className={`font-semibold ${stat.change.includes('+') || stat.change.includes('%') ? 'text-green-600' : 'text-orange-600'}`}>
-                  {stat.change}
+                <span className={`font-semibold ${insight.change.includes('+') || insight.change.includes('saved') ? 'text-green-600' : 'text-orange-600'}`}>
+                  {insight.change}
                 </span>
-                <span className="ml-2 text-muted-foreground">{stat.period}</span>
+                <span className="ml-2 text-muted-foreground">{insight.period}</span>
               </div>
             </CardContent>
           </Card>
         ))}
       </div>
 
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-        {/* Main Content */}
-        <div className="space-y-6">
-          {/* AI-Powered Priority Actions */}
-          <Card className="bg-gradient-to-br from-red-50 to-pink-50 dark:from-red-950/20 dark:to-pink-950/20 border-red-200 dark:border-red-800 shadow-xl">
-            <CardHeader className="border-b border-red-200 dark:border-red-800 bg-gradient-to-r from-red-100 to-pink-100 dark:from-red-900/30 dark:to-pink-900/30">
-              <CardTitle className="flex items-center gap-2 text-red-900 dark:text-red-100">
-                <Target className="h-5 w-5" />
-                Priority Action Items
-              </CardTitle>
+      {/* Action-Oriented Intelligent Interface */}
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+        {/* Priority Actions - Center Focus */}
+        <div className="lg:col-span-2 space-y-6">
+          {/* Smart Action Hub */}
+          <Card className="bg-gradient-to-br from-white to-gray-50 dark:from-gray-950 dark:to-gray-900 border-2 border-primary/20 shadow-2xl">
+            <CardHeader className="text-center py-8">
+              <div className="mx-auto w-16 h-16 rounded-full bg-gradient-to-r from-primary to-primary/60 flex items-center justify-center mb-4">
+                <Brain className="h-8 w-8 text-white" />
+              </div>
+              <CardTitle className="text-2xl font-bold">What would you like to accomplish today?</CardTitle>
+              <p className="text-muted-foreground">AI-powered procurement actions tailored to your workflow</p>
             </CardHeader>
-            <CardContent className="space-y-4 pt-4">
+            <CardContent className="space-y-4">
               {priorityActions.map((action) => (
-                <div key={action.id} className="flex items-center justify-between p-4 bg-white dark:bg-gray-800 rounded-xl border border-red-200 dark:border-red-700 shadow-sm hover:shadow-md transition-shadow">
-                  <div className="flex items-start gap-3">
-                    <Badge variant={action.urgency === 'high' ? 'destructive' : action.urgency === 'medium' ? 'default' : 'secondary'}>
-                      {action.priority}
-                    </Badge>
-                    <div>
-                      <p className="font-medium">{action.title}</p>
-                      <p className="text-sm text-muted-foreground">{action.description}</p>
+                <Link key={action.id} href={action.link}>
+                  <div className="group p-6 bg-gradient-to-r from-gray-50 to-white dark:from-gray-800 dark:to-gray-700 rounded-2xl border border-gray-200 dark:border-gray-600 hover:border-primary/30 hover:shadow-xl transition-all duration-300 cursor-pointer">
+                    <div className="flex items-center justify-between">
+                      <div className="flex items-center gap-4">
+                        <Badge variant={action.urgency === 'high' ? 'destructive' : action.urgency === 'medium' ? 'default' : 'secondary'} className="text-xs px-3 py-1">
+                          {action.priority}
+                        </Badge>
+                        <div>
+                          <h3 className="font-semibold text-lg group-hover:text-primary transition-colors">{action.title}</h3>
+                          <p className="text-sm text-muted-foreground">{action.description}</p>
+                        </div>
+                      </div>
+                      <div className="text-primary opacity-0 group-hover:opacity-100 transition-opacity">
+                        <div className="flex items-center gap-2 text-sm font-medium">
+                          {action.action} 
+                          <div className="w-6 h-6 rounded-full bg-primary/10 flex items-center justify-center">
+                            →
+                          </div>
+                        </div>
+                      </div>
                     </div>
                   </div>
-                  <Link href={action.link}>
-                    <Button variant="outline" size="sm" className="shadow-sm">
-                      {action.action} →
-                    </Button>
-                  </Link>
-                </div>
+                </Link>
               ))}
             </CardContent>
           </Card>
 
-          {/* Neural Performance Analytics */}
-          <Card className="bg-gradient-to-br from-indigo-50 to-blue-50 dark:from-indigo-950/20 dark:to-blue-950/20 border-indigo-200 dark:border-indigo-800 shadow-xl">
-            <CardHeader className="border-b border-indigo-200 dark:border-indigo-800 bg-gradient-to-r from-indigo-100 to-blue-100 dark:from-indigo-900/30 dark:to-blue-900/30">
-              <CardTitle className="flex items-center gap-2 text-indigo-900 dark:text-indigo-100">
-                <BarChart3 className="h-5 w-5" />
-                Performance Overview
+          {/* Quick Action Grid - Google-style */}
+          <Card className="bg-gradient-to-br from-green-50 to-emerald-50 dark:from-green-950/20 dark:to-emerald-950/20 border-green-200 dark:border-green-800 shadow-xl">
+            <CardHeader className="text-center pb-4">
+              <CardTitle className="flex items-center justify-center gap-2 text-green-900 dark:text-green-100">
+                <Zap className="h-5 w-5" />
+                Quick Actions
               </CardTitle>
             </CardHeader>
-            <CardContent className="space-y-6 pt-4">
-              <div className="grid grid-cols-2 gap-4">
-                <div className="p-4 bg-white dark:bg-gray-800 rounded-xl border border-indigo-200 dark:border-indigo-700">
-                  <p className="text-sm font-medium text-muted-foreground">Avg Processing Time</p>
-                  <p className="text-2xl font-bold">2.1 days</p>
-                  <p className="text-xs text-muted-foreground">Based on 67 completed approvals</p>
-                </div>
-                <div className="p-4 bg-white dark:bg-gray-800 rounded-xl border border-indigo-200 dark:border-indigo-700">
-                  <p className="text-sm font-medium text-muted-foreground">Total PO Count</p>
-                  <p className="text-2xl font-bold">23 POs</p>
-                  <p className="text-xs text-muted-foreground">Approved this month</p>
-                </div>
-              </div>
-              
-              <div className="space-y-3">
-                <div className="flex justify-between items-center">
-                  <span className="text-sm font-medium">Total Spend Approved</span>
-                  <span className="text-sm font-bold">$487K</span>
-                </div>
-                <Progress value={75} className="h-2" />
-                <p className="text-xs text-muted-foreground">Year to date total</p>
-                
-                <div className="flex justify-between items-center mt-4">
-                  <span className="text-sm font-medium">Total Paid from Invoices</span>
-                  <span className="text-sm font-bold">$421K</span>
-                </div>
-                <Progress value={86} className="h-2" />
-                <p className="text-xs text-muted-foreground">Payments processed YTD</p>
+            <CardContent>
+              <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
+                <Link href="/request">
+                  <div className="group p-6 bg-white dark:bg-gray-800 rounded-2xl border border-green-200 dark:border-green-700 hover:border-green-400 hover:shadow-lg transition-all duration-300 cursor-pointer text-center">
+                    <div className="w-12 h-12 mx-auto mb-3 rounded-2xl bg-gradient-to-br from-green-500 to-emerald-500 flex items-center justify-center group-hover:scale-110 transition-transform">
+                      <PlusCircle className="h-6 w-6 text-white" />
+                    </div>
+                    <h3 className="font-medium text-sm">New Requisition</h3>
+                  </div>
+                </Link>
+                <Link href="/approvals">
+                  <div className="group p-6 bg-white dark:bg-gray-800 rounded-2xl border border-green-200 dark:border-green-700 hover:border-green-400 hover:shadow-lg transition-all duration-300 cursor-pointer text-center">
+                    <div className="w-12 h-12 mx-auto mb-3 rounded-2xl bg-gradient-to-br from-blue-500 to-indigo-500 flex items-center justify-center group-hover:scale-110 transition-transform">
+                      <CheckCircle className="h-6 w-6 text-white" />
+                    </div>
+                    <h3 className="font-medium text-sm">Review Approvals</h3>
+                  </div>
+                </Link>
+                <Link href="/contracts">
+                  <div className="group p-6 bg-white dark:bg-gray-800 rounded-2xl border border-green-200 dark:border-green-700 hover:border-green-400 hover:shadow-lg transition-all duration-300 cursor-pointer text-center">
+                    <div className="w-12 h-12 mx-auto mb-3 rounded-2xl bg-gradient-to-br from-purple-500 to-pink-500 flex items-center justify-center group-hover:scale-110 transition-transform">
+                      <FileText className="h-6 w-6 text-white" />
+                    </div>
+                    <h3 className="font-medium text-sm">View Contracts</h3>
+                  </div>
+                </Link>
+                <Link href="/analytics">
+                  <div className="group p-6 bg-white dark:bg-gray-800 rounded-2xl border border-green-200 dark:border-green-700 hover:border-green-400 hover:shadow-lg transition-all duration-300 cursor-pointer text-center">
+                    <div className="w-12 h-12 mx-auto mb-3 rounded-2xl bg-gradient-to-br from-orange-500 to-red-500 flex items-center justify-center group-hover:scale-110 transition-transform">
+                      <BarChart3 className="h-6 w-6 text-white" />
+                    </div>
+                    <h3 className="font-medium text-sm">Analytics</h3>
+                  </div>
+                </Link>
               </div>
             </CardContent>
           </Card>
         </div>
 
-        {/* Right Column */}
+        {/* Assistant & Activity Sidebar */}
         <div className="space-y-6">
           {/* Smart Assistant */}
           <ChatAssistant />
 
-          {/* Recent Activity */}
+          {/* Recent Activity - Condensed */}
           <Card className="bg-gradient-to-br from-gray-50 to-slate-50 dark:from-gray-950/20 dark:to-slate-950/20 border-gray-200 dark:border-gray-800 shadow-xl">
-            <CardHeader className="border-b border-gray-200 dark:border-gray-700 bg-gradient-to-r from-gray-100 to-slate-100 dark:from-gray-900/30 dark:to-slate-900/30">
-              <CardTitle className="flex items-center gap-2 text-gray-900 dark:text-gray-100">
+            <CardHeader className="pb-3">
+              <CardTitle className="flex items-center gap-2 text-gray-900 dark:text-gray-100 text-lg">
                 <Activity className="h-5 w-5" />
                 Recent Activity
               </CardTitle>
             </CardHeader>
-            <CardContent className="space-y-4 pt-4">
-              {recentActivity.map((activity) => (
-                <div key={activity.id} className="flex items-start gap-3 p-3 bg-white dark:bg-gray-800 rounded-xl hover:bg-gray-50 dark:hover:bg-gray-700/50 transition-colors border border-gray-200 dark:border-gray-700">
+            <CardContent className="space-y-3">
+              {recentActivity.slice(0, 3).map((activity) => (
+                <div key={activity.id} className="flex items-center gap-3 p-3 bg-white dark:bg-gray-800 rounded-xl hover:bg-gray-50 dark:hover:bg-gray-700/50 transition-colors border border-gray-200 dark:border-gray-700">
                   <div className={`p-1.5 rounded-full ${
                     activity.status === 'completed' ? 'bg-green-100 text-green-600' :
                     activity.status === 'attention' ? 'bg-red-100 text-red-600' :
@@ -343,8 +363,7 @@ export default function FuturisticDashboard() {
                     {activity.type === 'contract' && <FileText className="h-3 w-3" />}
                   </div>
                   <div className="flex-1 min-w-0">
-                    <p className="text-sm font-medium">{activity.title}</p>
-                    <p className="text-xs text-muted-foreground">{activity.description}</p>
+                    <p className="text-sm font-medium truncate">{activity.title}</p>
                     <div className="flex items-center justify-between mt-1">
                       <p className="text-xs text-muted-foreground">{activity.time}</p>
                       <p className="text-xs font-medium">{activity.amount}</p>
@@ -352,42 +371,6 @@ export default function FuturisticDashboard() {
                   </div>
                 </div>
               ))}
-            </CardContent>
-          </Card>
-
-          {/* Quick Actions */}
-          <Card className="bg-gradient-to-br from-green-50 to-emerald-50 dark:from-green-950/20 dark:to-emerald-950/20 border-green-200 dark:border-green-800 shadow-xl">
-            <CardHeader className="border-b border-green-200 dark:border-green-700 bg-gradient-to-r from-green-100 to-emerald-100 dark:from-green-900/30 dark:to-emerald-900/30">
-              <CardTitle className="flex items-center gap-2 text-green-900 dark:text-green-100">
-                <Zap className="h-5 w-5" />
-                Quick Actions
-              </CardTitle>
-            </CardHeader>
-            <CardContent className="grid grid-cols-2 gap-3 pt-4">
-              <Link href="/request">
-                <Button variant="outline" className="w-full justify-start h-auto p-4 flex-col items-start bg-white dark:bg-gray-800 hover:bg-green-50 border-green-200">
-                  <PlusCircle className="h-5 w-5 mb-2 text-green-600" />
-                  <span className="text-sm font-medium">New Requisition</span>
-                </Button>
-              </Link>
-              <Link href="/contracts">
-                <Button variant="outline" className="w-full justify-start h-auto p-4 flex-col items-start bg-white dark:bg-gray-800 hover:bg-green-50 border-green-200">
-                  <FileText className="h-5 w-5 mb-2 text-green-600" />
-                  <span className="text-sm font-medium">View Contracts</span>
-                </Button>
-              </Link>
-              <Link href="/approvals">
-                <Button variant="outline" className="w-full justify-start h-auto p-4 flex-col items-start bg-white dark:bg-gray-800 hover:bg-green-50 border-green-200">
-                  <CheckCircle className="h-5 w-5 mb-2 text-green-600" />
-                  <span className="text-sm font-medium">Review Approvals</span>
-                </Button>
-              </Link>
-              <Link href="/analytics">
-                <Button variant="outline" className="w-full justify-start h-auto p-4 flex-col items-start bg-white dark:bg-gray-800 hover:bg-green-50 border-green-200">
-                  <BarChart3 className="h-5 w-5 mb-2 text-green-600" />
-                  <span className="text-sm font-medium">Analytics</span>
-                </Button>
-              </Link>
             </CardContent>
           </Card>
         </div>
