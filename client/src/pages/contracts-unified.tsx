@@ -78,7 +78,8 @@ export default function ContractsUnified() {
       autoRenewal: false,
       lastReviewed: "2024-10-15",
       contactPerson: "Sarah Davis",
-      description: "Enterprise software licensing"
+      description: "Enterprise software licensing",
+      poNumbers: ["PO-2024-1234", "PO-2024-1456"]
     },
     {
       id: "CTR-2024-008",
@@ -94,7 +95,8 @@ export default function ContractsUnified() {
       autoRenewal: true,
       lastReviewed: "2024-11-20",
       contactPerson: "Robert Wilson",
-      description: "Strategic consulting services"
+      description: "Strategic consulting services",
+      poNumbers: ["PO-2024-2789"]
     },
     {
       id: "CTR-2024-012",
@@ -110,7 +112,8 @@ export default function ContractsUnified() {
       autoRenewal: false,
       lastReviewed: "2024-11-01",
       contactPerson: "Lisa Chen",
-      description: "Comprehensive cybersecurity monitoring"
+      description: "Comprehensive cybersecurity monitoring",
+      poNumbers: ["PO-2024-3344", "PO-2024-3567"]
     },
     {
       id: "CTR-2023-005",
@@ -126,7 +129,8 @@ export default function ContractsUnified() {
       autoRenewal: true,
       lastReviewed: "2024-06-15",
       contactPerson: "Tom Anderson",
-      description: "Complete facility management services"
+      description: "Complete facility management services",
+      poNumbers: ["PO-2023-9876", "PO-2024-0123"]
     }
   ];
 
@@ -360,6 +364,7 @@ export default function ContractsUnified() {
                 </TableHead>
                 <TableHead>Status</TableHead>
                 <TableHead>Risk</TableHead>
+                <TableHead>Purchase Orders</TableHead>
                 <TableHead className="text-right">Actions</TableHead>
               </TableRow>
             </TableHeader>
@@ -405,16 +410,45 @@ export default function ContractsUnified() {
                       {contract.riskLevel}
                     </Badge>
                   </TableCell>
+                  <TableCell>
+                    <div className="flex flex-col gap-1">
+                      {(contract.poNumbers || []).map((poNumber, index) => (
+                        <Button 
+                          key={index}
+                          variant="ghost" 
+                          size="sm"
+                          className="h-6 px-2 text-xs font-mono justify-start"
+                          onClick={() => {
+                            // Navigate to PO details
+                            window.open(`/purchase-orders?search=${poNumber}`, '_blank');
+                          }}
+                        >
+                          {poNumber}
+                        </Button>
+                      ))}
+                      {contract.daysToExpiry <= 30 && (
+                        <Button
+                          variant="outline"
+                          size="sm"
+                          className="h-6 px-2 text-xs bg-orange-50 border-orange-200 text-orange-700 hover:bg-orange-100"
+                          onClick={() => {
+                            // Create change order for expired/expiring contract
+                            window.open(`/request?type=change-order&contractId=${contract.id}`, '_blank');
+                          }}
+                        >
+                          Change Order
+                        </Button>
+                      )}
+                    </div>
+                  </TableCell>
                   <TableCell className="text-right">
                     <div className="flex justify-end gap-1">
                       <Button 
                         variant="ghost" 
                         size="sm"
-                        onClick={() => window.open(`/purchase-orders?po=${contract.associatedPO || 'PO-2024-' + contract.id.split('-')[2]}`, '_blank')}
-                        title="View Associated Purchase Order"
+                        title="View Contract Details"
                       >
                         <Eye className="h-4 w-4" />
-                        <span className="ml-1 text-xs">PO-{contract.id.split('-')[2] || '001'}</span>
                       </Button>
                       <Button variant="ghost" size="sm">
                         <Edit className="h-4 w-4" />

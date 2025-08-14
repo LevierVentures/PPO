@@ -61,7 +61,7 @@ export default function Vendors() {
   };
 
   const handleRequestNewVendor = () => {
-    setLocation("/request");
+    setLocation("/new-vendor-request");
   };
 
   if (isLoading) {

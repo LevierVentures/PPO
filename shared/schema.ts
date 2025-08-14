@@ -16,8 +16,25 @@ export const vendors = pgTable("vendors", {
   id: varchar("id").primaryKey().default(sql`gen_random_uuid()`),
   name: text("name").notNull(),
   contactEmail: text("contact_email"),
+  contactPhone: text("contact_phone"),
+  contactPerson: text("contact_person"),
   businessType: text("business_type"),
   taxId: text("tax_id"),
+  ein: text("ein"), // Federal tax identification number
+  address: text("address"),
+  city: text("city"),
+  state: text("state"),
+  zipCode: text("zip_code"),
+  country: text("country").default("United States"),
+  // Banking information
+  bankName: text("bank_name"),
+  accountNumber: text("account_number"),
+  routingNumber: text("routing_number"),
+  accountType: text("account_type"), // checking, savings
+  // W9 and compliance
+  w9OnFile: boolean("w9_on_file").default(false),
+  w9FilePath: text("w9_file_path"),
+  certificationDocuments: text("certification_documents").array(),
   integrationType: text("integration_type").notNull().default("none"), // cxml, oci, hosted, none
   status: text("status").notNull().default("pending"), // active, pending, inactive
   totalSpendYtd: decimal("total_spend_ytd", { precision: 12, scale: 2 }).default("0"),
@@ -104,8 +121,24 @@ export const newVendorRequests = pgTable("new_vendor_requests", {
   requestId: text("request_id").notNull().unique(),
   companyName: text("company_name").notNull(),
   contactEmail: text("contact_email").notNull(),
+  contactPhone: text("contact_phone"),
+  contactPerson: text("contact_person").notNull(),
   businessType: text("business_type").notNull(),
+  ein: text("ein"), // Federal tax identification number
   taxId: text("tax_id"),
+  address: text("address").notNull(),
+  city: text("city").notNull(),
+  state: text("state").notNull(),
+  zipCode: text("zip_code").notNull(),
+  country: text("country").default("United States"),
+  // Banking information
+  bankName: text("bank_name"),
+  accountNumber: text("account_number"),
+  routingNumber: text("routing_number"),
+  accountType: text("account_type"), // checking, savings
+  // W9 and supporting documents
+  w9Document: text("w9_document"), // File path or reference
+  supportingDocuments: text("supporting_documents").array(),
   justification: text("justification").notNull(),
   requestorId: varchar("requestor_id").references(() => users.id),
   status: text("status").notNull().default("pending"), // pending, approved, rejected
