@@ -421,36 +421,61 @@ export default function FuturisticDashboard() {
             </CardContent>
           </Card>
 
-          {/* Recent Activity */}
+          {/* Compact Activity & Performance Summary */}
           <Card className="bg-gradient-to-br from-gray-50 to-slate-50 dark:from-gray-950/20 dark:to-slate-950/20 border-gray-200 dark:border-gray-800 shadow-xl">
-            <CardHeader className="pb-4 border-b border-gray-200 dark:border-gray-700 bg-gradient-to-r from-gray-100 to-slate-100 dark:from-gray-900/30 dark:to-slate-900/30">
-              <CardTitle className="flex items-center gap-2 text-gray-900 dark:text-gray-100">
-                <Activity className="h-5 w-5" />
-                Recent Activity
+            <CardHeader className="pb-3 border-b border-gray-200 dark:border-gray-700">
+              <CardTitle className="flex items-center justify-between text-gray-900 dark:text-gray-100">
+                <div className="flex items-center gap-2">
+                  <Activity className="h-5 w-5" />
+                  Activity & Performance
+                </div>
+                <Badge className={canViewAllData ? "bg-blue-100 text-blue-800" : "bg-green-100 text-green-800"}>
+                  {canViewAllData ? "All Depts" : currentUser.department}
+                </Badge>
               </CardTitle>
             </CardHeader>
-            <CardContent className="space-y-3 pt-6">
-              {recentActivity.slice(0, 4).map((activity) => (
-                <div key={activity.id} className="flex items-center gap-3 p-4 bg-white dark:bg-gray-800 rounded-xl hover:bg-gray-50 dark:hover:bg-gray-700/50 transition-colors border border-gray-200 dark:border-gray-700 cursor-pointer">
-                  <div className={`p-2 rounded-xl ${
-                    activity.status === 'completed' ? 'bg-green-100 text-green-600' :
-                    activity.status === 'attention' ? 'bg-red-100 text-red-600' :
-                    'bg-blue-100 text-blue-600'
-                  }`}>
-                    {activity.type === 'approval' && <CheckCircle className="h-4 w-4" />}
-                    {activity.type === 'requisition' && <ShoppingCart className="h-4 w-4" />}
-                    {activity.type === 'contract' && <FileText className="h-4 w-4" />}
-                  </div>
-                  <div className="flex-1">
-                    <p className="font-medium">{activity.title}</p>
-                    <p className="text-sm text-muted-foreground">{activity.description}</p>
-                    <div className="flex items-center justify-between mt-2">
-                      <p className="text-xs text-muted-foreground">{activity.time}</p>
-                      <p className="text-sm font-bold">{activity.amount}</p>
+            <CardContent className="pt-4 space-y-4">
+              {/* Performance Summary - Condensed */}
+              <div className="grid grid-cols-2 gap-3">
+                <div className="text-center p-3 bg-white dark:bg-gray-800 rounded-lg border">
+                  <p className="text-2xl font-bold text-blue-600">{canViewAllData ? "89%" : "94%"}</p>
+                  <p className="text-xs text-muted-foreground">On-Time Delivery</p>
+                </div>
+                <div className="text-center p-3 bg-white dark:bg-gray-800 rounded-lg border">
+                  <p className="text-2xl font-bold text-green-600">{canViewAllData ? "2.3d" : "1.8d"}</p>
+                  <p className="text-xs text-muted-foreground">Avg Approval Time</p>
+                </div>
+              </div>
+
+              {/* Recent Key Activities - Only 2 items */}
+              <div className="space-y-2">
+                {recentActivity.slice(0, 2).map((activity) => (
+                  <div key={activity.id} className="flex items-center gap-3 p-3 bg-white dark:bg-gray-800 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700/50 transition-colors border cursor-pointer">
+                    <div className={`p-1.5 rounded-lg ${
+                      activity.status === 'completed' ? 'bg-green-100 text-green-600' :
+                      activity.status === 'attention' ? 'bg-red-100 text-red-600' :
+                      'bg-blue-100 text-blue-600'
+                    }`}>
+                      {activity.type === 'approval' && <CheckCircle className="h-3 w-3" />}
+                      {activity.type === 'requisition' && <ShoppingCart className="h-3 w-3" />}
+                      {activity.type === 'contract' && <FileText className="h-3 w-3" />}
+                    </div>
+                    <div className="flex-1">
+                      <p className="text-sm font-medium">{activity.title}</p>
+                      <div className="flex items-center justify-between">
+                        <p className="text-xs text-muted-foreground">{activity.time}</p>
+                        <p className="text-xs font-semibold">{activity.amount}</p>
+                      </div>
                     </div>
                   </div>
-                </div>
-              ))}
+                ))}
+              </div>
+
+              {/* Quick Action */}
+              <Button variant="outline" className="w-full text-xs" size="sm">
+                <Eye className="h-3 w-3 mr-1" />
+                View All Activity
+              </Button>
             </CardContent>
           </Card>
         </div>

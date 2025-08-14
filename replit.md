@@ -57,7 +57,7 @@ The application follows standard P2P workflow: Purchase Requisition → Approval
 ## User Preferences
 
 Preferred communication style: Simple, everyday language.
-Dashboard design preference: Professional, visually rich interfaces over simplified layouts. Prefers sophisticated design with visual depth and modern aesthetics rather than sterile, minimal approaches.
+Dashboard design preference: Professional, visually rich interfaces over simplified layouts. Prefers sophisticated design with visual depth and modern aesthetics rather than sterile, minimal approaches. Wants efficient use of dashboard space - avoid redundant sections and minimize oversized components that don't add value.
 
 ## System Architecture
 

@@ -125,20 +125,38 @@ export class MemStorage implements IStorage {
     
     users.forEach(user => this.users.set(user.id, user));
 
-    // Seed vendors
-    const vendor1: Vendor = {
-      id: "vendor-1",
-      name: "ACME Corporation",
-      contactEmail: "contact@acme.com",
-      businessType: "Corporation",
-      taxId: "12-3456789",
-      integrationType: "cxml",
-      status: "active",
-      totalSpendYtd: "45670.00",
-      lastOrderDate: new Date("2024-01-15"),
-      createdAt: new Date()
-    };
-    this.vendors.set(vendor1.id, vendor1);
+    // Seed vendors (minimal structure to avoid errors)
+    const vendors: Vendor[] = [
+      {
+        id: "vendor-1",
+        name: "ACME Corporation",
+        status: "active",
+        contactEmail: "contact@acme.com",
+        contactPhone: "+1-555-123-4567",
+        contactPerson: "John Smith",
+        businessType: "Corporation",
+        taxId: "12-3456789",
+        ein: "12-3456789",
+        address: "123 Business St",
+        city: "Business City",
+        state: "NY",
+        zipCode: "10001",
+        country: "United States",
+        bankName: "Business Bank",
+        accountNumber: "123456789",
+        routingNumber: "021000021",
+        accountType: "checking",
+        w9OnFile: true,
+        w9FilePath: null,
+        certificationDocuments: [],
+        integrationType: "cxml",
+        totalSpendYtd: "45670.00",
+        lastOrderDate: new Date("2024-01-15"),
+        createdAt: new Date()
+      }
+    ];
+    
+    vendors.forEach(vendor => this.vendors.set(vendor.id, vendor));
   }
 
   // User methods
