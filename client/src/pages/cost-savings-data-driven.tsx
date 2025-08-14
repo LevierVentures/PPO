@@ -185,28 +185,36 @@ export default function CostSavingsDataDriven() {
 
   return (
     <div className="space-y-8">
-      {/* Modern Header */}
-      <div className="relative overflow-hidden rounded-3xl bg-gradient-to-r from-green-500/5 via-green-500/10 to-emerald-500/5 border-green-500/20 border-2 shadow-2xl">
-        <div className="absolute inset-0 bg-gradient-to-br from-white/20 to-transparent"></div>
+      {/* Futuristic 2030 Header - Cost Savings */}
+      <div className="relative overflow-hidden rounded-3xl bg-gradient-to-r from-yellow-500/10 via-amber-500/15 to-yellow-500/10 border-2 border-yellow-500/20 shadow-2xl">
+        <div className="absolute inset-0 bg-gradient-to-br from-white/30 to-transparent dark:from-white/10"></div>
+        <div className="absolute inset-0 bg-gradient-to-t from-black/5 to-transparent"></div>
         <div className="relative p-8">
           <div className="flex items-center justify-between">
             <div>
-              <h1 className="text-4xl font-bold bg-gradient-to-r from-green-600 via-emerald-500 to-teal-600 bg-clip-text text-transparent">
-                Cost Savings Analytics
+              <h1 className="text-5xl font-bold bg-gradient-to-r from-yellow-600 via-amber-600 to-yellow-700 bg-clip-text text-transparent mb-3">
+                Cost Savings Intelligence
               </h1>
-              <p className="text-lg text-muted-foreground mt-2 font-medium">
-                Data-driven savings tracking with AI-powered consolidation opportunities
+              <p className="text-lg text-gray-700 dark:text-gray-300 font-medium">
+                AI-powered cost optimization with machine learning consolidation opportunities and predictive savings
               </p>
             </div>
-            <div className="flex items-center gap-6">
-              <div className="text-center">
-                <p className="text-sm text-muted-foreground">Savings Rate</p>
+            <div className="flex items-center gap-4">
+              <div className="text-right">
+                <p className="text-sm text-muted-foreground">This Quarter</p>
                 <div className="flex items-center gap-2 mt-1">
-                  <div className="h-2 w-2 rounded-full bg-green-500 animate-pulse"></div>
-                  <p className="font-bold text-2xl text-green-600">{currentPeriodSummary.savingsRate}%</p>
+                  <div className="h-2 w-2 rounded-full bg-yellow-500 animate-pulse"></div>
+                  <p className="font-bold text-yellow-600">${currentPeriodSummary.directSavings.toLocaleString()}</p>
                 </div>
               </div>
-              <div className="h-16 w-16 rounded-2xl bg-gradient-to-br from-green-600 to-emerald-600 flex items-center justify-center shadow-xl">
+              <div className="text-right">
+                <p className="text-sm text-muted-foreground">Savings Rate</p>
+                <div className="flex items-center gap-2 mt-1">
+                  <div className="h-2 w-2 rounded-full bg-amber-500 animate-pulse"></div>
+                  <p className="font-bold text-amber-600">{currentPeriodSummary.savingsRate}%</p>
+                </div>
+              </div>
+              <div className="h-16 w-16 rounded-2xl bg-gradient-to-br from-yellow-600 to-amber-600 flex items-center justify-center shadow-xl">
                 <TrendingUp className="h-8 w-8 text-white" />
               </div>
             </div>

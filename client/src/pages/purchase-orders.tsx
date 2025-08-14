@@ -52,17 +52,18 @@ export default function PurchaseOrders() {
 
   return (
     <div className="space-y-8">
-      {/* Modern Header with Action Focus */}
-      <div className="relative overflow-hidden rounded-3xl bg-gradient-to-r from-primary/5 via-primary/10 to-primary/5 border-primary/20 border-2 shadow-2xl">
-        <div className="absolute inset-0 bg-gradient-to-br from-white/20 to-transparent"></div>
+      {/* Futuristic 2030 Header - Purchase Orders */}
+      <div className="relative overflow-hidden rounded-3xl bg-gradient-to-r from-indigo-500/10 via-blue-500/15 to-indigo-500/10 border-2 border-indigo-500/20 shadow-2xl">
+        <div className="absolute inset-0 bg-gradient-to-br from-white/30 to-transparent dark:from-white/10"></div>
+        <div className="absolute inset-0 bg-gradient-to-t from-black/5 to-transparent"></div>
         <div className="relative p-8">
           <div className="flex items-center justify-between">
             <div>
-              <h1 className="text-4xl font-bold bg-gradient-to-r from-primary via-primary/80 to-foreground bg-clip-text text-transparent">
-                Purchase Orders
+              <h1 className="text-5xl font-bold bg-gradient-to-r from-indigo-600 via-blue-600 to-indigo-700 bg-clip-text text-transparent mb-3">
+                Purchase Order Hub
               </h1>
-              <p className="text-lg text-muted-foreground mt-2 font-medium">
-                Advanced search and management with intelligent filtering
+              <p className="text-lg text-gray-700 dark:text-gray-300 font-medium">
+                Advanced order management with predictive delivery tracking and vendor optimization
               </p>
             </div>
             <div className="flex items-center gap-4">

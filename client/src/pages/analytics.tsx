@@ -117,7 +117,44 @@ export default function Analytics() {
     : 0;
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-8">
+      {/* Futuristic 2030 Header - Analytics */}
+      <div className="relative overflow-hidden rounded-3xl bg-gradient-to-r from-red-500/10 via-orange-500/15 to-red-500/10 border-2 border-red-500/20 shadow-2xl">
+        <div className="absolute inset-0 bg-gradient-to-br from-white/30 to-transparent dark:from-white/10"></div>
+        <div className="absolute inset-0 bg-gradient-to-t from-black/5 to-transparent"></div>
+        <div className="relative p-8">
+          <div className="flex items-center justify-between">
+            <div>
+              <h1 className="text-5xl font-bold bg-gradient-to-r from-red-600 via-orange-600 to-red-700 bg-clip-text text-transparent mb-3">
+                Analytics Intelligence Center
+              </h1>
+              <p className="text-lg text-gray-700 dark:text-gray-300 font-medium">
+                Advanced procurement analytics with AI-powered anomaly detection and predictive insights
+              </p>
+            </div>
+            <div className="flex items-center gap-4">
+              <div className="text-right">
+                <p className="text-sm text-muted-foreground">Active Anomalies</p>
+                <div className="flex items-center gap-2 mt-1">
+                  <div className="h-2 w-2 rounded-full bg-red-500 animate-pulse"></div>
+                  <p className="font-bold text-red-600">{mockAnalyticsAnomalies.length}</p>
+                </div>
+              </div>
+              <div className="text-right">
+                <p className="text-sm text-muted-foreground">Total Spend</p>
+                <div className="flex items-center gap-2 mt-1">
+                  <div className="h-2 w-2 rounded-full bg-orange-500 animate-pulse"></div>
+                  <p className="font-bold text-orange-600">${totalSpend.toLocaleString()}</p>
+                </div>
+              </div>
+              <div className="h-16 w-16 rounded-2xl bg-gradient-to-br from-red-600 to-orange-600 flex items-center justify-center shadow-xl">
+                <BarChart3 className="h-8 w-8 text-white" />
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
       {/* Analytics Filters */}
       <Card>
         <CardHeader>

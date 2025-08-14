@@ -69,7 +69,37 @@ export default function Vendors() {
   }
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-8">
+      {/* Futuristic 2030 Header - Vendors */}
+      <div className="relative overflow-hidden rounded-3xl bg-gradient-to-r from-cyan-500/10 via-teal-500/15 to-cyan-500/10 border-2 border-cyan-500/20 shadow-2xl">
+        <div className="absolute inset-0 bg-gradient-to-br from-white/30 to-transparent dark:from-white/10"></div>
+        <div className="absolute inset-0 bg-gradient-to-t from-black/5 to-transparent"></div>
+        <div className="relative p-8">
+          <div className="flex items-center justify-between">
+            <div>
+              <h1 className="text-5xl font-bold bg-gradient-to-r from-cyan-600 via-teal-600 to-cyan-700 bg-clip-text text-transparent mb-3">
+                Vendor Partnership Hub
+              </h1>
+              <p className="text-lg text-gray-700 dark:text-gray-300 font-medium">
+                AI-powered vendor ecosystem with intelligent catalog integrations and performance analytics
+              </p>
+            </div>
+            <div className="flex items-center gap-4">
+              <div className="text-right">
+                <p className="text-sm text-muted-foreground">Active Partners</p>
+                <div className="flex items-center gap-2 mt-1">
+                  <div className="h-2 w-2 rounded-full bg-cyan-500 animate-pulse"></div>
+                  <p className="font-bold text-cyan-600">{vendors.filter(v => v.status === 'active').length}</p>
+                </div>
+              </div>
+              <div className="h-16 w-16 rounded-2xl bg-gradient-to-br from-cyan-600 to-teal-600 flex items-center justify-center shadow-xl">
+                <Handshake className="h-8 w-8 text-white" />
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
       <Card>
         <CardHeader>
           <CardTitle className="flex items-center gap-2">

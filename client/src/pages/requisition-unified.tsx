@@ -739,12 +739,39 @@ export default function RequisitionUnified() {
   );
 
   return (
-    <div className="max-w-4xl mx-auto space-y-6">
-      <div>
-        <h1 className="text-3xl font-bold">Requisition</h1>
-        <p className="text-muted-foreground">
-          Submit new purchases, modify existing orders, or create blanket agreements
-        </p>
+    <div className="max-w-5xl mx-auto space-y-8">
+      {/* Futuristic 2030 Header - Requisitions */}
+      <div className="relative overflow-hidden rounded-3xl bg-gradient-to-r from-green-500/10 via-emerald-500/15 to-green-500/10 border-2 border-green-500/20 shadow-2xl">
+        <div className="absolute inset-0 bg-gradient-to-br from-white/30 to-transparent dark:from-white/10"></div>
+        <div className="absolute inset-0 bg-gradient-to-t from-black/5 to-transparent"></div>
+        <div className="relative p-8">
+          <div className="flex items-center justify-between">
+            <div>
+              <h1 className="text-5xl font-bold bg-gradient-to-r from-green-600 via-emerald-600 to-green-700 bg-clip-text text-transparent mb-3">
+                Unified Requisition System
+              </h1>
+              <p className="text-lg text-gray-700 dark:text-gray-300 font-medium">
+                AI-powered procurement requests with intelligent workflows and automated approvals
+              </p>
+            </div>
+            <div className="flex items-center gap-4">
+              <div className="text-right">
+                <p className="text-sm text-muted-foreground">Active Requests</p>
+                <div className="flex items-center gap-2 mt-1">
+                  <div className="h-2 w-2 rounded-full bg-green-500 animate-pulse"></div>
+                  <p className="font-bold text-green-600">12</p>
+                </div>
+              </div>
+              <div className="text-right">
+                <p className="text-sm text-muted-foreground">This Month</p>
+                <div className="flex items-center gap-2 mt-1">
+                  <div className="h-2 w-2 rounded-full bg-emerald-500 animate-pulse"></div>
+                  <p className="font-bold text-emerald-600">47</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
 
       <Form {...form}>

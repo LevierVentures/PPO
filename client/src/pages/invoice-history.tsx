@@ -159,12 +159,42 @@ export default function InvoiceHistory() {
   );
 
   return (
-    <div className="space-y-6">
-      <div>
-        <h1 className="text-3xl font-bold">Invoices</h1>
-        <p className="text-muted-foreground">
-          Search and manage all invoice records with detailed preview capabilities
-        </p>
+    <div className="space-y-8">
+      {/* Futuristic 2030 Header - Invoices */}
+      <div className="relative overflow-hidden rounded-3xl bg-gradient-to-r from-teal-500/10 via-green-500/15 to-teal-500/10 border-2 border-teal-500/20 shadow-2xl">
+        <div className="absolute inset-0 bg-gradient-to-br from-white/30 to-transparent dark:from-white/10"></div>
+        <div className="absolute inset-0 bg-gradient-to-t from-black/5 to-transparent"></div>
+        <div className="relative p-8">
+          <div className="flex items-center justify-between">
+            <div>
+              <h1 className="text-5xl font-bold bg-gradient-to-r from-teal-600 via-green-600 to-teal-700 bg-clip-text text-transparent mb-3">
+                Invoice Management Center
+              </h1>
+              <p className="text-lg text-gray-700 dark:text-gray-300 font-medium">
+                Intelligent invoice processing with automated matching and smart analytics
+              </p>
+            </div>
+            <div className="flex items-center gap-4">
+              <div className="text-right">
+                <p className="text-sm text-muted-foreground">Pending Payment</p>
+                <div className="flex items-center gap-2 mt-1">
+                  <div className="h-2 w-2 rounded-full bg-yellow-500 animate-pulse"></div>
+                  <p className="font-bold text-yellow-600">{invoicesByStatus.pending.length}</p>
+                </div>
+              </div>
+              <div className="text-right">
+                <p className="text-sm text-muted-foreground">Total Value</p>
+                <div className="flex items-center gap-2 mt-1">
+                  <div className="h-2 w-2 rounded-full bg-green-500 animate-pulse"></div>
+                  <p className="font-bold text-green-600">$1.2M</p>
+                </div>
+              </div>
+              <div className="h-16 w-16 rounded-2xl bg-gradient-to-br from-teal-600 to-green-600 flex items-center justify-center shadow-xl">
+                <Receipt className="h-8 w-8 text-white" />
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
 
       {/* Summary Cards */}

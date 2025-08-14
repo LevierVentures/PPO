@@ -125,28 +125,29 @@ export default function RFPManagement() {
 
   return (
     <div className="space-y-8">
-      {/* Modern Header */}
-      <div className="relative overflow-hidden rounded-3xl bg-gradient-to-r from-green-500/5 via-green-500/10 to-emerald-500/5 border-green-500/20 border-2 shadow-2xl">
-        <div className="absolute inset-0 bg-gradient-to-br from-white/20 to-transparent"></div>
+      {/* Futuristic 2030 Header - RFP Management */}
+      <div className="relative overflow-hidden rounded-3xl bg-gradient-to-r from-violet-500/10 via-purple-500/15 to-violet-500/10 border-2 border-violet-500/20 shadow-2xl">
+        <div className="absolute inset-0 bg-gradient-to-br from-white/30 to-transparent dark:from-white/10"></div>
+        <div className="absolute inset-0 bg-gradient-to-t from-black/5 to-transparent"></div>
         <div className="relative p-8">
           <div className="flex items-center justify-between">
             <div>
-              <h1 className="text-4xl font-bold bg-gradient-to-r from-green-600 via-green-500 to-emerald-600 bg-clip-text text-transparent">
-                Request for Proposals
+              <h1 className="text-5xl font-bold bg-gradient-to-r from-violet-600 via-purple-600 to-violet-700 bg-clip-text text-transparent mb-3">
+                RFP Management Hub
               </h1>
-              <p className="text-lg text-muted-foreground mt-2 font-medium">
-                Manage vendor proposals and competitive bidding processes
+              <p className="text-lg text-gray-700 dark:text-gray-300 font-medium">
+                AI-powered Request for Proposals with automated vendor outreach and intelligent bid analysis
               </p>
             </div>
             <div className="flex items-center gap-4">
               <div className="text-right">
                 <p className="text-sm text-muted-foreground">Active RFPs</p>
                 <div className="flex items-center gap-2 mt-1">
-                  <div className="h-2 w-2 rounded-full bg-green-500 animate-pulse"></div>
-                  <p className="font-bold text-green-600">{rfps.filter((r: any) => r.status !== 'closed').length}</p>
+                  <div className="h-2 w-2 rounded-full bg-violet-500 animate-pulse"></div>
+                  <p className="font-bold text-violet-600">{rfps.filter((r: any) => r.status !== 'closed').length}</p>
                 </div>
               </div>
-              <div className="h-16 w-16 rounded-2xl bg-gradient-to-br from-green-600 to-emerald-600 flex items-center justify-center shadow-xl">
+              <div className="h-16 w-16 rounded-2xl bg-gradient-to-br from-violet-600 to-purple-600 flex items-center justify-center shadow-xl">
                 <FileText className="h-8 w-8 text-white" />
               </div>
             </div>

@@ -197,17 +197,18 @@ export default function ApprovalsQueue() {
 
   return (
     <div className="space-y-8">
-      {/* Modern Header with Action Focus */}
-      <div className="relative overflow-hidden rounded-3xl bg-gradient-to-r from-blue-500/5 via-blue-500/10 to-indigo-500/5 border-blue-500/20 border-2 shadow-2xl">
-        <div className="absolute inset-0 bg-gradient-to-br from-white/20 to-transparent"></div>
+      {/* Futuristic 2030 Header - Approvals */}
+      <div className="relative overflow-hidden rounded-3xl bg-gradient-to-r from-orange-500/10 via-red-500/15 to-orange-500/10 border-2 border-orange-500/20 shadow-2xl">
+        <div className="absolute inset-0 bg-gradient-to-br from-white/30 to-transparent dark:from-white/10"></div>
+        <div className="absolute inset-0 bg-gradient-to-t from-black/5 to-transparent"></div>
         <div className="relative p-8">
           <div className="flex items-center justify-between">
             <div>
-              <h1 className="text-4xl font-bold bg-gradient-to-r from-blue-600 via-blue-500 to-indigo-600 bg-clip-text text-transparent">
-                Approval Queue
+              <h1 className="text-5xl font-bold bg-gradient-to-r from-orange-600 via-red-600 to-orange-700 bg-clip-text text-transparent mb-3">
+                Professional Approvals Queue
               </h1>
-              <p className="text-lg text-muted-foreground mt-2 font-medium">
-                Intelligent workflow management with priority-based review system
+              <p className="text-lg text-gray-700 dark:text-gray-300 font-medium">
+                AI-powered workflow with intelligent priority scoring and performance analytics
               </p>
             </div>
             <div className="flex items-center gap-6">
