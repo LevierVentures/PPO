@@ -224,7 +224,7 @@ export default function FuturisticDashboard() {
                 What would you like to accomplish today?
               </h2>
             </div>
-            <p className="text-lg text-gray-700 dark:text-gray-300">Modern procurement actions at your fingertips</p>
+            <p className="text-lg text-gray-700 dark:text-gray-300">Smart procurement workflows powered by AI insights</p>
           </div>
           
           <div className="grid grid-cols-2 md:grid-cols-4 gap-6 max-w-4xl mx-auto">
@@ -280,9 +280,9 @@ export default function FuturisticDashboard() {
             <CardHeader className="border-b bg-gradient-to-r from-primary/5 to-primary/10">
               <CardTitle className="flex items-center gap-3 text-xl">
                 <Target className="h-6 w-6 text-primary" />
-                AI-Detected Priority Actions
+                Items That Need Your Action
               </CardTitle>
-              <p className="text-sm text-muted-foreground">Smart recommendations based on your workflow</p>
+              <p className="text-sm text-muted-foreground">Priority tasks requiring your immediate attention</p>
             </CardHeader>
             <CardContent className="space-y-4 pt-6">
               {priorityActions.map((action) => (
