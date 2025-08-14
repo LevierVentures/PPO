@@ -8,7 +8,7 @@ import { BottomDock } from "@/components/layout/bottom-dock";
 import { FloatingMessaging } from "@/components/layout/floating-messaging";
 import ChatDock from "@/components/ai-chat/chat-dock";
 import ErrorOverlay from "@/components/common/error-overlay";
-import Dashboard from "./pages/dashboard-clean";
+import Dashboard from "./pages/dashboard-google-style";
 import RequisitionUnified from "./pages/requisition-unified";
 import ApprovalsQueue from "./pages/approvals-professional";
 import ContractsUnified from "./pages/contracts-unified";
