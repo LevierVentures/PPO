@@ -212,13 +212,33 @@ export default function ContractsUnified() {
   };
 
   return (
-    <div className="space-y-6">
-      <div className="flex justify-between items-center">
-        <div>
-          <h1 className="text-3xl font-bold">Contract Management</h1>
-          <p className="text-muted-foreground">
-            Complete view of all contracts with visibility and tracking
-          </p>
+    <div className="space-y-8">
+      {/* Modern Header with Action Focus */}
+      <div className="relative overflow-hidden rounded-3xl bg-gradient-to-r from-purple-500/5 via-purple-500/10 to-purple-500/5 border-purple-500/20 border-2 shadow-2xl">
+        <div className="absolute inset-0 bg-gradient-to-br from-white/20 to-transparent"></div>
+        <div className="relative p-8">
+          <div className="flex items-center justify-between">
+            <div>
+              <h1 className="text-4xl font-bold bg-gradient-to-r from-purple-600 via-purple-500 to-pink-600 bg-clip-text text-transparent">
+                Contract Management
+              </h1>
+              <p className="text-lg text-muted-foreground mt-2 font-medium">
+                Complete contract lifecycle with risk management and renewal tracking
+              </p>
+            </div>
+            <div className="flex items-center gap-4">
+              <div className="text-right">
+                <p className="text-sm text-muted-foreground">Expiring Soon</p>
+                <div className="flex items-center gap-2 mt-1">
+                  <div className="h-2 w-2 rounded-full bg-orange-500 animate-pulse"></div>
+                  <p className="font-bold text-orange-600">{stats.expiring}</p>
+                </div>
+              </div>
+              <div className="h-16 w-16 rounded-2xl bg-gradient-to-br from-purple-600 to-pink-600 flex items-center justify-center shadow-xl">
+                <FileText className="h-8 w-8 text-white" />
+              </div>
+            </div>
+          </div>
         </div>
       </div>
 

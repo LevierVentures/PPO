@@ -196,14 +196,45 @@ export default function ApprovalsQueue() {
   };
 
   return (
-    <div className="space-y-6">
-      <div className="flex justify-between items-center">
-        <div>
-          <h1 className="text-3xl font-bold">Approval Queue</h1>
-          <p className="text-muted-foreground">
-            Review and approve pending requisitions, purchase orders, and change requests
-          </p>
+    <div className="space-y-8">
+      {/* Modern Header with Action Focus */}
+      <div className="relative overflow-hidden rounded-3xl bg-gradient-to-r from-blue-500/5 via-blue-500/10 to-indigo-500/5 border-blue-500/20 border-2 shadow-2xl">
+        <div className="absolute inset-0 bg-gradient-to-br from-white/20 to-transparent"></div>
+        <div className="relative p-8">
+          <div className="flex items-center justify-between">
+            <div>
+              <h1 className="text-4xl font-bold bg-gradient-to-r from-blue-600 via-blue-500 to-indigo-600 bg-clip-text text-transparent">
+                Approval Queue
+              </h1>
+              <p className="text-lg text-muted-foreground mt-2 font-medium">
+                Intelligent workflow management with priority-based review system
+              </p>
+            </div>
+            <div className="flex items-center gap-6">
+              <div className="text-right">
+                <p className="text-sm text-muted-foreground">Pending Items</p>
+                <div className="flex items-center gap-2 mt-1">
+                  <div className="h-2 w-2 rounded-full bg-orange-500 animate-pulse"></div>
+                  <p className="font-bold text-orange-600">{stats.pending}</p>
+                </div>
+              </div>
+              <div className="text-right">
+                <p className="text-sm text-muted-foreground">High Priority</p>
+                <div className="flex items-center gap-2 mt-1">
+                  <div className="h-2 w-2 rounded-full bg-red-500 animate-pulse"></div>
+                  <p className="font-bold text-red-600">{stats.highPriority}</p>
+                </div>
+              </div>
+              <div className="h-16 w-16 rounded-2xl bg-gradient-to-br from-blue-600 to-indigo-600 flex items-center justify-center shadow-xl">
+                <CheckCircle className="h-8 w-8 text-white" />
+              </div>
+            </div>
+          </div>
         </div>
+      </div>
+
+      {/* Filters Section */}
+      <div className="flex justify-between items-center">
         <div className="flex items-center gap-2">
           <Select defaultValue="all">
             <SelectTrigger className="w-40">

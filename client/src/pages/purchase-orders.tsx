@@ -51,12 +51,34 @@ export default function PurchaseOrders() {
   });
 
   return (
-    <div className="space-y-6">
-      <div>
-        <h1 className="text-3xl font-bold">Purchase Orders</h1>
-        <p className="text-muted-foreground">
-          Search and filter purchase orders with advanced capabilities
-        </p>
+    <div className="space-y-8">
+      {/* Modern Header with Action Focus */}
+      <div className="relative overflow-hidden rounded-3xl bg-gradient-to-r from-primary/5 via-primary/10 to-primary/5 border-primary/20 border-2 shadow-2xl">
+        <div className="absolute inset-0 bg-gradient-to-br from-white/20 to-transparent"></div>
+        <div className="relative p-8">
+          <div className="flex items-center justify-between">
+            <div>
+              <h1 className="text-4xl font-bold bg-gradient-to-r from-primary via-primary/80 to-foreground bg-clip-text text-transparent">
+                Purchase Orders
+              </h1>
+              <p className="text-lg text-muted-foreground mt-2 font-medium">
+                Advanced search and management with intelligent filtering
+              </p>
+            </div>
+            <div className="flex items-center gap-4">
+              <div className="text-right">
+                <p className="text-sm text-muted-foreground">Total Orders</p>
+                <div className="flex items-center gap-2 mt-1">
+                  <div className="h-2 w-2 rounded-full bg-blue-500 animate-pulse"></div>
+                  <p className="font-bold text-blue-600">{filteredPOs.length}</p>
+                </div>
+              </div>
+              <div className="h-16 w-16 rounded-2xl bg-gradient-to-br from-primary to-primary/60 flex items-center justify-center shadow-xl">
+                <FileText className="h-8 w-8 text-white" />
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
 
       {/* Search and Filter Controls */}

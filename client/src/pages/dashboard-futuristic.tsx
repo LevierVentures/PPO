@@ -221,10 +221,10 @@ export default function FuturisticDashboard() {
                 <Brain className="h-8 w-8 text-white" />
               </div>
               <h2 className="text-3xl font-bold bg-gradient-to-r from-primary to-primary/70 bg-clip-text text-transparent">
-                AI-Powered Quick Actions
+                What would you like to accomplish today?
               </h2>
             </div>
-            <p className="text-lg text-muted-foreground">What would you like to accomplish today?</p>
+            <p className="text-lg text-muted-foreground">Modern procurement actions at your fingertips</p>
           </div>
           
           <div className="grid grid-cols-2 md:grid-cols-4 gap-6 max-w-4xl mx-auto">
