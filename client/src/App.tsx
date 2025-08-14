@@ -24,6 +24,7 @@ import Administration from "./pages/admin";
 import MyRequests from "./pages/my-requests";
 import RFPManagement from "./pages/rfp-management";
 import CostSavingsDataDriven from "./pages/cost-savings-data-driven";
+import MessagingSystem from "./pages/messaging-system";
 
 import { AppStateProvider } from "@/hooks/use-app-state";
 
@@ -47,6 +48,7 @@ function Router() {
       <Route path="/my-requests" component={MyRequests} />
       <Route path="/rfp" component={RFPManagement} />
       <Route path="/cost-savings" component={CostSavingsDataDriven} />
+      <Route path="/messages" component={MessagingSystem} />
     </Switch>
   );
 }

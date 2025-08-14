@@ -315,169 +315,229 @@ export default function FuturisticDashboard() {
         </CardContent>
       </Card>
 
-      {/* Balanced Two-Column Layout */}
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-        {/* Left Column - AI Intelligence & Insights */}
-        <div className="space-y-6">
-          {/* AI Priority Actions */}
-          <Card className="bg-gradient-to-br from-white to-gray-50 dark:from-gray-950 dark:to-gray-900 border-2 border-primary/20 shadow-xl">
-            <CardHeader className="border-b bg-gradient-to-r from-primary/5 to-primary/10">
-              <CardTitle className="flex items-center gap-3 text-xl">
-                <Target className="h-6 w-6 text-primary" />
-                Items That Need Your Action
-              </CardTitle>
-              <p className="text-sm text-muted-foreground">Priority tasks requiring your immediate attention</p>
-            </CardHeader>
-            <CardContent className="space-y-4 pt-6">
-              {priorityActions.map((action) => (
-                <Link key={action.id} href={action.link}>
-                  <div className="group p-5 bg-gradient-to-r from-gray-50 to-white dark:from-gray-800 dark:to-gray-700 rounded-2xl border border-gray-200 dark:border-gray-600 hover:border-primary/30 hover:shadow-lg transition-all duration-300 cursor-pointer">
-                    <div className="flex items-center justify-between">
-                      <div className="flex items-center gap-4">
-                        <Badge variant={action.urgency === 'high' ? 'destructive' : action.urgency === 'medium' ? 'default' : 'secondary'} className="text-xs px-3 py-1">
-                          {action.priority}
-                        </Badge>
-                        <div>
-                          <h3 className="font-semibold group-hover:text-primary transition-colors">{action.title}</h3>
-                          <p className="text-sm text-muted-foreground">{action.description}</p>
-                        </div>
-                      </div>
-                      <div className="text-primary opacity-0 group-hover:opacity-100 transition-opacity">
-                        <div className="flex items-center gap-2 text-sm font-medium">
-                          {action.action} →
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </Link>
-              ))}
-            </CardContent>
-          </Card>
-
-          {/* Performance Insights */}
-          <Card className="bg-gradient-to-br from-indigo-50 to-blue-50 dark:from-indigo-950/20 dark:to-blue-950/20 border-indigo-200 dark:border-indigo-800 shadow-xl">
-            <CardHeader className="border-b border-indigo-200 dark:border-indigo-700 bg-gradient-to-r from-indigo-100 to-blue-100 dark:from-indigo-900/30 dark:to-blue-900/30">
-              <CardTitle className="flex items-center gap-2 text-indigo-900 dark:text-indigo-100">
-                <TrendingUp className="h-5 w-5" />
-                Performance Insights
-              </CardTitle>
-            </CardHeader>
-            <CardContent className="grid grid-cols-2 gap-4 pt-6">
-              {uniqueInsights.map((insight, index) => (
-                <div key={index} className="p-4 bg-white dark:bg-gray-800 rounded-xl border border-indigo-200 dark:border-indigo-700 hover:shadow-md transition-shadow cursor-pointer group">
-                  <div className="flex items-center gap-3 mb-2">
-                    <insight.icon className="h-5 w-5 text-indigo-600" />
-                    <h4 className="font-medium text-sm text-muted-foreground">{insight.title}</h4>
-                  </div>
-                  <p className="text-2xl font-bold group-hover:text-primary transition-colors">{insight.value}</p>
-                  <p className="text-xs text-muted-foreground">{insight.description}</p>
-                  <p className="text-xs font-medium text-green-600 mt-1">{insight.change}</p>
+      {/* Revolutionary 2030 Dashboard Layout - Asymmetric & Creative */}
+      <div className="space-y-8">
+        {/* Floating Neural Assistant - Repositioned as sidebar overlay */}
+        <div className="relative">
+          <div className="absolute right-0 top-0 w-80 z-20">
+            <Card className="bg-gradient-to-br from-blue-500/90 to-indigo-600/90 backdrop-blur-xl text-white border-0 shadow-2xl">
+              <div className="absolute -top-1 -right-1">
+                <div className="h-4 w-4 rounded-full bg-white/30 flex items-center justify-center animate-pulse">
+                  <Sparkles className="h-2 w-2 text-white" />
                 </div>
-              ))}
-            </CardContent>
-          </Card>
+              </div>
+              <CardHeader className="pb-3">
+                <CardTitle className="flex items-center gap-2 text-white text-lg">
+                  <Brain className="h-5 w-5" />
+                  Neural Assistant
+                </CardTitle>
+              </CardHeader>
+              <CardContent className="space-y-3">
+                <div className="p-3 bg-white/10 backdrop-blur-sm rounded-xl border border-white/20">
+                  <p className="text-xs font-medium">
+                    "2 contracts expiring soon. Start renewals?"
+                  </p>
+                </div>
+                <div className="flex gap-2">
+                  <Button size="sm" className="flex-1 bg-white/20 hover:bg-white/30 text-white border-white/30 text-xs">
+                    <Zap className="h-3 w-3 mr-1" />
+                    Actions
+                  </Button>
+                  <Link href="/messages">
+                    <Button size="sm" variant="outline" className="flex-1 border-white/30 text-white hover:bg-white/10 text-xs">
+                      <MessageCircle className="h-3 w-3 mr-1" />
+                      Messages
+                    </Button>
+                  </Link>
+                </div>
+              </CardContent>
+            </Card>
+          </div>
+
+          {/* Priority Actions - Main Focus with Creative Grid */}
+          <div className="mr-84">
+            <Card className="bg-gradient-to-br from-orange-50 to-red-50 dark:from-orange-950/20 dark:to-red-950/20 border-orange-200 dark:border-orange-800 shadow-xl">
+              <CardHeader className="pb-4 border-b border-orange-200 dark:border-orange-700 bg-gradient-to-r from-orange-100 to-red-100 dark:from-orange-900/30 dark:to-red-900/30">
+                <CardTitle className="flex items-center gap-2 text-orange-900 dark:text-orange-100 text-xl">
+                  <Clock className="h-6 w-6" />
+                  Items That Need Your Action
+                </CardTitle>
+                <p className="text-sm text-orange-700 dark:text-orange-300">Priority tasks requiring your immediate attention</p>
+              </CardHeader>
+              <CardContent className="space-y-4 pt-6">
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                  <div className="p-4 bg-white dark:bg-gray-800 rounded-2xl border border-orange-200 dark:border-orange-700 shadow-sm">
+                    <div className="flex items-center gap-3 mb-3">
+                      <Badge className="bg-red-500 text-white">Urgent</Badge>
+                      <Badge className={canViewAllData ? "bg-blue-100 text-blue-800" : "bg-green-100 text-green-800"}>
+                        {canViewAllData ? "All Depts" : currentUser.department}
+                      </Badge>
+                    </div>
+                    <p className="font-semibold mb-1">2 contracts expire within 90 days</p>
+                    <p className="text-sm text-muted-foreground mb-3">Urgent: 1 expires within 30 days</p>
+                    <Button size="sm" className="w-full bg-gradient-to-r from-orange-600 to-red-600">
+                      Review
+                    </Button>
+                  </div>
+
+                  <div className="p-4 bg-white dark:bg-gray-800 rounded-2xl border border-orange-200 dark:border-orange-700 shadow-sm">
+                    <div className="flex items-center gap-3 mb-3">
+                      <Badge className="bg-blue-500 text-white">Today</Badge>
+                      <Badge className={canViewAllData ? "bg-blue-100 text-blue-800" : "bg-green-100 text-green-800"}>
+                        {canViewAllData ? "All Depts" : currentUser.department}
+                      </Badge>
+                    </div>
+                    <p className="font-semibold mb-1">{canViewAllData ? "2" : "1"} purchase requests need approval</p>
+                    <p className="text-sm text-muted-foreground mb-3">Total: {canViewAllData ? "$47,500" : "$22,500"}</p>
+                    <Button size="sm" className="w-full bg-gradient-to-r from-blue-600 to-indigo-600">
+                      Approve
+                    </Button>
+                  </div>
+
+                  <div className="p-4 bg-white dark:bg-gray-800 rounded-2xl border border-orange-200 dark:border-orange-700 shadow-sm">
+                    <div className="flex items-center gap-3 mb-3">
+                      <Badge className="bg-gray-600 text-white">Month</Badge>
+                      <Badge className={canViewAllData ? "bg-blue-100 text-blue-800" : "bg-green-100 text-green-800"}>
+                        {canViewAllData ? "All Depts" : currentUser.department}
+                      </Badge>
+                    </div>
+                    <p className="font-semibold mb-1">{canViewAllData ? "$47K" : "$12K"} potential savings</p>
+                    <p className="text-sm text-muted-foreground mb-3">Consolidation opportunities</p>
+                    <Button size="sm" className="w-full bg-gradient-to-r from-green-600 to-emerald-600">
+                      Optimize
+                    </Button>
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
+          </div>
         </div>
 
-        {/* Right Column - Assistant & Activity */}
-        <div className="space-y-6">
-          {/* Enhanced AI Assistant */}
-          <Card className="bg-gradient-to-br from-blue-50 to-indigo-50 dark:from-blue-950/20 dark:to-indigo-950/20 border-blue-200 dark:border-blue-800 shadow-xl">
-            <div className="absolute -top-2 -right-2">
-              <div className="h-6 w-6 rounded-full bg-gradient-to-r from-blue-500 to-indigo-500 flex items-center justify-center animate-pulse">
-                <Sparkles className="h-3 w-3 text-white" />
-              </div>
-            </div>
-            <CardHeader className="pb-4 border-b border-blue-200 dark:border-blue-700 bg-gradient-to-r from-blue-100 to-indigo-100 dark:from-blue-900/30 dark:to-indigo-900/30">
-              <CardTitle className="flex items-center gap-2 text-blue-900 dark:text-blue-100 text-xl">
-                <Brain className="h-6 w-6" />
-                Neural Assistant
-              </CardTitle>
-              <p className="text-sm text-blue-700 dark:text-blue-300">AI-powered procurement guidance</p>
-            </CardHeader>
-            <CardContent className="space-y-4 pt-6">
-              <div className="space-y-3">
-                <div className="p-4 bg-white dark:bg-gray-800 rounded-2xl border border-blue-200 dark:border-blue-700 shadow-sm">
-                  <p className="text-sm text-blue-800 dark:text-blue-200 font-medium">
-                    "You have 2 contracts expiring this month. Would you like me to help you start the renewal process?"
-                  </p>
+        {/* Asymmetric Performance Grid - Creative 2030 Layout */}
+        <div className="grid grid-cols-12 gap-6">
+          {/* Large Performance Dashboard */}
+          <div className="col-span-12 md:col-span-8">
+            <Card className="bg-gradient-to-br from-blue-50 to-cyan-50 dark:from-blue-950/20 dark:to-cyan-950/20 border-blue-200 dark:border-blue-800 shadow-xl h-48">
+              <CardHeader className="pb-2">
+                <div className="flex items-center justify-between">
+                  <CardTitle className="flex items-center gap-2 text-blue-900 dark:text-blue-100">
+                    <DollarSign className="h-6 w-6" />
+                    Financial Performance
+                  </CardTitle>
+                  <Badge className={canViewAllData ? "bg-blue-100 text-blue-800" : "bg-green-100 text-green-800"}>
+                    {canViewAllData ? "All Depts" : currentUser.department}
+                  </Badge>
                 </div>
-                <div className="p-4 bg-white dark:bg-gray-800 rounded-2xl border border-blue-200 dark:border-blue-700 shadow-sm">
-                  <p className="text-sm text-blue-800 dark:text-blue-200 font-medium">
-                    "Based on your recent orders, I recommend creating a Blanket PO for office supplies to save 15% on processing costs."
-                  </p>
+              </CardHeader>
+              <CardContent>
+                <div className="grid grid-cols-3 gap-6">
+                  <div className="text-center">
+                    <p className="text-3xl font-bold text-blue-600">{canViewAllData ? "$47K" : "$12K"}</p>
+                    <p className="text-sm text-muted-foreground">Savings This Quarter</p>
+                    <p className="text-xs text-green-600 font-semibold">↑ 23%</p>
+                  </div>
+                  <div className="text-center">
+                    <p className="text-3xl font-bold text-green-600">{canViewAllData ? "$59K" : "$18K"}</p>
+                    <p className="text-sm text-muted-foreground">Potential Savings</p>
+                    <p className="text-xs text-orange-600 font-semibold">6 opportunities</p>
+                  </div>
+                  <div className="text-center">
+                    <p className="text-3xl font-bold text-purple-600">{canViewAllData ? "89%" : "94%"}</p>
+                    <p className="text-sm text-muted-foreground">Budget Efficiency</p>
+                    <p className="text-xs text-blue-600 font-semibold">On target</p>
+                  </div>
                 </div>
-              </div>
-              
-              <div className="flex gap-3">
-                <Button className="flex-1 bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 shadow-lg">
-                  <Zap className="h-4 w-4 mr-2" />
-                  Quick Actions
-                </Button>
-                <Button variant="outline" className="flex-1 border-blue-300 text-blue-700 dark:text-blue-300 hover:bg-blue-50">
-                  <MessageCircle className="h-4 w-4 mr-2" />
-                  Ask Assistant
-                </Button>
-              </div>
-            </CardContent>
-          </Card>
+              </CardContent>
+            </Card>
+          </div>
 
-          {/* Compact Activity & Performance Summary */}
-          <Card className="bg-gradient-to-br from-gray-50 to-slate-50 dark:from-gray-950/20 dark:to-slate-950/20 border-gray-200 dark:border-gray-800 shadow-xl">
-            <CardHeader className="pb-3 border-b border-gray-200 dark:border-gray-700">
-              <CardTitle className="flex items-center justify-between text-gray-900 dark:text-gray-100">
-                <div className="flex items-center gap-2">
-                  <Activity className="h-5 w-5" />
-                  Activity & Performance
+          {/* Compact Activity Widget */}
+          <div className="col-span-12 md:col-span-4">
+            <Card className="bg-gradient-to-br from-gray-50 to-slate-50 dark:from-gray-950/20 dark:to-slate-950/20 border-gray-200 dark:border-gray-800 shadow-xl h-48">
+              <CardHeader className="pb-2">
+                <CardTitle className="flex items-center justify-between text-gray-900 dark:text-gray-100 text-sm">
+                  <div className="flex items-center gap-2">
+                    <Activity className="h-4 w-4" />
+                    Activity Feed
+                  </div>
+                  <Badge className={`text-xs ${canViewAllData ? "bg-blue-100 text-blue-800" : "bg-green-100 text-green-800"}`}>
+                    {canViewAllData ? "All" : currentUser.department}
+                  </Badge>
+                </CardTitle>
+              </CardHeader>
+              <CardContent className="space-y-3">
+                <div className="grid grid-cols-2 gap-3">
+                  <div className="text-center p-2 bg-white dark:bg-gray-800 rounded-lg">
+                    <p className="text-xl font-bold text-blue-600">{canViewAllData ? "2.3d" : "1.8d"}</p>
+                    <p className="text-xs text-muted-foreground">Avg Approval</p>
+                  </div>
+                  <div className="text-center p-2 bg-white dark:bg-gray-800 rounded-lg">
+                    <p className="text-xl font-bold text-green-600">{canViewAllData ? "23" : "4"}</p>
+                    <p className="text-xs text-muted-foreground">Active Contracts</p>
+                  </div>
                 </div>
-                <Badge className={canViewAllData ? "bg-blue-100 text-blue-800" : "bg-green-100 text-green-800"}>
-                  {canViewAllData ? "All Depts" : currentUser.department}
-                </Badge>
-              </CardTitle>
-            </CardHeader>
-            <CardContent className="pt-4 space-y-4">
-              {/* Performance Summary - Condensed */}
-              <div className="grid grid-cols-2 gap-3">
-                <div className="text-center p-3 bg-white dark:bg-gray-800 rounded-lg border">
-                  <p className="text-2xl font-bold text-blue-600">{canViewAllData ? "89%" : "94%"}</p>
-                  <p className="text-xs text-muted-foreground">On-Time Delivery</p>
-                </div>
-                <div className="text-center p-3 bg-white dark:bg-gray-800 rounded-lg border">
-                  <p className="text-2xl font-bold text-green-600">{canViewAllData ? "2.3d" : "1.8d"}</p>
-                  <p className="text-xs text-muted-foreground">Avg Approval Time</p>
-                </div>
-              </div>
-
-              {/* Recent Key Activities - Only 2 items */}
-              <div className="space-y-2">
-                {recentActivity.slice(0, 2).map((activity) => (
-                  <div key={activity.id} className="flex items-center gap-3 p-3 bg-white dark:bg-gray-800 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700/50 transition-colors border cursor-pointer">
-                    <div className={`p-1.5 rounded-lg ${
-                      activity.status === 'completed' ? 'bg-green-100 text-green-600' :
-                      activity.status === 'attention' ? 'bg-red-100 text-red-600' :
-                      'bg-blue-100 text-blue-600'
-                    }`}>
-                      {activity.type === 'approval' && <CheckCircle className="h-3 w-3" />}
-                      {activity.type === 'requisition' && <ShoppingCart className="h-3 w-3" />}
-                      {activity.type === 'contract' && <FileText className="h-3 w-3" />}
-                    </div>
-                    <div className="flex-1">
-                      <p className="text-sm font-medium">{activity.title}</p>
-                      <div className="flex items-center justify-between">
-                        <p className="text-xs text-muted-foreground">{activity.time}</p>
-                        <p className="text-xs font-semibold">{activity.amount}</p>
+                
+                <div className="space-y-2">
+                  {recentActivity.slice(0, 2).map((activity) => (
+                    <div key={activity.id} className="flex items-center gap-2 p-2 bg-white dark:bg-gray-800 rounded-lg text-xs">
+                      <div className={`p-1 rounded-full ${
+                        activity.status === 'completed' ? 'bg-green-100 text-green-600' : 'bg-blue-100 text-blue-600'
+                      }`}>
+                        {activity.type === 'approval' && <CheckCircle className="h-2 w-2" />}
+                        {activity.type === 'requisition' && <ShoppingCart className="h-2 w-2" />}
+                      </div>
+                      <div className="flex-1">
+                        <p className="font-medium truncate">{activity.title}</p>
+                        <p className="text-muted-foreground">{activity.amount}</p>
                       </div>
                     </div>
-                  </div>
-                ))}
-              </div>
+                  ))}
+                </div>
+              </CardContent>
+            </Card>
+          </div>
+        </div>
 
-              {/* Quick Action */}
-              <Button variant="outline" className="w-full text-xs" size="sm">
-                <Eye className="h-3 w-3 mr-1" />
-                View All Activity
-              </Button>
-            </CardContent>
-          </Card>
+        {/* Bottom Performance Tiles - Horizontal Creative Layout */}
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+          {uniqueInsights.slice(0, 4).map((insight, index) => (
+            <Card
+              key={index}
+              className={`bg-gradient-to-br ${
+                insight.color === 'orange'
+                  ? 'from-orange-50 to-amber-50 dark:from-orange-950/20 dark:to-amber-950/20 border-orange-200'
+                  : insight.color === 'red'
+                  ? 'from-red-50 to-pink-50 dark:from-red-950/20 dark:to-pink-950/20 border-red-200'
+                  : insight.color === 'blue'
+                  ? 'from-blue-50 to-cyan-50 dark:from-blue-950/20 dark:to-cyan-950/20 border-blue-200'
+                  : 'from-green-50 to-emerald-50 dark:from-green-950/20 dark:to-emerald-950/20 border-green-200'
+              } shadow-lg hover:shadow-xl transition-shadow cursor-pointer`}
+            >
+              <CardContent className="p-4">
+                <div className="flex items-center justify-between mb-2">
+                  <insight.icon className={`h-5 w-5 ${
+                    insight.color === 'orange' ? 'text-orange-600' :
+                    insight.color === 'red' ? 'text-red-600' :
+                    insight.color === 'blue' ? 'text-blue-600' :
+                    'text-green-600'
+                  }`} />
+                  <Badge className={`text-xs ${canViewAllData ? "bg-blue-100 text-blue-800" : "bg-green-100 text-green-800"}`}>
+                    {canViewAllData ? "All" : currentUser.department}
+                  </Badge>
+                </div>
+                <p className="text-2xl font-bold mb-1">{insight.value}</p>
+                <p className="text-sm font-medium text-muted-foreground mb-1">{insight.title}</p>
+                <p className={`text-xs font-semibold ${
+                  insight.color === 'orange' ? 'text-orange-700 dark:text-orange-300' :
+                  insight.color === 'red' ? 'text-red-700 dark:text-red-300' :
+                  insight.color === 'blue' ? 'text-blue-700 dark:text-blue-300' :
+                  'text-green-700 dark:text-green-300'
+                }`}>
+                  {insight.change}
+                </p>
+              </CardContent>
+            </Card>
+          ))}
         </div>
       </div>
     </div>

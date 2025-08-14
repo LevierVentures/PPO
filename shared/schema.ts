@@ -192,3 +192,6 @@ export type NewVendorRequest = typeof newVendorRequests.$inferSelect;
 export type InsertNewVendorRequest = z.infer<typeof insertNewVendorRequestSchema>;
 export type Analytics = typeof analytics.$inferSelect;
 export type InsertAnalytics = z.infer<typeof insertAnalyticsSchema>;
+
+// Export messaging schema types and tables
+export * from './messaging-schema';
