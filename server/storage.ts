@@ -74,25 +74,56 @@ export class MemStorage implements IStorage {
   }
 
   private seedData() {
-    // Seed users
-    const user1: User = {
-      id: "user-1",
-      username: "jsmith",
-      password: "password",
-      name: "John Smith",
-      role: "Procurement Manager",
-      department: "Procurement"
-    };
-    const user2: User = {
-      id: "user-2",
-      username: "sjohnson",
-      password: "password",
-      name: "Sarah Johnson",
-      role: "Marketing Manager",
-      department: "Marketing"
-    };
-    this.users.set(user1.id, user1);
-    this.users.set(user2.id, user2);
+    // Seed users with role-based access control
+    const users: User[] = [
+      {
+        id: "user-1",
+        username: "admin",
+        password: "admin123",
+        name: "Admin User",
+        role: "admin",
+        department: "IT",
+        canViewAllDepartments: true
+      },
+      {
+        id: "user-2",
+        username: "sarah.johnson",
+        password: "password123",
+        name: "Sarah Johnson",
+        role: "manager",
+        department: "IT",
+        canViewAllDepartments: false
+      },
+      {
+        id: "user-3",
+        username: "mike.procurement",
+        password: "password123",
+        name: "Mike Chen",
+        role: "procurement_sme",
+        department: "Procurement",
+        canViewAllDepartments: true
+      },
+      {
+        id: "user-4",
+        username: "jane.finance",
+        password: "password123",
+        name: "Jane Smith",
+        role: "finance",
+        department: "Finance",
+        canViewAllDepartments: true
+      },
+      {
+        id: "user-5",
+        username: "john.hr",
+        password: "password123",
+        name: "John Davis",
+        role: "end_user",
+        department: "HR",
+        canViewAllDepartments: false
+      }
+    ];
+    
+    users.forEach(user => this.users.set(user.id, user));
 
     // Seed vendors
     const vendor1: Vendor = {

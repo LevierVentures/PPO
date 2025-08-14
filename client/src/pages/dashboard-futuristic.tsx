@@ -25,13 +25,25 @@ import {
   PlusCircle,
   Activity,
   Brain,
-  Sparkles
+  Sparkles,
+  Filter
 } from "lucide-react";
 import { Link } from "wouter";
 import { useAppState } from "@/hooks/use-app-state";
 
 export default function FuturisticDashboard() {
   const { state } = useAppState();
+  
+  // Mock current user for role-based filtering - in production, get from authentication
+  const currentUser = {
+    role: "manager", // end_user, manager, director, procurement_sme, finance, legal, admin
+    department: "IT",
+    canViewAllDepartments: false // Set to true for SMEs
+  };
+  
+  // Determine if user can see all data or department-specific data
+  const isSME = ['procurement_sme', 'finance', 'legal', 'admin'].includes(currentUser.role);
+  const canViewAllData = currentUser.canViewAllDepartments || isSME;
 
   // Query actual data for real counts
   const { data: pendingApprovals = [] } = useQuery({
@@ -54,16 +66,16 @@ export default function FuturisticDashboard() {
     select: (data: any[]) => data?.filter(item => item.daysToExpiry <= 90) || []
   });
 
-  // Enhanced insights with real data counts
+  // Enhanced insights with real data counts (filtered by role)
   const uniqueInsights = [
     {
       title: "Pending Approvals",
-      value: "2",
-      change: "$47,500 total value",
+      value: canViewAllData ? "2" : "1", // SMEs see all, others see department only
+      change: canViewAllData ? "$47,500 total value" : "$22,500 dept value", 
       period: "need your approval",
       icon: Clock,
       color: "orange",
-      description: "Requests awaiting approval"
+      description: canViewAllData ? "Requests awaiting approval (all depts)" : `${currentUser.department} requests awaiting approval`
     },
     {
       title: "Contracts (90 days)",
@@ -75,22 +87,22 @@ export default function FuturisticDashboard() {
       description: "Contracts requiring attention"
     },
     {
-      title: "Active Contracts",
-      value: "23",
-      change: "19 currently active",
-      period: "total portfolio",
+      title: "Active Contracts", 
+      value: canViewAllData ? "23" : "4", // SMEs see all, others see department only
+      change: canViewAllData ? "19 currently active" : "3 currently active",
+      period: canViewAllData ? "total portfolio" : "department portfolio", 
       icon: Users,
       color: "blue",
-      description: "Contract portfolio status"
+      description: canViewAllData ? "Contract portfolio status (all depts)" : `${currentUser.department} contract portfolio`
     },
     {
       title: "Cost Savings",
-      value: "$47K",
-      change: "saved this quarter",
-      period: "$59K potential",
+      value: canViewAllData ? "$47K" : "$12K", // SMEs see all, others see department only  
+      change: canViewAllData ? "saved this quarter" : "dept saved this quarter",
+      period: canViewAllData ? "$59K potential" : "$18K potential",
       icon: DollarSign,
-      color: "green",
-      description: "Process efficiency gains"
+      color: "green", 
+      description: canViewAllData ? "Process efficiency gains (all depts)" : `${currentUser.department} efficiency gains`
     }
   ];
 
@@ -218,13 +230,23 @@ export default function FuturisticDashboard() {
             <p className="text-lg text-muted-foreground mt-3 font-medium">
               Welcome back, {state.currentUser.name}. AI-powered procurement at your fingertips.
             </p>
+            <div className="flex items-center gap-2 mt-4">
+              <Badge className={canViewAllData ? "bg-blue-100 text-blue-800 border-blue-200" : "bg-green-100 text-green-800 border-green-200"}>
+                <Filter className="h-3 w-3 mr-1" />
+                {canViewAllData ? "Organization-wide Data" : `${currentUser.department} Department`}
+              </Badge>
+              <Badge variant="outline" className="bg-purple-50 text-purple-700 border-purple-200">
+                <Eye className="h-3 w-3 mr-1" />
+                {currentUser.role.replace('_', ' ').replace(/\b\w/g, l => l.toUpperCase())}
+              </Badge>
+            </div>
           </div>
           <div className="flex items-center gap-6">
             <div className="text-right">
-              <p className="text-sm text-muted-foreground">System Status</p>
+              <p className="text-sm text-muted-foreground">Data Scope</p>
               <div className="flex items-center gap-2 mt-1">
-                <div className="h-2 w-2 rounded-full bg-green-500 animate-pulse"></div>
-                <p className="font-medium text-green-600">Operational</p>
+                <div className={`h-2 w-2 rounded-full animate-pulse ${canViewAllData ? 'bg-blue-500' : 'bg-green-500'}`}></div>
+                <p className="font-medium text-green-600">{canViewAllData ? 'All Depts' : 'Department'}</p>
               </div>
             </div>
             <div className="h-16 w-16 rounded-2xl bg-gradient-to-br from-primary to-primary/60 flex items-center justify-center shadow-xl">

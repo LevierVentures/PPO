@@ -19,7 +19,7 @@ import NewVendorRequest from "./pages/new-vendor-request";
 import Invoices from "./pages/invoices";
 import InvoiceHistory from "./pages/invoice-history";
 import Analytics from "./pages/analytics";
-import UserProfile from "./pages/user-profile";
+import UserProfileRBAC from "./pages/user-profile-rbac";
 import Administration from "./pages/admin";
 import MyRequests from "./pages/my-requests";
 import RFPManagement from "./pages/rfp-management";
@@ -42,7 +42,7 @@ function Router() {
       <Route path="/invoices" component={Invoices} />
       <Route path="/invoice-history" component={InvoiceHistory} />
       <Route path="/analytics" component={Analytics} />
-      <Route path="/user-profile" component={UserProfile} />
+      <Route path="/user-profile" component={UserProfileRBAC} />
       <Route path="/admin" component={Administration} />
       <Route path="/my-requests" component={MyRequests} />
       <Route path="/rfp" component={RFPManagement} />

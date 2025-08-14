@@ -8,8 +8,9 @@ export const users = pgTable("users", {
   username: text("username").notNull().unique(),
   password: text("password").notNull(),
   name: text("name").notNull(),
-  role: text("role").notNull(),
+  role: text("role").notNull(), // end_user, manager, director, procurement_sme, finance, legal, admin
   department: text("department").notNull(),
+  canViewAllDepartments: boolean("can_view_all_departments").default(false), // SMEs can see all data
 });
 
 export const vendors = pgTable("vendors", {

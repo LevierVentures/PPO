@@ -30,6 +30,7 @@ The application follows standard P2P workflow: Purchase Requisition → Approval
 ✅ **Contract-PO Integration with Change Orders** - Added PO# column to contracts table with direct navigation to PO details and change order capability for expiring contracts
 ✅ **Database Schema Enhancement** - Updated vendor and new vendor request tables with comprehensive fields for banking, compliance, and document management
 ✅ **Data-Driven Cost Savings Module** - Complete redesign with direct discount capture fields on requisitions and AI-powered consolidation analysis based on product similarity
+✅ **Role-Based Data Filtering System** - End users see department-specific data while SMEs like procurement view organization-wide activities with visual indicators
 
 ## Key Features Implemented
 
