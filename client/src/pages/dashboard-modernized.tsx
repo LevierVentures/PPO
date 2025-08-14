@@ -365,10 +365,10 @@ export default function Dashboard() {
                   New Requisition
                 </Button>
               </Link>
-              <Link href="/change-order">
+              <Link href="/contracts">
                 <Button variant="outline" className="w-full justify-start">
                   <FileText className="h-4 w-4 mr-2" />
-                  Change Order
+                  View Contracts
                 </Button>
               </Link>
               <Link href="/approvals">

@@ -8,9 +8,9 @@ import Navigation from "@/components/layout/navigation";
 import ChatDock from "@/components/ai-chat/chat-dock";
 import ErrorOverlay from "@/components/common/error-overlay";
 import Dashboard from "./pages/dashboard-modernized";
-import RequestIntake from "./pages/request-intake";
-import Approvals from "./pages/approvals";
-import ContractsRedesigned from "./pages/contracts-redesigned";
+import RequisitionUnified from "./pages/requisition-unified";
+import ApprovalsQueue from "./pages/approvals-professional";
+import ContractsUnified from "./pages/contracts-unified";
 import PurchaseOrders from "./pages/purchase-orders";
 import POSummary from "./pages/po-summary";
 import UserReview from "./pages/user-review";
@@ -20,17 +20,16 @@ import InvoiceHistory from "./pages/invoice-history";
 import Analytics from "./pages/analytics";
 import UserProfile from "./pages/user-profile";
 import Administration from "./pages/admin";
-import ChangeOrder from "./pages/change-order";
+
 import { AppStateProvider } from "@/hooks/use-app-state";
 
 function Router() {
   return (
     <Switch>
       <Route path="/" component={Dashboard} />
-      <Route path="/request" component={RequestIntake} />
-      <Route path="/change-order" component={ChangeOrder} />
-      <Route path="/approvals" component={Approvals} />
-      <Route path="/contracts" component={ContractsRedesigned} />
+      <Route path="/request" component={RequisitionUnified} />
+      <Route path="/approvals" component={ApprovalsQueue} />
+      <Route path="/contracts" component={ContractsUnified} />
       <Route path="/purchase-orders" component={PurchaseOrders} />
       <Route path="/po-summary" component={POSummary} />
       <Route path="/user-review" component={UserReview} />
