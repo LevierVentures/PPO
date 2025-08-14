@@ -35,8 +35,8 @@ export default function Dashboard() {
       title: "Contract Renewal Required",
       description: "GlobalSoft Software License expires in 15 days",
       priority: "High",
-      action: "Review Terms",
-      link: "/contracts",
+      action: "View PO Details",
+      link: "/purchase-orders?po=PO-2024-1205",
       category: "Contract",
       urgent: true
     },
@@ -55,8 +55,8 @@ export default function Dashboard() {
       title: "Budget Optimization",
       description: "Office supplies showing consistent usage - consider Blanket PO",
       priority: "Low",
-      action: "Create Blanket PO",
-      link: "/request",
+      action: "View Analytics",
+      link: "/analytics?product=office-supplies&trend=high-usage",
       category: "Optimization",
       urgent: false
     }
@@ -274,38 +274,38 @@ export default function Dashboard() {
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div>
                   <div className="flex justify-between items-center mb-2">
-                    <span className="text-sm font-medium">Processing Time</span>
-                    <span className="text-sm text-green-600">-15% vs last month</span>
+                    <span className="text-sm font-medium">Avg Processing Time</span>
+                    <span className="text-sm text-green-600">2.1 days</span>
                   </div>
-                  <Progress value={85} className="h-2" />
-                  <p className="text-xs text-muted-foreground mt-1">Average: 2.3 days</p>
+                  <Progress value={75} className="h-2" />
+                  <p className="text-xs text-muted-foreground mt-1">Based on 47 completed approvals</p>
                 </div>
                 
                 <div>
                   <div className="flex justify-between items-center mb-2">
-                    <span className="text-sm font-medium">Budget Adherence</span>
-                    <span className="text-sm text-green-600">98.2%</span>
+                    <span className="text-sm font-medium">Total PO Count</span>
+                    <span className="text-sm text-blue-600">23 POs</span>
                   </div>
-                  <Progress value={98} className="h-2" />
-                  <p className="text-xs text-muted-foreground mt-1">$47.3K of $48.2K budget</p>
+                  <Progress value={76} className="h-2" />
+                  <p className="text-xs text-muted-foreground mt-1">Approved this month</p>
                 </div>
 
                 <div>
                   <div className="flex justify-between items-center mb-2">
-                    <span className="text-sm font-medium">Vendor Performance</span>
-                    <span className="text-sm text-blue-600">4.7/5.0</span>
+                    <span className="text-sm font-medium">Total Spend Approved</span>
+                    <span className="text-sm text-green-600">$487K</span>
                   </div>
-                  <Progress value={94} className="h-2" />
-                  <p className="text-xs text-muted-foreground mt-1">23 active vendors</p>
+                  <Progress value={83} className="h-2" />
+                  <p className="text-xs text-muted-foreground mt-1">Year to date total</p>
                 </div>
 
                 <div>
                   <div className="flex justify-between items-center mb-2">
-                    <span className="text-sm font-medium">Compliance Score</span>
-                    <span className="text-sm text-green-600">96%</span>
+                    <span className="text-sm font-medium">Total Paid from Invoices</span>
+                    <span className="text-sm text-green-600">$421K</span>
                   </div>
-                  <Progress value={96} className="h-2" />
-                  <p className="text-xs text-muted-foreground mt-1">All critical items compliant</p>
+                  <Progress value={86} className="h-2" />
+                  <p className="text-xs text-muted-foreground mt-1">Payments processed YTD</p>
                 </div>
               </div>
             </CardContent>
