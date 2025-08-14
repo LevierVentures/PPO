@@ -263,13 +263,9 @@ export default function FuturisticDashboard() {
       </Card>
     </div>
   );
+  }
 
   return (
-    <>
-      {/* Draggable Neural Assistant */}
-      <DraggableNeuralAssistant />
-
-      {/* Main Dashboard */}
     <div className="min-h-screen bg-gradient-to-br from-background via-muted/10 to-primary/5 space-y-8 p-6">
       {/* Futuristic Header */}
       <div className="relative overflow-hidden bg-gradient-to-r from-primary/10 via-primary/5 to-background rounded-3xl border border-primary/20 p-8 shadow-2xl">
@@ -558,6 +554,6 @@ export default function FuturisticDashboard() {
           ))}
         </div>
       </div>
-    </>
+    </div>
   );
 }
