@@ -15,7 +15,8 @@ import {
   TrendingUp,
   ArrowRight,
   Sparkles,
-  Zap
+  Zap,
+  BarChart3
 } from 'lucide-react';
 import { useAppState } from '@/hooks/use-app-state';
 
@@ -52,9 +53,9 @@ export default function GoogleStyleDashboard() {
 
   const quickActions = [
     { icon: FileText, label: 'New Requisition', href: '/requisitions', color: 'from-blue-500 to-cyan-500' },
-    { icon: Users, label: 'Find Vendors', href: '/vendors', color: 'from-purple-500 to-pink-500' },
-    { icon: Package, label: 'Browse Products', href: '/catalog', color: 'from-green-500 to-emerald-500' },
-    { icon: ShoppingCart, label: 'Track Orders', href: '/purchase-orders', color: 'from-orange-500 to-red-500' },
+    { icon: ShoppingCart, label: 'Purchase Orders', href: '/purchase-orders', color: 'from-purple-500 to-pink-500' },
+    { icon: FileText, label: 'Contracts', href: '/contracts', color: 'from-green-500 to-emerald-500' },
+    { icon: BarChart3, label: 'Reports & Analytics', href: '/analytics', color: 'from-orange-500 to-red-500' },
   ];
 
   const getSearchIcon = (type: string) => {
@@ -86,32 +87,35 @@ export default function GoogleStyleDashboard() {
         </div>
 
         {/* Google-style search box */}
-        <div className="w-full max-w-2xl mb-12 relative">
+        <div className="w-full max-w-3xl mb-12 relative">
           <div className={`relative transition-all duration-300 ${
             isSearchFocused ? 'transform scale-105' : ''
           }`}>
-            <div className="absolute inset-0 bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 rounded-full p-0.5">
-              <div className="bg-white dark:bg-gray-800 rounded-full h-full w-full">
-                <div className="relative">
-                  <Search className="absolute left-6 top-1/2 transform -translate-y-1/2 h-5 w-5 text-gray-400" />
-                  <Input
-                    placeholder="Search vendors, products, contracts, or anything..."
-                    value={searchQuery}
-                    onChange={(e) => handleSearch(e.target.value)}
-                    onFocus={() => setIsSearchFocused(true)}
-                    onBlur={() => setTimeout(() => setIsSearchFocused(false), 200)}
-                    className="w-full pl-14 pr-6 py-4 text-lg border-none bg-transparent rounded-full h-14 focus:ring-0 focus:outline-none"
-                  />
-                  {searchQuery && (
-                    <Button 
-                      size="sm" 
-                      className="absolute right-2 top-2 rounded-full bg-gradient-to-r from-blue-500 to-purple-500 hover:from-blue-600 hover:to-purple-600"
-                    >
-                      <Search className="h-4 w-4" />
-                    </Button>
-                  )}
+            <div className="relative bg-white dark:bg-gray-800 rounded-full shadow-2xl border border-gray-200 dark:border-gray-700 hover:shadow-3xl transition-shadow">
+              <Search className="absolute left-6 top-1/2 transform -translate-y-1/2 h-6 w-6 text-gray-400" />
+              <Input
+                placeholder="Search vendors, products, contracts, POs, or anything in the system..."
+                value={searchQuery}
+                onChange={(e) => handleSearch(e.target.value)}
+                onFocus={() => setIsSearchFocused(true)}
+                onBlur={() => setTimeout(() => setIsSearchFocused(false), 200)}
+                className="w-full pl-16 pr-20 py-6 text-lg border-none bg-transparent rounded-full h-16 focus:ring-0 focus:outline-none placeholder:text-gray-400"
+              />
+              {searchQuery && (
+                <Button 
+                  size="sm" 
+                  className="absolute right-3 top-3 rounded-full bg-gradient-to-r from-blue-500 to-purple-500 hover:from-blue-600 hover:to-purple-600 h-10 w-10 p-0"
+                >
+                  <Search className="h-5 w-5" />
+                </Button>
+              )}
+              {!searchQuery && (
+                <div className="absolute right-6 top-1/2 transform -translate-y-1/2 text-gray-400">
+                  <kbd className="px-2 py-1 text-xs bg-gray-100 dark:bg-gray-700 rounded border">
+                    ⌘K
+                  </kbd>
                 </div>
-              </div>
+              )}
             </div>
           </div>
 
