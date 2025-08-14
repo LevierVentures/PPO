@@ -21,6 +21,8 @@ import Analytics from "./pages/analytics";
 import UserProfile from "./pages/user-profile";
 import Administration from "./pages/admin";
 import MyRequests from "./pages/my-requests";
+import RFPManagement from "./pages/rfp-management";
+import CostSavings from "./pages/cost-savings";
 
 import { AppStateProvider } from "@/hooks/use-app-state";
 
@@ -41,6 +43,8 @@ function Router() {
       <Route path="/user-profile" component={UserProfile} />
       <Route path="/admin" component={Administration} />
       <Route path="/my-requests" component={MyRequests} />
+      <Route path="/rfp" component={RFPManagement} />
+      <Route path="/cost-savings" component={CostSavings} />
     </Switch>
   );
 }

@@ -18,8 +18,10 @@ const navItems = [
   { path: "/approvals", label: "Approvals", icon: CheckCircle },
   { path: "/contracts", label: "Contracts", icon: FileText },
   { path: "/purchase-orders", label: "Purchase Orders", icon: History },
+  { path: "/rfp", label: "RFP", icon: FileText },
   { path: "/vendors", label: "Vendors", icon: Handshake },
   { path: "/invoice-history", label: "Invoices", icon: Receipt },
+  { path: "/cost-savings", label: "Cost Savings", icon: BarChart3 },
   { path: "/analytics", label: "Analytics", icon: BarChart3 },
 ];
 

@@ -1,6 +1,7 @@
 import type { Express } from "express";
 import { createServer, type Server } from "http";
 import { storage } from "./storage";
+import { rfpMockData } from "./storage/rfps";
 import { 
   insertRequisitionSchema, insertRequisitionItemSchema,
   insertPurchaseOrderSchema, insertInvoiceSchema,
@@ -198,6 +199,29 @@ export async function registerRoutes(app: Express): Promise<Server> {
       res.status(201).json(request);
     } catch (error) {
       res.status(400).json({ message: "Invalid new vendor request data" });
+    }
+  });
+
+  // RFPs (Request for Proposals)
+  app.get("/api/rfps", async (req, res) => {
+    try {
+      res.json(rfpMockData);
+    } catch (error) {
+      res.status(500).json({ message: "Failed to fetch RFPs" });
+    }
+  });
+
+  app.post("/api/rfps", async (req, res) => {
+    try {
+      const newRFP = {
+        id: `rfp-${Date.now()}`,
+        ...req.body,
+        createdDate: new Date().toISOString()
+      };
+      rfpMockData.push(newRFP);
+      res.status(201).json(newRFP);
+    } catch (error) {
+      res.status(400).json({ message: "Invalid RFP data" });
     }
   });
 
