@@ -52,10 +52,10 @@ export default function GoogleStyleDashboard() {
   };
 
   const quickActions = [
-    { icon: FileText, label: 'New Requisition', href: '/requisitions', color: 'from-blue-500 to-cyan-500' },
-    { icon: ShoppingCart, label: 'Purchase Orders', href: '/purchase-orders', color: 'from-purple-500 to-pink-500' },
-    { icon: FileText, label: 'Contracts', href: '/contracts', color: 'from-green-500 to-emerald-500' },
-    { icon: BarChart3, label: 'Reports & Analytics', href: '/analytics', color: 'from-orange-500 to-red-500' },
+    { icon: FileText, label: 'New Requisition', href: '/requisitions', color: 'from-slate-700 to-slate-800' },
+    { icon: ShoppingCart, label: 'Purchase Orders', href: '/purchase-orders', color: 'from-indigo-800 to-indigo-900' },
+    { icon: FileText, label: 'Contracts', href: '/contracts', color: 'from-emerald-800 to-emerald-900' },
+    { icon: BarChart3, label: 'Reports & Analytics', href: '/analytics', color: 'from-amber-700 to-amber-800' },
   ];
 
   const getSearchIcon = (type: string) => {
@@ -76,8 +76,8 @@ export default function GoogleStyleDashboard() {
         {/* Welcome section with Google-style branding */}
         <div className="text-center mb-12">
           <h1 className="text-6xl font-light mb-4">
-            <span className="text-blue-500">Welcome back,</span>{' '}
-            <span className="bg-gradient-to-r from-green-500 via-blue-500 to-purple-500 bg-clip-text text-transparent font-medium">
+            <span className="text-slate-700 dark:text-slate-300">Welcome back,</span>{' '}
+            <span className="bg-gradient-to-r from-slate-800 via-indigo-800 to-emerald-800 bg-clip-text text-transparent font-medium">
               {currentUser.name}
             </span>
           </h1>
@@ -104,7 +104,7 @@ export default function GoogleStyleDashboard() {
               {searchQuery && (
                 <Button 
                   size="sm" 
-                  className="absolute right-3 top-3 rounded-full bg-gradient-to-r from-blue-500 to-purple-500 hover:from-blue-600 hover:to-purple-600 h-10 w-10 p-0"
+                  className="absolute right-3 top-3 rounded-full bg-gradient-to-r from-slate-700 to-indigo-800 hover:from-slate-800 hover:to-indigo-900 h-10 w-10 p-0"
                 >
                   <Search className="h-5 w-5" />
                 </Button>
@@ -166,32 +166,32 @@ export default function GoogleStyleDashboard() {
 
         {/* Quick insights - minimalist cards */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 w-full max-w-4xl">
-          <Card className="border-0 shadow-lg hover:shadow-xl transition-shadow bg-gradient-to-br from-blue-50 to-cyan-50 dark:from-blue-950/20 dark:to-cyan-950/20">
+          <Card className="border-0 shadow-lg hover:shadow-xl transition-shadow bg-gradient-to-br from-slate-100 to-slate-200 dark:from-slate-900/20 dark:to-slate-800/20">
             <CardContent className="p-6 text-center">
-              <div className="w-12 h-12 mx-auto mb-4 rounded-full bg-gradient-to-br from-blue-500 to-cyan-500 flex items-center justify-center">
+              <div className="w-12 h-12 mx-auto mb-4 rounded-full bg-gradient-to-br from-slate-700 to-slate-800 flex items-center justify-center">
                 <Clock className="h-6 w-6 text-white" />
               </div>
-              <p className="text-2xl font-bold text-blue-600 mb-2">2</p>
+              <p className="text-2xl font-bold text-slate-700 dark:text-slate-300 mb-2">2</p>
               <p className="text-sm text-gray-600 dark:text-gray-300">Pending Approvals</p>
             </CardContent>
           </Card>
 
-          <Card className="border-0 shadow-lg hover:shadow-xl transition-shadow bg-gradient-to-br from-purple-50 to-pink-50 dark:from-purple-950/20 dark:to-pink-950/20">
+          <Card className="border-0 shadow-lg hover:shadow-xl transition-shadow bg-gradient-to-br from-purple-100 to-purple-200 dark:from-purple-900/20 dark:to-purple-800/20">
             <CardContent className="p-6 text-center">
-              <div className="w-12 h-12 mx-auto mb-4 rounded-full bg-gradient-to-br from-purple-500 to-pink-500 flex items-center justify-center">
+              <div className="w-12 h-12 mx-auto mb-4 rounded-full bg-gradient-to-br from-purple-800 to-purple-900 flex items-center justify-center">
                 <Users className="h-6 w-6 text-white" />
               </div>
-              <p className="text-2xl font-bold text-purple-600 mb-2">23</p>
+              <p className="text-2xl font-bold text-purple-800 dark:text-purple-300 mb-2">23</p>
               <p className="text-sm text-gray-600 dark:text-gray-300">Active Contracts</p>
             </CardContent>
           </Card>
 
-          <Card className="border-0 shadow-lg hover:shadow-xl transition-shadow bg-gradient-to-br from-green-50 to-emerald-50 dark:from-green-950/20 dark:to-emerald-950/20">
+          <Card className="border-0 shadow-lg hover:shadow-xl transition-shadow bg-gradient-to-br from-emerald-100 to-emerald-200 dark:from-emerald-900/20 dark:to-emerald-800/20">
             <CardContent className="p-6 text-center">
-              <div className="w-12 h-12 mx-auto mb-4 rounded-full bg-gradient-to-br from-green-500 to-emerald-500 flex items-center justify-center">
+              <div className="w-12 h-12 mx-auto mb-4 rounded-full bg-gradient-to-br from-emerald-800 to-emerald-900 flex items-center justify-center">
                 <TrendingUp className="h-6 w-6 text-white" />
               </div>
-              <p className="text-2xl font-bold text-green-600 mb-2">$18K</p>
+              <p className="text-2xl font-bold text-emerald-800 dark:text-emerald-300 mb-2">$18K</p>
               <p className="text-sm text-gray-600 dark:text-gray-300">Cost Savings This Quarter</p>
             </CardContent>
           </Card>
@@ -199,7 +199,7 @@ export default function GoogleStyleDashboard() {
 
         {/* AI assistant prompt */}
         <div className="mt-16 text-center">
-          <div className="inline-flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-purple-500 to-pink-500 text-white rounded-full shadow-lg hover:shadow-xl transition-shadow cursor-pointer">
+          <div className="inline-flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-slate-700 to-indigo-800 text-white rounded-full shadow-lg hover:shadow-xl transition-shadow cursor-pointer">
             <Sparkles className="h-5 w-5" />
             <span className="font-medium">Ask AI: "Find office chairs under $300"</span>
             <Zap className="h-4 w-4" />

@@ -52,29 +52,29 @@ export default function PurchaseOrders() {
 
   return (
     <div className="space-y-8">
-      {/* Futuristic 2030 Header - Purchase Orders */}
-      <div className="relative overflow-hidden rounded-3xl bg-gradient-to-r from-indigo-500/10 via-blue-500/15 to-indigo-500/10 border-2 border-indigo-500/20 shadow-2xl">
-        <div className="absolute inset-0 bg-gradient-to-br from-white/30 to-transparent dark:from-white/10"></div>
-        <div className="absolute inset-0 bg-gradient-to-t from-black/5 to-transparent"></div>
+      {/* Professional 2030 Header - Purchase Orders */}
+      <div className="relative overflow-hidden rounded-3xl bg-gradient-to-r from-indigo-900/20 via-indigo-800/25 to-indigo-900/20 border-2 border-indigo-800/30 shadow-2xl">
+        <div className="absolute inset-0 bg-gradient-to-br from-white/20 to-transparent dark:from-white/5"></div>
+        <div className="absolute inset-0 bg-gradient-to-t from-black/10 to-transparent"></div>
         <div className="relative p-8">
           <div className="flex items-center justify-between">
             <div>
-              <h1 className="text-5xl font-bold bg-gradient-to-r from-indigo-600 via-blue-600 to-indigo-700 bg-clip-text text-transparent mb-3">
+              <h1 className="text-5xl font-bold bg-gradient-to-r from-indigo-900 via-indigo-800 to-indigo-900 bg-clip-text text-transparent mb-3 dark:from-indigo-300 dark:via-indigo-200 dark:to-indigo-300">
                 Purchase Order Hub
               </h1>
-              <p className="text-lg text-gray-700 dark:text-gray-300 font-medium">
-                Advanced order management with predictive delivery tracking and vendor optimization
+              <p className="text-lg text-slate-700 dark:text-slate-300 font-medium">
+                Enterprise order management with predictive delivery tracking and vendor optimization
               </p>
             </div>
             <div className="flex items-center gap-4">
               <div className="text-right">
                 <p className="text-sm text-muted-foreground">Total Orders</p>
                 <div className="flex items-center gap-2 mt-1">
-                  <div className="h-2 w-2 rounded-full bg-blue-500 animate-pulse"></div>
-                  <p className="font-bold text-blue-600">{filteredPOs.length}</p>
+                  <div className="h-2 w-2 rounded-full bg-indigo-700 animate-pulse"></div>
+                  <p className="font-bold text-indigo-800">{filteredPOs.length}</p>
                 </div>
               </div>
-              <div className="h-16 w-16 rounded-2xl bg-gradient-to-br from-primary to-primary/60 flex items-center justify-center shadow-xl">
+              <div className="h-16 w-16 rounded-2xl bg-gradient-to-br from-indigo-800 to-indigo-900 flex items-center justify-center shadow-xl">
                 <FileText className="h-8 w-8 text-white" />
               </div>
             </div>

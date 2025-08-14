@@ -197,36 +197,36 @@ export default function ApprovalsQueue() {
 
   return (
     <div className="space-y-8">
-      {/* Futuristic 2030 Header - Approvals */}
-      <div className="relative overflow-hidden rounded-3xl bg-gradient-to-r from-orange-500/10 via-red-500/15 to-orange-500/10 border-2 border-orange-500/20 shadow-2xl">
-        <div className="absolute inset-0 bg-gradient-to-br from-white/30 to-transparent dark:from-white/10"></div>
-        <div className="absolute inset-0 bg-gradient-to-t from-black/5 to-transparent"></div>
+      {/* Professional 2030 Header - Approvals */}
+      <div className="relative overflow-hidden rounded-3xl bg-gradient-to-r from-red-900/20 via-red-800/25 to-red-900/20 border-2 border-red-800/30 shadow-2xl">
+        <div className="absolute inset-0 bg-gradient-to-br from-white/20 to-transparent dark:from-white/5"></div>
+        <div className="absolute inset-0 bg-gradient-to-t from-black/10 to-transparent"></div>
         <div className="relative p-8">
           <div className="flex items-center justify-between">
             <div>
-              <h1 className="text-5xl font-bold bg-gradient-to-r from-orange-600 via-red-600 to-orange-700 bg-clip-text text-transparent mb-3">
+              <h1 className="text-5xl font-bold bg-gradient-to-r from-red-900 via-red-800 to-red-900 bg-clip-text text-transparent mb-3 dark:from-red-300 dark:via-red-200 dark:to-red-300">
                 Professional Approvals Queue
               </h1>
-              <p className="text-lg text-gray-700 dark:text-gray-300 font-medium">
-                AI-powered workflow with intelligent priority scoring and performance analytics
+              <p className="text-lg text-slate-700 dark:text-slate-300 font-medium">
+                Enterprise workflow engine with intelligent priority scoring and performance analytics
               </p>
             </div>
             <div className="flex items-center gap-6">
               <div className="text-right">
                 <p className="text-sm text-muted-foreground">Pending Items</p>
                 <div className="flex items-center gap-2 mt-1">
-                  <div className="h-2 w-2 rounded-full bg-orange-500 animate-pulse"></div>
-                  <p className="font-bold text-orange-600">{stats.pending}</p>
+                  <div className="h-2 w-2 rounded-full bg-red-700 animate-pulse"></div>
+                  <p className="font-bold text-red-800">{stats.pending}</p>
                 </div>
               </div>
               <div className="text-right">
                 <p className="text-sm text-muted-foreground">High Priority</p>
                 <div className="flex items-center gap-2 mt-1">
-                  <div className="h-2 w-2 rounded-full bg-red-500 animate-pulse"></div>
-                  <p className="font-bold text-red-600">{stats.highPriority}</p>
+                  <div className="h-2 w-2 rounded-full bg-red-800 animate-pulse"></div>
+                  <p className="font-bold text-red-900">{stats.highPriority}</p>
                 </div>
               </div>
-              <div className="h-16 w-16 rounded-2xl bg-gradient-to-br from-blue-600 to-indigo-600 flex items-center justify-center shadow-xl">
+              <div className="h-16 w-16 rounded-2xl bg-gradient-to-br from-red-800 to-red-900 flex items-center justify-center shadow-xl">
                 <CheckCircle className="h-8 w-8 text-white" />
               </div>
             </div>

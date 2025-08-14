@@ -217,29 +217,29 @@ export default function ContractsUnified() {
 
   return (
     <div className="space-y-8">
-      {/* Futuristic 2030 Header - Contracts */}
-      <div className="relative overflow-hidden rounded-3xl bg-gradient-to-r from-purple-500/10 via-pink-500/15 to-purple-500/10 border-2 border-purple-500/20 shadow-2xl">
-        <div className="absolute inset-0 bg-gradient-to-br from-white/30 to-transparent dark:from-white/10"></div>
-        <div className="absolute inset-0 bg-gradient-to-t from-black/5 to-transparent"></div>
+      {/* Professional 2030 Header - Contracts */}
+      <div className="relative overflow-hidden rounded-3xl bg-gradient-to-r from-purple-900/20 via-purple-800/25 to-purple-900/20 border-2 border-purple-800/30 shadow-2xl">
+        <div className="absolute inset-0 bg-gradient-to-br from-white/20 to-transparent dark:from-white/5"></div>
+        <div className="absolute inset-0 bg-gradient-to-t from-black/10 to-transparent"></div>
         <div className="relative p-8">
           <div className="flex items-center justify-between">
             <div>
-              <h1 className="text-5xl font-bold bg-gradient-to-r from-purple-600 via-pink-600 to-purple-700 bg-clip-text text-transparent mb-3">
+              <h1 className="text-5xl font-bold bg-gradient-to-r from-purple-900 via-purple-800 to-purple-900 bg-clip-text text-transparent mb-3 dark:from-purple-300 dark:via-purple-200 dark:to-purple-300">
                 Contract Management Hub
               </h1>
-              <p className="text-lg text-gray-700 dark:text-gray-300 font-medium">
-                AI-powered contract intelligence with predictive risk assessment and renewal automation
+              <p className="text-lg text-slate-700 dark:text-slate-300 font-medium">
+                Enterprise contract intelligence with predictive risk assessment and renewal automation
               </p>
             </div>
             <div className="flex items-center gap-4">
               <div className="text-right">
                 <p className="text-sm text-muted-foreground">Expiring Soon</p>
                 <div className="flex items-center gap-2 mt-1">
-                  <div className="h-2 w-2 rounded-full bg-orange-500 animate-pulse"></div>
-                  <p className="font-bold text-orange-600">{stats.expiring}</p>
+                  <div className="h-2 w-2 rounded-full bg-amber-700 animate-pulse"></div>
+                  <p className="font-bold text-amber-800">{stats.expiring}</p>
                 </div>
               </div>
-              <div className="h-16 w-16 rounded-2xl bg-gradient-to-br from-purple-600 to-pink-600 flex items-center justify-center shadow-xl">
+              <div className="h-16 w-16 rounded-2xl bg-gradient-to-br from-purple-800 to-purple-900 flex items-center justify-center shadow-xl">
                 <FileText className="h-8 w-8 text-white" />
               </div>
             </div>
