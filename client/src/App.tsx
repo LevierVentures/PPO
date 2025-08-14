@@ -5,7 +5,7 @@ import { Toaster } from "@/components/ui/toaster";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import Header from "@/components/layout/header";
 import { FuturisticBottomDock } from "@/components/layout/bottom-dock-futuristic";
-import { FloatingMessaging } from "@/components/layout/floating-messaging";
+
 import ChatDock from "@/components/ai-chat/chat-dock";
 import ErrorOverlay from "@/components/common/error-overlay";
 import Dashboard from "./pages/dashboard-google-style";
@@ -68,7 +68,6 @@ function App() {
               </div>
             </main>
             <FuturisticBottomDock />
-            <FloatingMessaging />
             <ChatDock />
             <Toaster />
           </div>

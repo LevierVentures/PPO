@@ -13,7 +13,8 @@ import {
   FileCheck,
   Send,
   BarChart3,
-  Target
+  Target,
+  MessageSquare
 } from 'lucide-react';
 
 interface DockItem {
@@ -30,6 +31,7 @@ const dockItems: DockItem[] = [
   { icon: CheckSquare, label: 'Approvals', href: '/approvals', color: 'from-orange-500 to-red-500', badge: 2 },
   { icon: FileCheck, label: 'Contracts', href: '/contracts', color: 'from-purple-500 to-pink-500' },
   { icon: ShoppingCart, label: 'Orders', href: '/purchase-orders', color: 'from-indigo-500 to-blue-500' },
+  { icon: MessageSquare, label: 'Messages', href: '/messages', color: 'from-blue-500 to-indigo-500', badge: 5 },
   { icon: Send, label: 'RFP', href: '/rfp', color: 'from-pink-500 to-rose-500' },
   { icon: Users, label: 'Vendors', href: '/vendors', color: 'from-cyan-500 to-teal-500' },
   { icon: Receipt, label: 'Invoices', href: '/invoices', color: 'from-teal-500 to-green-500' },
