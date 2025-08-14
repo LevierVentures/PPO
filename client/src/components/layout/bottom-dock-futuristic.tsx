@@ -49,9 +49,11 @@ export function FuturisticBottomDock() {
       {/* Futuristic dock container */}
       <div className="relative px-4 py-3">
         <div className="flex items-center justify-center">
-          <div className="flex items-center gap-1 p-2 bg-white/60 dark:bg-black/60 rounded-3xl shadow-2xl border border-white/30 backdrop-blur-3xl overflow-x-auto scrollbar-hide max-w-[95vw] relative">
-            {/* Ambient glow behind dock */}
-            <div className="absolute inset-0 rounded-3xl bg-gradient-to-r from-blue-500/10 via-purple-500/10 to-pink-500/10 blur-xl opacity-50"></div>
+          <div className="flex items-center gap-2 p-4 bg-white/70 dark:bg-black/70 rounded-[2rem] shadow-2xl border border-white/40 backdrop-blur-3xl overflow-x-auto scrollbar-hide max-w-[95vw] relative">
+            {/* Premium multi-layer dock background */}
+            <div className="absolute inset-0 rounded-[2rem] bg-gradient-to-r from-blue-500/5 via-purple-500/5 to-pink-500/5 blur-2xl"></div>
+            <div className="absolute inset-0 rounded-[2rem] bg-gradient-to-b from-white/20 to-transparent"></div>
+            <div className="absolute inset-0.5 rounded-[2rem] shadow-inner bg-gradient-to-b from-transparent to-black/5"></div>
             
             {dockItems.map((item, index) => {
               const isActive = location === item.href || (item.href !== '/' && location.startsWith(item.href));
@@ -60,42 +62,79 @@ export function FuturisticBottomDock() {
               return (
                 <Link key={item.href} href={item.href}>
                   <div className={cn(
-                    "group relative flex flex-col items-center p-2 rounded-2xl transition-all duration-700 cursor-pointer min-w-[58px] flex-shrink-0",
-                    "hover:bg-white/40 dark:hover:bg-white/10 hover:scale-125 hover:shadow-2xl hover:-translate-y-2",
-                    isActive && "bg-white/40 dark:bg-white/10 shadow-2xl scale-110 -translate-y-1"
+                    "group relative flex flex-col items-center p-3 rounded-3xl transition-all duration-1000 cursor-pointer min-w-[72px] flex-shrink-0 transform-gpu",
+                    "hover:bg-white/30 dark:hover:bg-white/10 hover:shadow-2xl",
+                    isActive && "bg-white/30 dark:bg-white/10 shadow-2xl"
                   )}>
                     
-                    {/* Futuristic Icon with advanced styling */}
+                    {/* Ultra-Premium 2030 Icon - Beyond Apple Quality */}
                     <div className={cn(
-                      "relative w-10 h-10 rounded-2xl flex items-center justify-center transition-all duration-700 mb-1 shadow-lg group-hover:shadow-2xl",
-                      `bg-gradient-to-br ${item.color}`,
-                      "group-hover:scale-125 group-hover:rotate-12",
-                      isActive && "scale-110 rotate-6"
+                      "relative w-12 h-12 rounded-3xl transition-all duration-1000 mb-1 group-hover:scale-150 group-hover:-translate-y-3",
+                      "group-hover:rotate-12 transform-gpu perspective-1000",
+                      isActive && "scale-125 -translate-y-1 rotate-6"
                     )}>
-                      <Icon className="h-5 w-5 text-white drop-shadow-lg" />
                       
-                      {/* Animated Badge */}
+                      {/* Multi-layer depth background - Apple-beating technique */}
+                      <div className={cn(
+                        "absolute inset-0 rounded-3xl shadow-2xl",
+                        `bg-gradient-to-br ${item.color}`,
+                        "opacity-90"
+                      )}></div>
+                      
+                      {/* Glossy reflection layer */}
+                      <div className="absolute inset-0 rounded-3xl bg-gradient-to-b from-white/40 via-white/10 to-transparent opacity-80"></div>
+                      
+                      {/* Inner shadow for depth */}
+                      <div className="absolute inset-0.5 rounded-3xl shadow-inner bg-gradient-to-br from-transparent via-black/5 to-black/20"></div>
+                      
+                      {/* Icon container with perfect centering */}
+                      <div className="absolute inset-0 flex items-center justify-center rounded-3xl">
+                        <Icon className="h-6 w-6 text-white drop-shadow-xl filter brightness-110" />
+                      </div>
+                      
+                      {/* Premium light reflection - top highlight */}
+                      <div className="absolute top-1 left-1 right-1 h-4 rounded-t-3xl bg-gradient-to-b from-white/60 to-transparent opacity-70"></div>
+                      
+                      {/* Ambient glow - multiple layers */}
+                      <div className={cn(
+                        "absolute -inset-2 rounded-3xl transition-all duration-1000 blur-xl",
+                        `bg-gradient-to-br ${item.color}`,
+                        "opacity-0 group-hover:opacity-50",
+                        isActive && "opacity-30 animate-pulse"
+                      )}></div>
+                      
+                      {/* Secondary glow for extra depth */}
+                      <div className={cn(
+                        "absolute -inset-1 rounded-3xl transition-all duration-700 blur-lg",
+                        `bg-gradient-to-br ${item.color}`,
+                        "opacity-0 group-hover:opacity-40",
+                        isActive && "opacity-25"
+                      )}></div>
+                      
+                      {/* Ultra-premium badge with Apple-style depth */}
                       {item.badge && (
-                        <div className="absolute -top-1 -right-1 bg-gradient-to-r from-red-500 to-pink-500 text-white text-[8px] font-bold rounded-full h-4 w-4 flex items-center justify-center shadow-2xl border border-white animate-pulse">
-                          {item.badge}
+                        <div className="absolute -top-2 -right-2 group">
+                          {/* Badge shadow */}
+                          <div className="absolute inset-0 rounded-full bg-red-600 blur-sm opacity-50"></div>
+                          {/* Badge main */}
+                          <div className="relative w-6 h-6 rounded-full bg-gradient-to-br from-red-400 to-red-600 shadow-2xl border-2 border-white/80 flex items-center justify-center">
+                            <span className="text-white text-[10px] font-black drop-shadow-sm">{item.badge}</span>
+                            {/* Badge highlight */}
+                            <div className="absolute top-0.5 left-0.5 right-1.5 h-1.5 rounded-full bg-gradient-to-r from-white/70 to-transparent"></div>
+                          </div>
                         </div>
                       )}
                       
-                      {/* Dynamic glow effect */}
-                      <div className={cn(
-                        "absolute inset-0 rounded-2xl transition-opacity duration-700 blur-lg",
-                        `bg-gradient-to-br ${item.color}`,
-                        "opacity-0 group-hover:opacity-30",
-                        isActive && "opacity-20"
-                      )}></div>
-                      
-                      {/* Active state inner glow */}
+                      {/* Active state premium indicator */}
                       {isActive && (
-                        <div className={cn(
-                          "absolute inset-1 rounded-xl animate-pulse",
-                          `bg-gradient-to-br ${item.color} opacity-20`
-                        )}></div>
+                        <>
+                          <div className="absolute inset-0 rounded-3xl border-2 border-white/30 animate-pulse"></div>
+                          <div className="absolute inset-1 rounded-3xl border border-white/20"></div>
+                        </>
                       )}
+                      
+                      {/* Hover interaction ripple */}
+                      <div className="absolute inset-0 rounded-3xl bg-white/0 group-hover:bg-white/10 transition-all duration-500"></div>
                     </div>
                     
                     {/* Futuristic Label */}
