@@ -5,7 +5,7 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { FileText, Eye, Calendar, Building2, Search, Filter } from "lucide-react";
+import { FileText, Eye, Edit, Calendar, Building2, Search, Filter } from "lucide-react";
 import { useLocation } from "wouter";
 import { dummyPurchaseOrders } from "@/lib/dummy-pos";
 
@@ -199,15 +199,27 @@ export default function PurchaseOrders() {
                       {po.status.charAt(0).toUpperCase() + po.status.slice(1)}
                     </Badge>
                   </TableCell>
-                  <TableCell>
-                    <Button 
-                      variant="outline" 
-                      size="sm"
-                      onClick={() => setLocation(`/po-summary?id=${po.id}`)}
-                    >
-                      <Eye className="h-4 w-4 mr-1" />
-                      View
-                    </Button>
+                  <TableCell className="text-right">
+                    <div className="flex justify-end gap-2">
+                      <Button 
+                        variant="outline" 
+                        size="sm"
+                        onClick={() => setLocation(`/po-summary?id=${po.id}`)}
+                      >
+                        <Eye className="h-4 w-4 mr-1" />
+                        View
+                      </Button>
+                      {po.status === 'pending' && (
+                        <Button 
+                          variant="ghost" 
+                          size="sm"
+                          onClick={() => setLocation(`/po-edit?id=${po.id}`)}
+                        >
+                          <Edit className="h-4 w-4 mr-1" />
+                          Edit
+                        </Button>
+                      )}
+                    </div>
                   </TableCell>
                 </TableRow>
               ))}

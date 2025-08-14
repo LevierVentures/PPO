@@ -183,33 +183,65 @@ export default function Dashboard() {
   );
 
   return (
-    <div className="space-y-6">
-      {/* Header */}
-      <div className="flex justify-between items-center">
-        <div>
-          <h1 className="text-3xl font-bold">Welcome back, {state.currentUser.name}</h1>
-          <p className="text-muted-foreground">
-            Here's what needs your attention today
-          </p>
-        </div>
-        <div className="flex items-center gap-3">
-          <Button variant="outline" size="sm">
-            <Calendar className="h-4 w-4 mr-2" />
-            Today: {new Date().toLocaleDateString()}
-          </Button>
-          <Button size="sm">
-            <Bell className="h-4 w-4 mr-2" />
-            Notifications
-          </Button>
+    <div className="min-h-screen bg-gradient-to-br from-background via-muted/10 to-primary/5 space-y-8">
+      {/* Futuristic Header */}
+      <div className="relative overflow-hidden bg-gradient-to-r from-primary/10 via-primary/5 to-background rounded-3xl border border-primary/20 p-8">
+        <div className="absolute inset-0 bg-gradient-to-r from-primary/20 via-transparent to-transparent opacity-30"></div>
+        <div className="relative flex justify-between items-center">
+          <div>
+            <h1 className="text-5xl font-bold bg-gradient-to-r from-primary via-primary/80 to-foreground bg-clip-text text-transparent">
+              Procurement Command Center
+            </h1>
+            <p className="text-lg text-muted-foreground mt-3 font-medium">
+              Welcome back, {state.currentUser.name}. AI-powered procurement at your fingertips.
+            </p>
+          </div>
+          <div className="flex items-center gap-6">
+            <div className="text-right">
+              <p className="text-sm text-muted-foreground">System Status</p>
+              <div className="flex items-center gap-2 mt-1">
+                <div className="h-2 w-2 rounded-full bg-green-500 animate-pulse"></div>
+                <p className="font-medium text-green-600">Operational</p>
+              </div>
+            </div>
+            <div className="h-16 w-16 rounded-2xl bg-gradient-to-br from-primary to-primary/60 flex items-center justify-center">
+              <div className="text-white font-bold text-lg">{state.currentUser.name.charAt(0)}</div>
+            </div>
+          </div>
         </div>
       </div>
 
-      {/* Quick Stats */}
+      {/* Neural Analytics Grid */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
         {quickStats.map((stat, index) => (
-          <Card key={index} className="hover:shadow-md transition-shadow">
-            <CardContent className="p-6">
-              <div className="flex items-center justify-between">
+          <Card key={index} className={`relative overflow-hidden border-0 shadow-xl bg-gradient-to-br ${
+            index === 0 ? 'from-blue-50 to-blue-100 dark:from-blue-950/20 dark:to-blue-900/20' :
+            index === 1 ? 'from-orange-50 to-orange-100 dark:from-orange-950/20 dark:to-orange-900/20' :
+            index === 2 ? 'from-green-50 to-green-100 dark:from-green-950/20 dark:to-green-900/20' :
+            'from-purple-50 to-purple-100 dark:from-purple-950/20 dark:to-purple-900/20'
+          } hover:shadow-2xl transition-all duration-300 hover:scale-105`}>
+            <div className="absolute top-4 right-4">
+              <div className={`p-3 rounded-2xl ${
+                index === 0 ? 'bg-blue-500 text-white' :
+                index === 1 ? 'bg-orange-500 text-white' :
+                index === 2 ? 'bg-green-500 text-white' :
+                'bg-purple-500 text-white'
+              } shadow-lg`}>
+                <stat.icon className="h-6 w-6" />
+              </div>
+            </div>
+            <CardHeader className="pb-2">
+              <CardTitle className="text-sm font-medium text-muted-foreground">{stat.title}</CardTitle>
+            </CardHeader>
+            <CardContent className="pt-0">
+              <div className="text-3xl font-bold mb-2">{stat.value}</div>
+              <div className="flex items-center text-sm">
+                <span className={`font-semibold ${stat.change.startsWith('+') ? 'text-green-600' : 'text-red-600'}`}>
+                  {stat.change}
+                </span>
+                <span className="ml-2 text-muted-foreground">{stat.period}</span>
+              </div>
+            </CardContent>
                 <div>
                   <p className="text-sm font-medium text-muted-foreground">{stat.title}</p>
                   <p className="text-3xl font-bold mt-2">{stat.value}</p>
@@ -227,9 +259,9 @@ export default function Dashboard() {
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
         {/* Main Content */}
         <div className="space-y-6">
-          {/* Priority Actions */}
-          <Card>
-            <CardHeader>
+          {/* AI-Powered Priority Actions */}
+          <Card className="bg-gradient-to-br from-red-50 to-pink-50 dark:from-red-950/20 dark:to-pink-950/20 border-red-200 dark:border-red-800 shadow-xl">
+            <CardHeader className="border-b border-red-200 dark:border-red-800 bg-gradient-to-r from-red-100 to-pink-100 dark:from-red-900/30 dark:to-pink-900/30">
               <CardTitle className="flex items-center gap-2">
                 <Target className="h-5 w-5" />
                 Priority Action Items

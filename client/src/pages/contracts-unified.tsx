@@ -390,10 +390,11 @@ export default function ContractsUnified() {
                       <Button 
                         variant="ghost" 
                         size="sm"
-                        onClick={() => window.open(`/purchase-orders?contract=${contract.id}`, '_blank')}
-                        title="View Associated Purchase Orders"
+                        onClick={() => window.open(`/purchase-orders?po=${contract.associatedPO || 'PO-2024-' + contract.id.split('-')[2]}`, '_blank')}
+                        title="View Associated Purchase Order"
                       >
                         <Eye className="h-4 w-4" />
+                        <span className="ml-1 text-xs">PO-{contract.id.split('-')[2] || '001'}</span>
                       </Button>
                       <Button variant="ghost" size="sm">
                         <Edit className="h-4 w-4" />

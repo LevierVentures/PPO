@@ -7,7 +7,7 @@ import Header from "@/components/layout/header";
 import Navigation from "@/components/layout/navigation";
 import ChatDock from "@/components/ai-chat/chat-dock";
 import ErrorOverlay from "@/components/common/error-overlay";
-import Dashboard from "./pages/dashboard-modernized";
+import Dashboard from "./pages/dashboard-futuristic";
 import RequisitionUnified from "./pages/requisition-unified";
 import ApprovalsQueue from "./pages/approvals-professional";
 import ContractsUnified from "./pages/contracts-unified";
