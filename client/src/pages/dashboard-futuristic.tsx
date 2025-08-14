@@ -67,8 +67,8 @@ export default function FuturisticDashboard() {
     },
     {
       title: "Contracts (90 days)",
-      value: "7",
-      change: "4 expire within 30 days",
+      value: "2",
+      change: "1 expires within 30 days",
       period: "expiring soon",
       icon: FileText,
       color: "red", 
@@ -99,8 +99,8 @@ export default function FuturisticDashboard() {
     {
       id: 1,
       type: "Contracts Expiring",
-      title: "4 contracts expire within 30 days",
-      description: "Urgent: 2 expire within 15 days",
+      title: "2 contracts expire within 90 days",
+      description: "Urgent: 1 expires within 30 days",
       priority: "Urgent",
       action: "Review Contracts",
       link: "/contracts",

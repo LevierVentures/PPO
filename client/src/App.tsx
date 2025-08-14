@@ -23,7 +23,7 @@ import UserProfile from "./pages/user-profile";
 import Administration from "./pages/admin";
 import MyRequests from "./pages/my-requests";
 import RFPManagement from "./pages/rfp-management";
-import CostSavings from "./pages/cost-savings";
+import CostSavingsDataDriven from "./pages/cost-savings-data-driven";
 
 import { AppStateProvider } from "@/hooks/use-app-state";
 
@@ -46,7 +46,7 @@ function Router() {
       <Route path="/admin" component={Administration} />
       <Route path="/my-requests" component={MyRequests} />
       <Route path="/rfp" component={RFPManagement} />
-      <Route path="/cost-savings" component={CostSavings} />
+      <Route path="/cost-savings" component={CostSavingsDataDriven} />
     </Switch>
   );
 }

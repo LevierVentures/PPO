@@ -70,10 +70,17 @@ export const requisitionItems = pgTable("requisition_items", {
   quantity: integer("quantity"),
   unitOfMeasure: text("unit_of_measure"),
   unitPrice: decimal("unit_price", { precision: 12, scale: 2 }),
+  originalPrice: decimal("original_price", { precision: 12, scale: 2 }), // Original price before discount
+  discountAmount: decimal("discount_amount", { precision: 12, scale: 2 }).default("0"), // Direct discount captured
+  discountPercentage: decimal("discount_percentage", { precision: 5, scale: 2 }).default("0"), // Discount percentage
   totalPrice: decimal("total_price", { precision: 12, scale: 2 }),
   generalLedgerCode: text("general_ledger_code").notNull(),
   isHazmat: boolean("is_hazmat").default(false),
   contractNumber: text("contract_number"),
+  // Cost savings tracking
+  savingsCategory: text("savings_category"), // negotiated_discount, volume_discount, contract_savings, opportunistic
+  savingsDescription: text("savings_description"), // Description of how savings was achieved
+  benchmarkPrice: decimal("benchmark_price", { precision: 12, scale: 2 }), // Market/historical benchmark price
 });
 
 export const purchaseOrders = pgTable("purchase_orders", {
