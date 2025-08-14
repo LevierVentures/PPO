@@ -186,13 +186,13 @@ export default function CostSavingsDataDriven() {
   return (
     <div className="space-y-8">
       {/* Professional 2030 Header - Cost Savings */}
-      <div className="relative overflow-hidden rounded-3xl bg-gradient-to-r from-amber-800/20 via-amber-700/25 to-amber-800/20 border-2 border-amber-700/30 shadow-2xl">
-        <div className="absolute inset-0 bg-gradient-to-br from-white/20 to-transparent dark:from-white/5"></div>
-        <div className="absolute inset-0 bg-gradient-to-t from-black/10 to-transparent"></div>
+      <div className="relative overflow-hidden rounded-3xl bg-gradient-to-r from-amber-100/40 via-amber-50/60 to-amber-100/40 border-2 border-amber-200/30 shadow-2xl dark:from-amber-900/20 dark:via-amber-800/25 dark:to-amber-900/20">
+        <div className="absolute inset-0 bg-gradient-to-br from-white/60 to-transparent dark:from-white/5"></div>
+        <div className="absolute inset-0 bg-gradient-to-t from-black/5 to-transparent"></div>
         <div className="relative p-8">
           <div className="flex items-center justify-between">
             <div>
-              <h1 className="text-5xl font-bold bg-gradient-to-r from-amber-800 via-amber-700 to-amber-800 bg-clip-text text-transparent mb-3 dark:from-amber-300 dark:via-amber-200 dark:to-amber-300">
+              <h1 className="text-5xl font-bold bg-gradient-to-r from-amber-700 via-amber-600 to-amber-700 bg-clip-text text-transparent mb-3">
                 Cost Savings Intelligence
               </h1>
               <p className="text-lg text-slate-700 dark:text-slate-300 font-medium">
@@ -203,18 +203,18 @@ export default function CostSavingsDataDriven() {
               <div className="text-right">
                 <p className="text-sm text-muted-foreground">This Quarter</p>
                 <div className="flex items-center gap-2 mt-1">
-                  <div className="h-2 w-2 rounded-full bg-amber-700 animate-pulse"></div>
-                  <p className="font-bold text-amber-800">${currentPeriodSummary.directSavings.toLocaleString()}</p>
+                  <div className="h-2 w-2 rounded-full bg-amber-600 animate-pulse"></div>
+                  <p className="font-bold text-amber-700">${currentPeriodSummary.directSavings.toLocaleString()}</p>
                 </div>
               </div>
               <div className="text-right">
                 <p className="text-sm text-muted-foreground">Savings Rate</p>
                 <div className="flex items-center gap-2 mt-1">
-                  <div className="h-2 w-2 rounded-full bg-amber-800 animate-pulse"></div>
-                  <p className="font-bold text-amber-900">{currentPeriodSummary.savingsRate}%</p>
+                  <div className="h-2 w-2 rounded-full bg-amber-700 animate-pulse"></div>
+                  <p className="font-bold text-amber-800">{currentPeriodSummary.savingsRate}%</p>
                 </div>
               </div>
-              <div className="h-16 w-16 rounded-2xl bg-gradient-to-br from-amber-800 to-amber-900 flex items-center justify-center shadow-xl">
+              <div className="h-16 w-16 rounded-2xl bg-gradient-to-br from-amber-600 to-amber-700 flex items-center justify-center shadow-xl">
                 <TrendingUp className="h-8 w-8 text-white" />
               </div>
             </div>

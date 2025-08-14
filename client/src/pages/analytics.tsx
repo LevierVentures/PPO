@@ -119,13 +119,13 @@ export default function Analytics() {
   return (
     <div className="space-y-8">
       {/* Professional 2030 Header - Analytics */}
-      <div className="relative overflow-hidden rounded-3xl bg-gradient-to-r from-red-900/20 via-red-800/25 to-red-900/20 border-2 border-red-800/30 shadow-2xl">
-        <div className="absolute inset-0 bg-gradient-to-br from-white/20 to-transparent dark:from-white/5"></div>
-        <div className="absolute inset-0 bg-gradient-to-t from-black/10 to-transparent"></div>
+      <div className="relative overflow-hidden rounded-3xl bg-gradient-to-r from-red-100/40 via-red-50/60 to-red-100/40 border-2 border-red-200/30 shadow-2xl dark:from-red-900/20 dark:via-red-800/25 dark:to-red-900/20">
+        <div className="absolute inset-0 bg-gradient-to-br from-white/60 to-transparent dark:from-white/5"></div>
+        <div className="absolute inset-0 bg-gradient-to-t from-black/5 to-transparent"></div>
         <div className="relative p-8">
           <div className="flex items-center justify-between">
             <div>
-              <h1 className="text-5xl font-bold bg-gradient-to-r from-red-900 via-red-800 to-red-900 bg-clip-text text-transparent mb-3 dark:from-red-300 dark:via-red-200 dark:to-red-300">
+              <h1 className="text-5xl font-bold bg-gradient-to-r from-red-700 via-red-600 to-red-700 bg-clip-text text-transparent mb-3">
                 Analytics Intelligence Center
               </h1>
               <p className="text-lg text-slate-700 dark:text-slate-300 font-medium">
@@ -136,18 +136,18 @@ export default function Analytics() {
               <div className="text-right">
                 <p className="text-sm text-muted-foreground">Active Anomalies</p>
                 <div className="flex items-center gap-2 mt-1">
-                  <div className="h-2 w-2 rounded-full bg-red-700 animate-pulse"></div>
-                  <p className="font-bold text-red-800">{mockAnalyticsAnomalies.length}</p>
+                  <div className="h-2 w-2 rounded-full bg-red-600 animate-pulse"></div>
+                  <p className="font-bold text-red-700">{mockAnalyticsAnomalies.length}</p>
                 </div>
               </div>
               <div className="text-right">
                 <p className="text-sm text-muted-foreground">Total Spend</p>
                 <div className="flex items-center gap-2 mt-1">
-                  <div className="h-2 w-2 rounded-full bg-amber-700 animate-pulse"></div>
-                  <p className="font-bold text-amber-800">${totalSpend.toLocaleString()}</p>
+                  <div className="h-2 w-2 rounded-full bg-amber-600 animate-pulse"></div>
+                  <p className="font-bold text-amber-700">${totalSpend.toLocaleString()}</p>
                 </div>
               </div>
-              <div className="h-16 w-16 rounded-2xl bg-gradient-to-br from-red-800 to-amber-800 flex items-center justify-center shadow-xl">
+              <div className="h-16 w-16 rounded-2xl bg-gradient-to-br from-red-600 to-amber-600 flex items-center justify-center shadow-xl">
                 <BarChart3 className="h-8 w-8 text-white" />
               </div>
             </div>

@@ -218,13 +218,13 @@ export default function ContractsUnified() {
   return (
     <div className="space-y-8">
       {/* Professional 2030 Header - Contracts */}
-      <div className="relative overflow-hidden rounded-3xl bg-gradient-to-r from-purple-900/20 via-purple-800/25 to-purple-900/20 border-2 border-purple-800/30 shadow-2xl">
-        <div className="absolute inset-0 bg-gradient-to-br from-white/20 to-transparent dark:from-white/5"></div>
-        <div className="absolute inset-0 bg-gradient-to-t from-black/10 to-transparent"></div>
+      <div className="relative overflow-hidden rounded-3xl bg-gradient-to-r from-violet-100/40 via-violet-50/60 to-violet-100/40 border-2 border-violet-200/30 shadow-2xl dark:from-violet-900/20 dark:via-violet-800/25 dark:to-violet-900/20">
+        <div className="absolute inset-0 bg-gradient-to-br from-white/60 to-transparent dark:from-white/5"></div>
+        <div className="absolute inset-0 bg-gradient-to-t from-black/5 to-transparent"></div>
         <div className="relative p-8">
           <div className="flex items-center justify-between">
             <div>
-              <h1 className="text-5xl font-bold bg-gradient-to-r from-purple-900 via-purple-800 to-purple-900 bg-clip-text text-transparent mb-3 dark:from-purple-300 dark:via-purple-200 dark:to-purple-300">
+              <h1 className="text-5xl font-bold bg-gradient-to-r from-violet-700 via-violet-600 to-violet-700 bg-clip-text text-transparent mb-3">
                 Contract Management Hub
               </h1>
               <p className="text-lg text-slate-700 dark:text-slate-300 font-medium">
@@ -235,11 +235,11 @@ export default function ContractsUnified() {
               <div className="text-right">
                 <p className="text-sm text-muted-foreground">Expiring Soon</p>
                 <div className="flex items-center gap-2 mt-1">
-                  <div className="h-2 w-2 rounded-full bg-amber-700 animate-pulse"></div>
-                  <p className="font-bold text-amber-800">{stats.expiring}</p>
+                  <div className="h-2 w-2 rounded-full bg-amber-600 animate-pulse"></div>
+                  <p className="font-bold text-amber-700">{stats.expiring}</p>
                 </div>
               </div>
-              <div className="h-16 w-16 rounded-2xl bg-gradient-to-br from-purple-800 to-purple-900 flex items-center justify-center shadow-xl">
+              <div className="h-16 w-16 rounded-2xl bg-gradient-to-br from-violet-600 to-violet-700 flex items-center justify-center shadow-xl">
                 <FileText className="h-8 w-8 text-white" />
               </div>
             </div>

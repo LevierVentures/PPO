@@ -26,18 +26,18 @@ interface DockItem {
 }
 
 const dockItems: DockItem[] = [
-  { icon: LayoutDashboard, label: 'Dashboard', href: '/', color: 'from-slate-700 to-slate-800' },
-  { icon: FileText, label: 'Requisitions', href: '/requisitions', color: 'from-slate-700 to-slate-800' },
-  { icon: CheckSquare, label: 'Approvals', href: '/approvals', color: 'from-red-800 to-red-900', badge: 2 },
-  { icon: FileCheck, label: 'Contracts', href: '/contracts', color: 'from-purple-800 to-purple-900' },
-  { icon: ShoppingCart, label: 'Orders', href: '/purchase-orders', color: 'from-indigo-800 to-indigo-900' },
-  { icon: MessageSquare, label: 'Messages', href: '/messages', color: 'from-indigo-800 to-indigo-900', badge: 5 },
-  { icon: Send, label: 'RFP', href: '/rfp', color: 'from-violet-800 to-violet-900' },
-  { icon: Users, label: 'Vendors', href: '/vendors', color: 'from-cyan-800 to-cyan-900' },
-  { icon: Receipt, label: 'Invoices', href: '/invoices', color: 'from-emerald-800 to-emerald-900' },
-  { icon: BarChart3, label: 'Analytics', href: '/analytics', color: 'from-red-800 to-amber-800' },
-  { icon: Target, label: 'Savings', href: '/cost-savings', color: 'from-amber-800 to-amber-900' },
-  { icon: Settings, label: 'Admin', href: '/administration', color: 'from-slate-600 to-slate-700' }
+  { icon: LayoutDashboard, label: 'Dashboard', href: '/', color: 'from-blue-600 to-blue-700' },
+  { icon: FileText, label: 'Requisitions', href: '/requisitions', color: 'from-blue-600 to-blue-700' },
+  { icon: CheckSquare, label: 'Approvals', href: '/approvals', color: 'from-red-600 to-red-700', badge: 2 },
+  { icon: FileCheck, label: 'Contracts', href: '/contracts', color: 'from-violet-600 to-violet-700' },
+  { icon: ShoppingCart, label: 'Orders', href: '/purchase-orders', color: 'from-violet-600 to-violet-700' },
+  { icon: MessageSquare, label: 'Messages', href: '/messages', color: 'from-blue-600 to-violet-600', badge: 5 },
+  { icon: Send, label: 'RFP', href: '/rfp', color: 'from-violet-600 to-violet-700' },
+  { icon: Users, label: 'Vendors', href: '/vendors', color: 'from-cyan-600 to-cyan-700' },
+  { icon: Receipt, label: 'Invoices', href: '/invoices', color: 'from-emerald-600 to-emerald-700' },
+  { icon: BarChart3, label: 'Analytics', href: '/analytics', color: 'from-red-600 to-amber-600' },
+  { icon: Target, label: 'Savings', href: '/cost-savings', color: 'from-amber-600 to-amber-700' },
+  { icon: Settings, label: 'Admin', href: '/administration', color: 'from-gray-600 to-gray-700' }
 ];
 
 export function FuturisticBottomDock() {
