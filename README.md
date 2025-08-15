@@ -2,7 +2,7 @@
 
 A comprehensive full-stack web application that provides a unified Procure-to-Pay (P2P) procurement system for professional procurement organizations. The system handles the complete procurement workflow from requisition intake through approval workflows to purchase order management and invoice processing, with AI-assisted chat functionality and analytics capabilities.
 
-## 🚀 Key Features
+## Key Features
 
 ### Core P2P Workflow
 - **Purchase Requisitions**: New Purchase, Change Orders, and Blanket PO management
@@ -24,7 +24,7 @@ A comprehensive full-stack web application that provides a unified Procure-to-Pa
 - **Professional Color Harmony**: Blue-violet-emerald-red-amber theme (60-30-10 design)
 - **Role-Based Access Control**: Tailored experiences for different user roles
 
-## 🛠 Technology Stack
+## Technology Stack
 
 ### Frontend
 - **React 18** with TypeScript for type-safe development
@@ -45,13 +45,13 @@ A comprehensive full-stack web application that provides a unified Procure-to-Pa
 - **Drizzle Kit** for database migrations
 - **ESBuild** for production bundling
 
-## 📋 Prerequisites
+## Prerequisites
 
 - Node.js 18+ 
 - PostgreSQL database
 - npm or yarn package manager
 
-## 🚦 Getting Started
+## Getting Started
 
 ### Installation
 
@@ -84,7 +84,7 @@ npm run dev
 
 The application will be available at `http://localhost:5000`
 
-## 🏗 Project Structure
+## Project Structure
 
 ```
 ├── client/                 # Frontend React application
@@ -101,7 +101,7 @@ The application will be available at `http://localhost:5000`
 └── package.json
 ```
 
-## 🎯 Core Modules
+## Core Modules
 
 ### 1. Purchase Requisitions
 - **New Purchase**: Standard procurement requests
@@ -130,7 +130,7 @@ The application will be available at `http://localhost:5000`
 - Vendor performance analytics
 - Department-specific insights
 
-## 🔧 Configuration
+## Configuration
 
 ### Environment Variables
 
@@ -157,7 +157,7 @@ npm run db:push
 - **Legal**: Contract review and compliance
 - **Procurement**: Organization-wide procurement management
 
-## 🎨 Design System
+## Design System
 
 The application uses a professional color harmony system:
 - **Blue** (60%): Trust and stability - primary navigation and data
@@ -177,7 +177,7 @@ npm run build
 
 2. Deploy to your preferred platform (Vercel, Netlify, AWS, etc.)
 
-## 📝 API Documentation
+##  API Documentation
 
 ### Key Endpoints
 
@@ -187,7 +187,7 @@ npm run build
 - `GET /api/contracts` - Retrieve contracts
 - `POST /api/approvals` - Process approvals
 
-## 🤝 Contributing
+## Contributing
 
 1. Fork the repository
 2. Create a feature branch: `git checkout -b feature/new-feature`
@@ -195,11 +195,11 @@ npm run build
 4. Push to the branch: `git push origin feature/new-feature`
 5. Submit a pull request
 
-## 📄 License
+##  License
 
 This project is proprietary software owned by Levier Ventures.
 
-## 🆘 Support
+## Support
 
 For support and questions, please contact the development team or create an issue in the repository.
 
