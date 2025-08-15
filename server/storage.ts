@@ -170,11 +170,7 @@ export class MemStorage implements IStorage {
 
   async createUser(insertUser: InsertUser): Promise<User> {
     const id = randomUUID();
-    const user: User = { 
-      ...insertUser, 
-      id,
-      canViewAllDepartments: insertUser.canViewAllDepartments ?? false
-    };
+    const user: User = { ...insertUser, id };
     this.users.set(id, user);
     return user;
   }
@@ -195,23 +191,8 @@ export class MemStorage implements IStorage {
       id, 
       createdAt: new Date(),
       contactEmail: insertVendor.contactEmail ?? null,
-      contactPhone: insertVendor.contactPhone ?? null,
-      contactPerson: insertVendor.contactPerson ?? null,
       businessType: insertVendor.businessType ?? null,
       taxId: insertVendor.taxId ?? null,
-      ein: insertVendor.ein ?? null,
-      address: insertVendor.address ?? null,
-      city: insertVendor.city ?? null,
-      state: insertVendor.state ?? null,
-      zipCode: insertVendor.zipCode ?? null,
-      country: insertVendor.country ?? "United States",
-      bankName: insertVendor.bankName ?? null,
-      accountNumber: insertVendor.accountNumber ?? null,
-      routingNumber: insertVendor.routingNumber ?? null,
-      accountType: insertVendor.accountType ?? null,
-      w9OnFile: insertVendor.w9OnFile ?? false,
-      w9FilePath: insertVendor.w9FilePath ?? null,
-      certificationDocuments: insertVendor.certificationDocuments ?? [],
       integrationType: insertVendor.integrationType ?? "none",
       status: insertVendor.status ?? "pending",
       totalSpendYtd: insertVendor.totalSpendYtd ?? "0",
@@ -257,7 +238,6 @@ export class MemStorage implements IStorage {
       businessJustification: insertRequisition.businessJustification ?? null,
       shippingAddress: insertRequisition.shippingAddress ?? null,
       isMultiVendor: insertRequisition.isMultiVendor ?? false,
-      attachments: insertRequisition.attachments ?? null,
       submittedAt: new Date(),
       approvedAt: null
     };
@@ -290,15 +270,9 @@ export class MemStorage implements IStorage {
       quantity: insertItem.quantity ?? null,
       unitOfMeasure: insertItem.unitOfMeasure ?? null,
       unitPrice: insertItem.unitPrice ?? null,
-      originalPrice: insertItem.originalPrice ?? null,
-      discountAmount: insertItem.discountAmount ?? "0",
-      discountPercentage: insertItem.discountPercentage ?? "0",
       totalPrice: insertItem.totalPrice ?? null,
       isHazmat: insertItem.isHazmat ?? false,
-      contractNumber: insertItem.contractNumber ?? null,
-      savingsCategory: insertItem.savingsCategory ?? null,
-      savingsDescription: insertItem.savingsDescription ?? null,
-      benchmarkPrice: insertItem.benchmarkPrice ?? null
+      contractNumber: insertItem.contractNumber ?? null
     };
     this.requisitionItems.set(id, item);
     return item;
@@ -321,14 +295,12 @@ export class MemStorage implements IStorage {
       id, 
       poNumber,
       status: insertPO.status ?? "pending",
-      attachments: insertPO.attachments ?? null,
+      poType: insertPO.poType ?? "standard",
       requisitionId: insertPO.requisitionId ?? null,
       vendorId: insertPO.vendorId ?? null,
-      isBlanketPO: insertPO.isBlanketPO ?? false,
       contractStartDate: insertPO.contractStartDate ?? null,
       contractEndDate: insertPO.contractEndDate ?? null,
       contractNumber: insertPO.contractNumber ?? null,
-      agreementDate: insertPO.agreementDate ?? null,
       createdAt: new Date(),
       approvedAt: null,
       completedAt: null
@@ -427,16 +399,7 @@ export class MemStorage implements IStorage {
       requestId,
       status: insertRequest.status ?? "pending",
       requestorId: insertRequest.requestorId ?? null,
-      contactPhone: insertRequest.contactPhone ?? null,
       taxId: insertRequest.taxId ?? null,
-      ein: insertRequest.ein ?? null,
-      country: insertRequest.country ?? "United States",
-      bankName: insertRequest.bankName ?? null,
-      accountNumber: insertRequest.accountNumber ?? null,
-      routingNumber: insertRequest.routingNumber ?? null,
-      accountType: insertRequest.accountType ?? null,
-      w9Document: insertRequest.w9Document ?? null,
-      supportingDocuments: insertRequest.supportingDocuments ?? null,
       submittedAt: new Date(),
       reviewedAt: null
     };
