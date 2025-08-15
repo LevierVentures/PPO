@@ -47,11 +47,31 @@ export const queryClient = new QueryClient({
       queryFn: getQueryFn({ on401: "throw" }),
       refetchInterval: false,
       refetchOnWindowFocus: false,
-      staleTime: Infinity,
-      retry: false,
+      staleTime: 1000 * 60 * 5, // 5 minutes instead of Infinity
+      retry: (failureCount, error) => {
+        // Don't retry on 4xx errors
+        if (error && typeof error === 'object' && 'message' in error) {
+          const status = parseInt((error.message as string).split(':')[0]);
+          if (status >= 400 && status < 500) return false;
+        }
+        return failureCount < 3;
+      },
     },
     mutations: {
       retry: false,
+      onError: (error) => {
+        // Handle unhandled rejections from mutations
+        console.error('Mutation error:', error);
+      },
     },
   },
 });
+
+// Global error handler for unhandled promise rejections
+if (typeof window !== 'undefined') {
+  window.addEventListener('unhandledrejection', (event) => {
+    console.error('Unhandled promise rejection:', event.reason);
+    // Prevent the default behavior (console error)
+    event.preventDefault();
+  });
+}
