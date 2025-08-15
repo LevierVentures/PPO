@@ -2,6 +2,8 @@
 
 A comprehensive full-stack web application that provides a unified Procure-to-Pay (P2P) procurement system for professional procurement organizations. The system handles the complete procurement workflow from requisition intake through approval workflows to purchase order management and invoice processing, with AI-assisted chat functionality and analytics capabilities.
 
+Demo Link: https://689e8a8c391bf504649960e7--stalwart-dieffenbachia-16561b.netlify.app/
+
 ## Key Features
 
 ### Core P2P Workflow
